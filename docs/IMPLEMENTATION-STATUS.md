@@ -45,7 +45,7 @@ Statuses: **Not started**, **In progress**, **Blocked**, or **Accepted**. “Acc
 | MN-PLAN-006 | 0 | Define data, event, and threat contracts | Pending | Coordinator | Depends on MN-PLAN-003 and relevant MN-PLAN-004/005 outputs |
 | MN-PLAN-007 | 0 | Prepare country and operations packs | Pending | Coordinator | Depends on MN-PLAN-003 and relevant MN-PLAN-005/006 outputs |
 | MN-PLAN-008 | 0 | Prioritize v1 stories and review Phase 0 exit gate | Pending | Coordinator | Depends on MN-PLAN-003 through MN-PLAN-007 |
-| MN-PLAN-009 | 0 | Reconcile approved usage-pricing and subscriber-portal branding decisions | In progress | Coordinator | Depends on MN-PLAN-003; [task handoff](agent-handoffs/2026-11-11-MN-PLAN-009-codex.md); own PR, numerical Greptile 5/5 review, checks, and merge gates pending |
+| MN-PLAN-009 | 0 | Reconcile approved usage-pricing and subscriber-portal branding decisions | In progress | Coordinator | Depends on MN-PLAN-003; [task handoff](agent-handoffs/2026-11-11-MN-PLAN-009-codex.md); [PR #10](https://github.com/mylescorp/mylesnet/pull/10) open; numerical Greptile 5/5 review, required checks, and merge gates pending |
 | MN-GOV-001 | 0 | Add mandatory agent handoff and status tracking | In progress | Coordinating agent | [Task handoff](agent-handoffs/2026-11-11-MN-GOV-001-coordinator.md); PR/review gates pending |
 | MN-GOV-002 | 0 | Require same-PR remediation for Greptile findings | In progress | Coordinating agent | [Task handoff](agent-handoffs/2026-11-11-MN-GOV-002-coordinator.md); PR/review gates pending |
 | MN-GOV-003 | 0 | Reconcile public sitemap route-family counts | In progress | Coordinating agent | [Task handoff](agent-handoffs/2026-11-11-MN-GOV-003-coordinator.md); PR/review gates pending |
