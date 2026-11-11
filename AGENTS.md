@@ -119,10 +119,19 @@ Treat package versions in the scaffold as setup-time pins. Recheck supported ver
 
 ## Phase, branch, pull-request, and review policy
 
+### Temporary user-directed Greptile deferral
+
+The user has temporarily authorized planning and repository-documentation work to continue without Greptile reviews while they restore the service. This deferral remains active until the user explicitly says Greptile is restored.
+
+- Continue eligible planning tasks when their documented dependencies and acceptance criteria are satisfied. Do not stop independent Phase 0 work solely because Greptile is unavailable.
+- Keep using focused branches, commits, pull requests, applicable non-Greptile checks, and durable handoffs. Do not claim a Greptile review, score, or approval that did not occur.
+- Leave review-deferred pull requests open and unmerged. This deferral does not waive required CI, task dependencies, Phase 0 acceptance criteria, the planning-only boundary, explicit authorization to begin product implementation, or production-deployment approval.
+- When the user says Greptile is restored, request a fresh review of the then-current head of each open review-deferred PR. Fix actionable findings in the same PR and resume the 5/5, zero-comment, zero-unresolved-issue merge gate below.
+
 1. Confirm the current phase and read the applicable canonical requirements, repository guidance, and Git status before editing. Preserve unrelated work and never stage unrelated files.
 2. Work on a focused phase branch. Keep each commit scoped to that phase. Immediately after the first commit, push the branch and open its pull request; push each later phase commit to that same PR. At phase completion, ensure all intended phase changes are committed and the PR description/checklist is current.
 3. Run the relevant project checks for the phase and fix regressions caused by the change. Report unrelated pre-existing failures separately. Do not add or run tests unless the user asks for testing; use non-test build/type/configuration checks where appropriate.
-4. Wait for Greptile to review the latest PR commit. Read the explicit confidence score and every review comment. Fix actionable issues in the **same task branch and PR Greptile reviewed**; do not open a follow-up PR or move a finding or its fix to another PR. Push fixes to that existing PR and request a fresh review. Do not proceed to another phase until the latest PR head has an explicit **5/5 confidence score, zero review comments, zero unresolved issues**, and required CI checks pass.
+4. Unless the temporary user-directed Greptile deferral above is active, wait for Greptile to review the latest PR commit. Read the explicit confidence score and every review comment. Fix actionable issues in the **same task branch and PR Greptile reviewed**; do not open a follow-up PR or move a finding or its fix to another PR. Push fixes to that existing PR and request a fresh review. Do not proceed to another phase until the latest PR head has an explicit **5/5 confidence score, zero review comments, zero unresolved issues**, and required CI checks pass. During the deferral, planning work may continue as described above, but review-deferred PRs remain open and unmerged.
 5. Merge only after that exact review and check state is verified. If unavailable, leave the PR open and report what is pending. After merge, clean only the task worktree/branches that are dedicated, merged, and safe to remove; preserve shared or unrelated user work.
 6. Production deployment is a separate approval boundary. Do not deploy unless the user explicitly authorizes it and the documented release process is satisfied. Never point local development configuration at production.
 
