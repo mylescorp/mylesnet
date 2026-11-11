@@ -17,7 +17,7 @@ Record PR #15's actual merge and review state, publish the status correction tha
 - Verified PR #15 merged by `Mylesoft` at merge commit `ebccb9551fdb43ae565cc833fd378d1524d06308` from head `b2ed6a927f61dd9d1332131192adcc8d0f4846f3`.
 - Verified Gitleaks, Greptile Review, Vercel, and Vercel Preview Comments report success for the merged PR. The automatic Greptile summary is 4/5 with one finding; this is not a 5/5 review gate.
 - Confirmed local commit `d1d3bcb921461d024758dfd6f638208603eb0a82` was pushed after PR #15 merged and is not part of merge commit `ebccb95`.
-- Started a separate branch and our own PR #16 to publish the remaining status-ledger and Phase 0 exit-review corrections.
+- Opened our own [PR #16](https://github.com/mylescorp/mylesnet/pull/16) to publish the remaining status-ledger and Phase 0 exit-review corrections.
 - Kept the PR #15 review finding and PR #10's recorded 4/5/two-finding state visible in the status records. No finding has been moved to a different PR or remediated during the user's review suspension.
 
 ## Implementation or documentation details
@@ -29,7 +29,7 @@ Record PR #15's actual merge and review state, publish the status correction tha
 
 ## Verification and evidence
 
-- **Checks run:** `gh pr view 15` confirmed merge actor, head, merge commit, and check rollup. `git diff --check` passed; local Markdown-link validation passed across all three changed files.
+- **Checks run:** `gh pr view 15` confirmed merge actor, head, merge commit, and check rollup. `git diff --check` passed; local Markdown-link validation passed across all three changed files. On PR #16 head `404d0d2`, Gitleaks completed successfully and Vercel/Preview Comments passed. Greptile Review started automatically; no review was requested, and the user has deferred code review.
 - **Checks not run:** No tests or builds; this is a documentation-only task and tests were not requested.
 - **Evidence:** [PR #15](https://github.com/mylescorp/mylesnet/pull/15), merged at `ebccb95` from `b2ed6a9`; check rollup passed and its Greptile summary is 4/5 with one finding. [PR #16](https://github.com/mylescorp/mylesnet/pull/16) is the separate status correction.
 - **REA evidence:** Not used; no runtime behavior was under review.
@@ -60,7 +60,7 @@ Record PR #15's actual merge and review state, publish the status correction tha
 
 ## Delivery state
 
-- **Commit/branch:** This handoff and status correction will be committed on `codex/mn-phase0-status-reconciliation`.
-- **PR/review:** [PR #16](https://github.com/mylescorp/mylesnet/pull/16); no review requested; user review suspension applies.
+- **Commit/branch:** `404d0d2` on `codex/mn-phase0-status-reconciliation`; this handoff update follows on the same branch.
+- **PR/review:** [PR #16](https://github.com/mylescorp/mylesnet/pull/16); no review requested. The automatic Greptile check was pending on head `404d0d2`; user review suspension applies.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed.
