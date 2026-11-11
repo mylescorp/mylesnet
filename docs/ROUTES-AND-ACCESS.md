@@ -2,6 +2,8 @@
 
 **Status: planning only.** Tenant routes below were recorded during the read-only reference platform dashboard review on 2026-11-10. They are reference routes, not a requirement to clone every internal behavior. Platform-admin routes are proposed because no super-admin panel was inspected. Confirm route names and workflows before implementation.
 
+Stable route and requirement IDs, sanitized inventories for all 308 public URLs and 73 tenant reference entries, and the acceptance/action contracts are in [`REQUIREMENT-ROUTE-TRACEABILITY.md`](REQUIREMENT-ROUTE-TRACEABILITY.md). This inventory remains planning-only; the external router-console capture and observed `/accounts` 404 are explicitly not accepted MylesNet routes.
+
 ## Observed tenant-console routes
 
 | Area | Reference routes |
