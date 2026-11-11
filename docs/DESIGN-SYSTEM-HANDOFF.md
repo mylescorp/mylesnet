@@ -42,7 +42,7 @@ All surfaces consume one semantic token contract and shared components. A surfac
 | Signup, sign-in and recovery | Focused form shell, progress where needed, security/help copy and clear retry/error states. A tenant sign-in host may resolve that tenant’s approved logo and brand; platform identity and security copy stay protected. |
 | Platform admin | Separate platform navigation, global health, tenant lifecycle and operator identity. Always platform-branded. Never inherits a tenant theme, including during approved support access. |
 | Tenant operator console | Persistent grouped sidebar, topbar, global search, page header, bounded content and settings sub-navigation. Tenant branding is permitted within the override contract. |
-| Subscriber account portal | Mobile-first customer tasks and service information. Tenant brand is permitted. Do not show staff controls. |
+| Subscriber account portal | Mobile-first customer tasks and service information, tenant-branded using the approved tenant inputs like the captive portal. Do not show staff controls. |
 | Captive portal | Minimal mobile-first tenant-branded access page for package purchase or voucher redemption. No staff navigation or operator chrome. |
 | Email, invoices, receipts and PDFs | Static renderer-specific output using approved tenant logo/contact details and locked financial/status wording. A theme edit must not rewrite an issued historical document. |
 
@@ -215,7 +215,7 @@ The v1.0 schema places tenant-writable values under brand, auth, email and plan.
 | Default density | comfortable or compact | Touch remains automatic; never saved as a brand override. |
 | Login image | Optional asset | Apply a text-contrast scrim and mobile crop preview. |
 | Email header/footer | Optional sanitized HTML subset, max 8,000 characters each | Allow only safe approved markup/content; no scripts, arbitrary CSS, legal address or unsubscribe overrides. |
-| White-label flag | Optional setting available on every tier to preserve the same feature set | When enabled, remove only MylesNet product attribution from allowed tenant-facing footer/email areas. Keep legal and security notices. |
+| White-label flag | Optional setting available across all offers; tenant branding is not gated by usage mode | When enabled, remove only MylesNet product attribution from allowed tenant-facing footer/email areas. Keep legal and security notices. |
 
 Schema syntax is strict: brand colors are six-digit sRGB hex values; tenant assets use asset IDs matching the package schema. Unknown keys and arbitrary URLs are rejected.
 
@@ -223,15 +223,15 @@ Tenant themes cannot set status colors, focus, security/sensitive-data meaning, 
 
 ### Custom domain is a separate product setting
 
-The archive schema includes plan.customDomain and its documentation says CNAME plus paid-tier access. Both conflict with MylesNet’s already approved product decision. The MylesNet contract is:
+The archive schema includes plan.customDomain and its documentation says CNAME plus paid-offer access. Both conflict with MylesNet’s already approved product decision. The MylesNet contract is:
 
-- Every tier can use a tenant-owned captive portal domain.
+- Every offer can use a tenant-owned captive portal domain.
 - Offer MylesNet subdomain, own domain and buy-domain paths.
 - For an own domain, issue a tenant-specific DNS A record, show “Awaiting DNS,” and provide an explicit Verify DNS action.
 - Provision HTTPS after verification.
 - Keep prior addresses serving until the Owner confirms payment callbacks/integrations have moved; then provide an explicit Stop serving action.
 - Buy a domain opens a supported external registrar, then returns the tenant to DNS setup.
-- Domain ownership, DNS/TLS readiness and host-to-tenant mapping live in the domain control plane, not in CSS variables. Do not let the schema’s plan.customDomain field reintroduce a tier gate.
+- Domain ownership, DNS/TLS readiness and host-to-tenant mapping live in the domain control plane, not in CSS variables. Do not let the schema’s plan.customDomain field reintroduce an offer gate.
 
 The archive field’s persistence/normalization must be resolved before theme schema implementation. Domain is not a visual token and does not affect palette compilation.
 
@@ -260,6 +260,7 @@ Core patterns include:
 - Metrics/charts: units, currency, period, source and freshness; text summaries and labels independent of color.
 - Status badges and notices: platform-owned meanings, icon/text support and known/unknown/stale states.
 - Dialogs, drawers, menus, tabs, pagination, file/logo upload, permission gates, live regions and captive checkout.
+- Guided CSV import patterns: file selection and template help, field mapping, accessible dry-run summary, row-level validation/duplicate feedback, progress/results, explicit commit confirmation and safe-rollback confirmation. Show scope and permission errors without exposing other tenants' records.
 - Each realtime view distinguishes connecting, live, delayed, stale, reconnecting and offline.
 
 All interactive and data components support the relevant states: default, hover, focus, pressed, selected, disabled, loading, success, warning, error, empty, stale/offline, read-only, permission-denied, feature-disabled, over-quota, trial/grace and suspended. Do not show actions to an unauthorized user when their presence itself leaks sensitive capability; where a disabled action is useful, explain why. Server-side authorization remains authoritative.
@@ -345,8 +346,8 @@ These are concrete source-package or implementation gaps, not requests to redesi
 3. Resolve the shape preset mismatch: schema allows three values, while presets.json still labels them proposed. Default remains safe until approved values are fixed.
 4. Fix the generated dark JSON omission of common radius/density values; prove light/dark output parity.
 5. Add exhaustive contrast declarations/checks and validate chart color-vision distinction. The current tests do not prove those claims.
-6. Normalize the package’s plan.customDomain field against the separate MylesNet domain model and all-tier availability; retain the A-record/Verify DNS/TLS lifecycle above.
-7. Confirm attribution behavior for white-label settings without introducing tier-specific theme features.
+6. Normalize the package’s plan.customDomain field against the separate MylesNet domain model and all-offer availability; retain the A-record/Verify DNS/TLS lifecycle above.
+7. Confirm attribution behavior for white-label settings without introducing usage-mode-specific theme features.
 8. Source approved logo and font assets. Neither is included in the ZIP.
 9. Build the React component library, runtime theme compiler/validator, theme editor, tenant storage/cache/SSR wiring, lint rule, component catalog and visual/accessibility CI.
 10. Align docs/04's Noto Sans Arabic guidance with the tenant font enum before adding Arabic/RTL; English and Kiswahili remain the v1 language scope.

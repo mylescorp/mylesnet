@@ -1,0 +1,68 @@
+# Phase 0 country and operations packs
+
+**Task:** MN-PLAN-007 · **Plan phase:** Phase 0 — close planning and turn decisions into build contracts
+
+**Status:** Planning checklist; country enablement is not approved.
+**Authority:** `AGENTS.md`, `READINESS-DECISIONS.md`, `DECISION-REGISTER.md` (MN-DEC-002, 008, 012–019), `TECH-STACK.md`, and the Phase 0 implementation roadmap.
+
+## Purpose and boundary
+
+Record country-by-country evidence and owners required before MylesNet enables the Kenya, Uganda, or Tanzania launch pack. This document does not provide legal or tax advice, select a payment or messaging provider, approve data residency, or enable live processing. A candidate stays a candidate until the required evidence is reviewed and signed by the accountable owner.
+
+Every ISP tenant may operate across countries and legal entities. Country, currency, timezone, tax, invoicing, and permitted payment methods belong to each legal entity/branch. A branch can override its country-default timezone. No legal-entity or branch cap is introduced here.
+
+The table uses KES, UGX, and TZS and the corresponding IANA timezone names as **working country metadata**. Finance and country counsel must confirm these defaults and all provider settlement currencies before invoices or payment rails are enabled. Country metadata does not set tax rates, invoice content, cross-currency conversion, or wallet-draw authority. MylesNet platform subscription billing remains separate from an ISP's subscriber collection ledger.
+
+## Country readiness overview
+
+| Country pack | Working branch metadata | Launch language contract | Subscriber collection candidates | Current decision state |
+|---|---|---|---|---|
+| Kenya (`KE`) | KES; `Africa/Nairobi` | English and Kiswahili; country legal and transactional copy needs review. | Daraja candidate; no backup selected in the approved source set. | Open. Validate legal entity/tax/invoice rules, candidate account and sandbox, settlement/refunds/payouts, fees, communications, transfers, and operations. Pooled collections remain disabled. |
+| Uganda (`UG`) | UGX; `Africa/Kampala` | English and Kiswahili; country legal and transactional copy needs review. | iOtec candidate; no backup selected in the approved source set. | Open. Validate legal entity/tax/invoice rules, candidate account and sandbox, settlement/refunds/payouts, fees, communications, transfers, and operations. Pooled collections remain disabled. |
+| Tanzania (`TZ`) | TZS; `Africa/Dar_es_Salaam` | English and Kiswahili; country legal and transactional copy needs review. | ClickPesa first candidate; Selcom backup candidate. | Open. Validate legal entity/tax/invoice rules, candidate accounts and sandboxes, settlement/refunds/payouts, fees, communications, transfers, and operations. Pooled collections remain disabled. |
+
+These are candidate providers from MN-DEC-013, not selections, contracts, live credentials, or authorization to collect or pay out funds. Tenants may use their own merchant accounts where approved. MylesNet SaaS subscription invoices use MylesNet's separate merchant account and the selected billing legal entity's exact currency; no conversion or wallet draw across legal entities is permitted.
+
+## Shared evidence register
+
+Each row applies separately to KE, UG, and TZ. Record the country-specific result, evidence link, decision date, approver, named accountable owner, and revisit trigger before changing its state from **Open**. Required owner roles are identified below; named people have not been appointed in the canonical decisions and must not be inferred.
+
+| ID | Country pack item | Evidence required for each country | Accountable role to appoint | Current state and revisit trigger |
+|---|---|---|---|---|
+| `CP-LEGAL-01` | Legal entity and market authority | Approved legal-entity structure; counsel review of permitted MylesNet and tenant activities, required registrations/permits, contracting parties, terms, and prohibited or restricted activities. Do not add a government-issued business-registration ID to v1 signup; any later collection needs an approved scope decision. | Country counsel; project owner appoints the named counsel. | Open in all countries. Revisit before contracting, collecting personal data, or announcing country availability. |
+| `CP-TAX-01` | Tax and invoicing | Country-specific tax advice for MylesNet subscription invoices and tenant subscriber invoices; registration and tax IDs where legally required; invoice/receipt fields, numbering, language, currency, tax display, correction/credit-note rules, record retention, and any e-invoicing/fiscalization obligation. No tax rate or invoice-compliance claim is set here. | Finance/tax owner and country tax counsel; project owner appoints both. | Open in all countries. Revisit before pricing, invoice templates, merchant settlement, or first charge. |
+| `CP-PRIVACY-01` | Privacy, transfer, and data-subject handling | Counsel-approved controller/processor roles, registration/notification duties, privacy and consent language, data-subject request/breach process, subprocessors, transfer mechanism/safeguards, and any location restriction. Review the candidate Vercel Dublin and Convex Ireland regions against current contracts, service access, latency, cost, and capacity; do not claim production residency. | Privacy/legal owner and country counsel; project owner appoints them. | Open in all countries. Revisit before production personal-data processing or region selection. |
+| `CP-RETENTION-01` | Retention, deletion, and legal hold | Country/legal-entity schedule for subscriber, financial, RADIUS, security/audit, consent, communication, export, and telemetry records; lawful holds; deletion/anonymization triggers; backup expiry and evidence. Map to the categories in `DATA-OWNERSHIP-AND-CLASSIFICATION.md`; do not invent durations. | Privacy/data owner and country counsel; project owner appoints them. | Open in all countries. Revisit before storing live records and before any deletion/export workflow is approved. |
+| `CP-LOCALE-01` | Language and country formatting | Confirm English/Kiswahili defaults and switching per tenant/customer; review legal, consent, invoice, service-notice, and support text; validate dates, numbers, phone entry, local currency formatting, and timezone display for each country. | Product/localization owner with support and country counsel; project owner appoints them. | Language support is approved; country copy and acceptance are open. Revisit before country signup, invoice, consent, or message content is approved. |
+| `CP-PAYMENT-01` | Collection, settlement, refunds, and payout | For each candidate and tenant-owned alternative: written provider eligibility/contract, merchant ownership and onboarding, sandbox evidence, accepted currencies, fees, settlement timing, reconciliation/export, signed callbacks, idempotency, chargebacks/disputes, refund/partial-refund behavior, payout fees/limits/failure restoration, support, and data/transfer terms. Verify each rail with provider evidence; a marketing page is insufficient. | Payments/finance owner and country counsel; project owner appoints them. | Candidate only. Revisit after written quotes/contracts, sandbox evidence, and legal/provider approval. Pooled collections and payout remain disabled until separate country approval. |
+| `CP-COMMS-01` | Transactional email and SMS | Compare Africa's Talking and Infobip for SMS and use Twilio only as the documented price benchmark; no SMS provider is selected. Check country/MNO coverage, handset-confirmed delivery/latency, sender-ID registration, template rules, consent and STOP handling, delivery callbacks, retries, cost per delivered message, support, data location/retention, and contract. For application email, validate conditional Resend or SES Ireland against delivery and data-transfer decisions; WorkOS identity email remains separate. | Communications/privacy owner and country counsel; project owner appoints them. | Open in all countries. Revisit after comparable country-level quotes and delivery tests; don't send live customer messages before approval. |
+| `CP-REGION-01` | Hosting, RADIUS, network, and capacity | Compare region candidates and independent RADIUS/AAA placement using measured user/provider latency, failure domains, data-transfer/legal terms, plan limits, workload capacity, cost, monitoring, and operator access. Confirm router-lab and payment-callback isolation; no real router or production provider connection is part of this task. | Platform/operations and network owners; project owner appoints them. | Open in all countries. Revisit after workload and contract evidence; Ireland/Dublin remains a candidate only. |
+| `CP-RECOVERY-01` | Backup, restore, and continuity | Data/assets/secrets scope, encryption, frequency, retention, restore order, tenant-selective restore/export, isolated drill, integrity/isolation evidence, failover dependencies, RPO/RTO, and named incident/recovery owner. Record what happens to RADIUS, payment callbacks, and tenant service during regional/provider outage. | Operations/security owner; project owner appoints them. | Open in all countries. Revisit when the region and operating model are evaluated and before any production launch. |
+| `CP-SUPPORT-01` | Support, public holidays, and incident response | Confirm weekday 08:00–17:00 EAT coverage excluding the country's public holidays; language coverage; ticket ownership; P1 acknowledgement/triage and update process; 24/7 on-call route for the approved major incidents; escalation contacts, staffing, and support-system data handling. Targets in readiness decisions are planning targets, not staffed service commitments. | Support lead and incident commander; project owner appoints them. | Open in all countries. Revisit after staffing, holiday calendar, and on-call rota are approved. |
+| `CP-MIGRATION-01` | Tenant data migration and launch cost | Identify likely source systems only from approved pilot discovery; define source/field mapping, data rights/consent, sample validation, dry run, reconciliation, rollback, tenant communications, migration owner, per-country setup/support cost, volume assumptions, and ongoing provider/network cost. No real reference images or customer data enter planning artifacts. | Migration/product owner and finance/operations owner; project owner appoints them. | Open in all countries. Revisit after a pilot cohort and migration sources are approved. |
+| `CP-GO-NO-GO-01` | Country launch authorization | Signed checklist linking the above evidence, residual risks, owner, expiry/revisit date, permitted rails, disabled features, support/recovery readiness, and separate production approval. Legal, provider, privacy, and operations approvals must be explicit and country-scoped. | Project owner plus named legal, finance, privacy, support, and operations approvers. | Closed/disabled by default in all countries; only an approved country go/no-go can enable it. |
+
+## Candidate and policy references
+
+- Country launch model and branch-scoped currency/timezone: `AGENTS.md`, MN-DEC-002, and `TECHNICAL-SPECIFICATION.md` §14.2.
+- Provider candidates and country gating: MN-DEC-008, MN-DEC-013, and `TECH-STACK.md` “Payments and financial processing”. MylesNet subscriptions and tenant subscriber collections are separate ledgers/accounts.
+- Hosting and managed-region candidates: MN-DEC-012 and `READINESS-DECISIONS.md` “Platform operations and design”. Dublin/Ireland is not an approved production region or residency claim.
+- Privacy/retention evidence source set and counsel caveat: `READINESS-DECISIONS.md` “Platform operations and design”; exact category periods and legal decisions remain open under MN-DEC-018.
+- Messaging/email choices and evidence requirements: MN-DEC-014 and the country-specific comparison in `READINESS-DECISIONS.md`. No provider is selected by this pack.
+- Support hours and incident targets: `AGENTS.md` and `READINESS-DECISIONS.md`. These targets require staffing and feasibility validation before any service commitment.
+- Migration and recovery requirements: `TECHNICAL-SPECIFICATION.md` §14.8 and MN-DEC-019.
+
+## MN-PLAN-007 acceptance review
+
+- Each country has a visible status, working metadata, provider candidates, evidence list, responsible role, and revisit/enablement gate.
+- Candidate providers and regions remain distinct from selected or production-approved services. Pooled collection/payout and production data processing stay disabled until the applicable signed approvals exist.
+- Exact tax, legal, privacy, retention, provider, cost, region, support, recovery, and migration decisions remain open where the canonical sources do not decide them. Their required owner roles and evidence triggers are explicit; the project owner must still appoint named individuals.
+- **Task remains In progress** until accountable named owners and country evidence are accepted through the relevant review. MN-PLAN-008 must reconcile any open owner or country go/no-go gap before Phase 0 exit.
+
+## Related artifacts
+
+- [Decision register](DECISION-REGISTER.md)
+- [Data ownership and classification](DATA-OWNERSHIP-AND-CLASSIFICATION.md)
+- [Implementation plan](IMPLEMENTATION-PLAN.md#phase-0--close-planning-and-turn-decisions-into-build-contracts)
+- [Execution kickoff plan](EXECUTION-KICKOFF-PLAN.md)
+- [Current implementation status](IMPLEMENTATION-STATUS.md)

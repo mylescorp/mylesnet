@@ -20,6 +20,40 @@ The public sitemap inventory is 308 URLs: the homepage plus 307 non-homepage rou
 - Audit events record actor, tenant/branch where applicable, resource, action, timestamp, reason where required, and request/job/correlation reference. Redact secrets and avoid copying sensitive field values into this planning catalog.
 - Proposed platform navigation names are catalog keys, not finalized URLs. No CMS is assumed. Exact subscriber portal host/navigation remains open.
 
+## Cross-cutting architecture contracts
+
+Route rows inherit their requirement contracts above; those requirements also inherit the interface and sequence contracts below. Use this map when a route/action touches more than one service boundary. It keeps the 308 public routes and 73 tenant reference entries linked through their requirement IDs without duplicating an architecture contract on each route row.
+
+| Requirement/journey family | Interface and sequence contracts |
+|---|---|
+| Public/signup and tenant provisioning (`REQ-PUB-*`, `REQ-SIGNUP-01`) | [`IC-APP-01/02`, `IC-IAM-01`, `SEQ-SIGNUP-01`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#interface-contract-registry) |
+| Platform and tenant staff identity, roles, and revocation (`REQ-PLAT-04`, `REQ-TEN-10`, `REQ-IAM-01/02`) | [`IC-APP-02`, `IC-IAM-01/02`, `IC-DATA-01`, `SEQ-IAM-01/02`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#sequence-registry) |
+| Tenant access, branch scope, exports, and audit (`REQ-PLAT-02/05/07`, `REQ-TEN-02/09/13`) | [`IC-DATA-01`, `IC-EXPORT-01`, `IC-STORAGE-01`, `SEQ-SUPPORT-01`, `SEQ-EXPORT-01`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#interface-contract-registry) |
+| Tenant domains and branding (`REQ-TEN-11`, public and portal host resolution) | [`IC-APP-02`, `IC-DOMAIN-01`, `IC-THEME-01`, `SEQ-DOMAIN-01`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#sequence-registry) |
+| Platform billing and tenant subscriber payments (`REQ-PLAT-03`, `REQ-TEN-07/08/12`, `REQ-SUB-02`, `REQ-CAP-01`) | [`IC-PAY-01`, `IC-LEDGER-01`, `IC-EVENT-01`, `SEQ-PAY-01`, `SEQ-PLAN-01`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#interface-contract-registry) |
+| Network sessions, accounting, and router commands (`REQ-TEN-05`, `REQ-NET-01/02`) | [`IC-RADIUS-01`, `IC-ROUTER-01`, `IC-DATA-01`, `IC-OBS-01`, `SEQ-RADIUS-01`, `SEQ-ROUTER-01`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#sequence-registry) |
+| Lifecycle, deletion, backup, and recovery (`REQ-PLAT-02/03/07`, `REQ-TEN-12/13`, `AC-D-03`) | [`IC-STORAGE-01`, `IC-RECOVERY-01`, `IC-MIGRATION-01`, `SEQ-OFFBOARD-01`, `SEQ-RESTORE-01`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#interface-contract-registry) |
+| Service health and operational reporting (`REQ-PLAT-01/06`, `REQ-TEN-01`, `REQ-NET-01/02`) | [`IC-EVENT-01`, `IC-OBS-01`, `IC-INCIDENT-01`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#interface-contract-registry) |
+
+The full contract definitions and their limits are indexed in the [ADR set](adr/README.md). Contract links do not close open provider, branch-assignment, regional, design-system, legal, retention, RPO/RTO, or SLO measurement decisions.
+
+## Cross-cutting data, event, and threat contracts
+
+The route/action rows below inherit these data-ownership, classification, event, synthetic-data, and threat controls through their requirement IDs. The labels are working handling levels, not a legal classification scheme; exact retention periods and accountable owners remain open in the linked artifacts.
+
+| Requirement/journey family | Record/data contract | Threats and flow contract |
+|---|---|---|
+| Signup, tenant, legal entity and branch lifecycle (`REQ-SIGNUP-01`, `REQ-TEN-11`) | [`REC-001`–`REC-003`, `REC-014`](DATA-OWNERSHIP-AND-CLASSIFICATION.md#critical-record-and-event-ownership-map); synthetic provisioning rules in [SYN rules](SYNTHETIC-DATA-AND-TEST-ENVIRONMENTS.md#synthetic-fixture-rules) | [`THR-002`, `THR-003`, `THR-009`, `THR-014`](THREAT-MODEL.md#threat-register); [`EVT-003`](API-ERROR-EVENT-CONTRACT-BACKLOG.md#contract-backlog) |
+| Platform and tenant identity, membership, roles and revocation (`REQ-PLAT-04`, `REQ-TEN-10`, `REQ-IAM-01/02`) | [`REC-001`, `REC-003`, `REC-017`](DATA-OWNERSHIP-AND-CLASSIFICATION.md#critical-record-and-event-ownership-map) | [`THR-002`, `THR-003`](THREAT-MODEL.md#threat-register); [`EVT-003`, `EVT-006`](API-ERROR-EVENT-CONTRACT-BACKLOG.md#contract-backlog) |
+| Subscriber accounts, entitlements, sessions, service access (`REQ-TEN-02/05`, `REQ-SUB-*`, `REQ-CAP-02`, `REQ-NET-01`) | [`REC-004`, `REC-005`, `REC-007`, `REC-008`](DATA-OWNERSHIP-AND-CLASSIFICATION.md#critical-record-and-event-ownership-map); [`API-001`, `EVT-002`](API-ERROR-EVENT-CONTRACT-BACKLOG.md#contract-backlog) | [`THR-001`, `THR-003`, `THR-006`, `THR-014`](THREAT-MODEL.md#threat-register) |
+| Tenant collection and MylesNet subscription finance (`REQ-PLAT-03`, `REQ-TEN-07/08/12`, `REQ-SUB-02`, `REQ-CAP-01`) | [`REC-009`–`REC-012`](DATA-OWNERSHIP-AND-CLASSIFICATION.md#critical-record-and-event-ownership-map); [`EVT-001`, `RECON-001`](API-ERROR-EVENT-CONTRACT-BACKLOG.md#contract-backlog) | [`THR-004`, `THR-005`, `THR-012`](THREAT-MODEL.md#threat-register) |
+| NAS, RADIUS accounting, router onboarding/commands (`REQ-TEN-05`, `REQ-NET-01/02`) | [`REC-006`–`REC-008`](DATA-OWNERSHIP-AND-CLASSIFICATION.md#critical-record-and-event-ownership-map); [`EVT-002`, `EVT-004`, `RECON-002`](API-ERROR-EVENT-CONTRACT-BACKLOG.md#contract-backlog) | [`THR-006`, `THR-007`, `THR-013`, `THR-014`](THREAT-MODEL.md#threat-register) |
+| Tenant domains, themes, private files and exports (`REQ-TEN-09/11/13`, `REQ-PLAT-02/05/07`, `AC-X-01/02/03`) | [`REC-013`–`REC-015`](DATA-OWNERSHIP-AND-CLASSIFICATION.md#critical-record-and-event-ownership-map); [`EXPORT-001`](API-ERROR-EVENT-CONTRACT-BACKLOG.md#contract-backlog) | [`THR-008`, `THR-009`, `THR-010`, `THR-012`](THREAT-MODEL.md#threat-register) |
+| Imports, reports, background jobs, reference assets (`REQ-TEN-09/13`, public/tenant route references) | [`REC-016`, `REC-019`](DATA-OWNERSHIP-AND-CLASSIFICATION.md#critical-record-and-event-ownership-map); [synthetic-data rules](SYNTHETIC-DATA-AND-TEST-ENVIRONMENTS.md) | [`THR-010`, `THR-011`, `THR-013`, `THR-014`](THREAT-MODEL.md#threat-register); [`JOB-001`](API-ERROR-EVENT-CONTRACT-BACKLOG.md#contract-backlog) |
+| Audit, telemetry, incidents, retention and recovery (`REQ-PLAT-01/07`, `REQ-TEN-01/13`, `AC-D-03`) | [`REC-017`–`REC-019`](DATA-OWNERSHIP-AND-CLASSIFICATION.md#critical-record-and-event-ownership-map); [retention register](DATA-OWNERSHIP-AND-CLASSIFICATION.md#retention-and-legal-hold-register) | [`THR-010`–`THR-014`](THREAT-MODEL.md#threat-register); [`EVT-006`](API-ERROR-EVENT-CONTRACT-BACKLOG.md#contract-backlog); [`SEQ-RESTORE-01`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#sequence-registry) |
+
+The crosswalk points to the [data ownership/classification inventory](DATA-OWNERSHIP-AND-CLASSIFICATION.md), [threat model](THREAT-MODEL.md), [API/error/event backlog](API-ERROR-EVENT-CONTRACT-BACKLOG.md), and [synthetic-data/environment rules](SYNTHETIC-DATA-AND-TEST-ENVIRONMENTS.md). These are planning contracts; they do not authorize tests against live services or production data.
+
 ## Public and signup requirements
 
 | Requirement | Actor and permission | Scope and applicability | Data class and audit | Acceptance case |
