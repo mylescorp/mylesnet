@@ -209,7 +209,7 @@ Phases can overlap only when interfaces are approved and their prerequisites are
 
 **Public content work**
 
-1. Import the 308-route manifest as structured route/content records. Families: 36 feature pages, 33 blog index/article paths, 177 changelog paths, 4 solutions, 4 comparisons, 1 integrations directory, and 50 country/pricing/tools/affiliate/legal/other routes. Preserve intended canonical path, metadata, redirects, internal links, and sitemap membership.
+1. Import all 308 public sitemap URLs as structured route/content records. The 307 non-homepage paths comprise 36 feature pages, 33 blog index/article paths, 177 changelog paths, 4 solution paths, 4 comparison paths, 1 integrations directory, and 52 other paths; count the homepage separately as URL 308. The screenshot manifest also includes UI captures beyond sitemap pages. Preserve intended canonical paths, metadata, redirects, internal links, and sitemap membership.
 2. Render mostly static/server-rendered content for SEO, accessibility, and global CDN caching. Add a CMS only after editorial ownership, roles, preview, approval, versioning, scheduled publishing, redirect, and rollback requirements are decided. Marketing publication cannot mutate tenant operations.
 3. Rebuild navigation, search/discovery, pricing, consent/cookie behavior where required, calculators/tools, legal pages, changelog/blog listing and detail pages, responsive layouts and accessible menus.
 4. Reconcile all route slugs against `docs/reference-images/public-site-screenshots/route-manifest.csv`. Treat screenshots as private; no credentials/PII/sample tenant values in content.

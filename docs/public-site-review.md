@@ -5,6 +5,7 @@ Reviewed in the browser on 10 November 2026. This covers the public marketing si
 ## Route coverage
 
 - Captured the homepage and all 307 non-root URLs listed in the source sitemap: 308 public pages total.
+- Reconciled the 307 non-homepage URLs into 36 feature pages, 33 blog index/article paths, 177 changelog paths, 4 solution paths, 4 comparison paths, 1 integrations directory, and 52 other paths. The homepage is counted separately as sitemap URL 308.
 - Also captured the cookie banner, Features/Solutions/Resources navigation menu states, and registration/recovery screens.
 - Full-page captures and a searchable gallery remain in the local-only `docs/reference-images/public-site-screenshots/` directory. Its `route-manifest.csv` maps each captured route or state to an image; the gallery contains 325 screenshots.
 - The route collection covers product and feature pages, pricing, solutions, country pages, integrations, calculators/tools, comparisons, blog and changelog pages, and legal/content pages.
