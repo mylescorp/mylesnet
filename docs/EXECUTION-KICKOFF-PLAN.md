@@ -58,7 +58,7 @@ Follow `IMPLEMENTATION-PLAN.md` §§4–5 exactly:
 3. **Phases 4–6 — Platform lifecycle, public signup/domains, and tenant core operations** follow the design and identity foundations. Phase 5 depends on platform lifecycle as well as design and identity; Phase 6 depends on platform lifecycle, design, and identity.
 4. **Phases 7 and 8 — RADIUS/router lab and finance/payment rails** follow tenant core operations and must prove their isolated contracts before subscriber activation.
 5. **Phase 9 — Subscriber/captive portals** depends on both network and finance/payment proofs. **Phase 10 — Communications/support/analytics** depends on platform, tenant, network, finance, and portal foundations.
-6. **Phase 11 — Hardening/legal/operations** depends on public, network, finance, and portal readiness. **Phase 12 — Country pilots/GA** depends on Phase 11 and country-specific go/no-go evidence.
+6. **Phase 11 — Hardening/legal/operations** depends on public, network, finance, portal, and communications/support/analytics readiness. **Phase 12 — Country pilots/GA** depends on Phase 11 and country-specific go/no-go evidence.
 
 No dependency is complete merely because a document, screen, or demo exists; use the evidence and exit gate named for each phase.
 
