@@ -29,7 +29,7 @@ Make it explicit that actionable Greptile findings are fixed on the same task br
 
 - **Checks run:** `pnpm install --frozen-lockfile --offline` — passed; `pnpm typecheck` — passed; `pnpm build` — passed; `git diff --check` — passed; a relative Markdown link check — passed; `rg -ni 'centipid' AGENTS.md` — no matches.
 - **Checks not run:** Product tests were not run because tests were not requested and the change adds no product workflow.
-- **Evidence:** Commit `a5690b1` added the same-PR rule and commit `4b4baf5` fixed Greptile's phase-map and Node.js findings on PR #2. The `4b4baf5` Greptile check succeeded (63 files reviewed, 0 new comments) and its review was approved; both earlier review threads are resolved. GitHub did not expose a numeric confidence score, so the explicit 5/5 gate is not verified. This handoff update creates a new PR head that also requires review.
+- **Evidence:** Commit `a5690b1` added the same-PR rule and commit `4b4baf5` fixed Greptile's phase-map and Node.js findings on PR #2. The latest reviewed PR head `2c32275` passed Greptile (63 files reviewed, 0 new comments), has an approved review, and both earlier review threads are resolved. GitHub did not expose a numeric confidence score, so the explicit 5/5 gate is not verified. This handoff update creates a new PR head that also requires review.
 - **Failures:** None observed.
 
 ## Remaining work
@@ -55,7 +55,7 @@ Make it explicit that actionable Greptile findings are fixed on the same task br
 
 ## Delivery state
 
-- **Commit/branch:** `a5690b1` (same-PR rule), `4b4baf5` (Greptile fixes), and this handoff update / `docs/agent-handoff-governance`.
-- **PR/review:** [PR #2](https://github.com/mylescorp/mylesnet/pull/2); `4b4baf5` approved with 63 files reviewed and 0 new comments, but no numeric score; fresh review required after this update.
+- **Commit/branch:** `a5690b1` (same-PR rule), `4b4baf5` (Greptile fixes), `2c32275` (PR cleanup), and this handoff update / `docs/agent-handoff-governance`.
+- **PR/review:** [PR #2](https://github.com/mylescorp/mylesnet/pull/2); `2c32275` approved with 63 files reviewed and 0 new comments, but no numeric score; fresh review required after this update.
 - **Merge:** not merged.
 - **Deployment:** not deployed.
