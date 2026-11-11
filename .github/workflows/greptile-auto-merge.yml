@@ -1,0 +1,23 @@
+name: Greptile 5/5 Auto Merge
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: greptile-auto-merge-${{ github.repository }}
+  cancel-in-progress: false
+
+permissions:
+  checks: read
+  contents: read
+  pull-requests: read
+
+jobs:
+  queue-greptile-auto-merge:
+    uses: mylescorp/.github/.github/workflows/greptile-auto-merge.yml@main
+    with:
+      app_client_id: ${{ vars.GREPTILE_AUTOMERGE_APP_CLIENT_ID }}
+    secrets:
+      app_private_key: ${{ secrets.GREPTILE_AUTOMERGE_APP_PRIVATE_KEY }}
