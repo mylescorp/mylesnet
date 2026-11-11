@@ -1,0 +1,22 @@
+# Dependencies and build output
+node_modules/
+.next/
+.turbo/
+dist/
+coverage/
+*.tsbuildinfo
+packages/design-system/dist/
+
+# Local secrets and environment overrides
+.env*
+!.env.example
+
+# Local tool state
+.vercel/
+.convex/
+.DS_Store
+Thumbs.db
+
+# Private reference galleries and source design archive
+docs/reference-images/**
+docs/reference/**

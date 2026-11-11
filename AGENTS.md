@@ -1,0 +1,125 @@
+# MylesNet project charter and agent instructions
+
+## Mission and current stage
+
+MylesNet is a multi-tenant software-as-a-service platform for internet service providers. It combines ISP customer and network operations, payments, subscriber access, support, analytics, and platform administration. The first release targets small and larger providers, starting with single-branch operators while supporting multi-branch and cross-border tenants from day one.
+
+The project is currently in planning and repository-foundation setup. Until the user explicitly authorizes product development, agents may maintain planning documents, repository structure, development tooling, and non-product scaffolding only. Do not implement workflows, connect production services, provision live tenants, deploy, or perform real network/payment actions in this stage.
+
+The authoritative detailed requirements are in `docs/TECHNICAL-SPECIFICATION.md`, `docs/PRODUCT-SCOPE.md`, `docs/CORE-FLOWS-AND-DATA.md`, `docs/ROUTES-AND-ACCESS.md`, `docs/READINESS-DECISIONS.md`, `docs/TECH-STACK.md`, and `docs/DESIGN-SYSTEM-HANDOFF.md`. Read the relevant sections before changing the architecture. If these documents conflict, prefer the newest explicitly approved decision in `READINESS-DECISIONS.md`, record the reconciliation, and update the affected canonical document.
+
+## Mandatory implementation-plan and agent handoff protocol
+
+The approved end-to-end roadmap is [`docs/IMPLEMENTATION-PLAN.md`](docs/IMPLEMENTATION-PLAN.md). It is the execution map for all work in this repository. Before starting a task, every agent (including the coordinating agent) must:
+
+1. Read this `AGENTS.md`, the current Git status, the relevant implementation-plan phase, and the canonical requirement documents for the requested scope.
+2. State the applicable phase and acceptance criteria in its task plan or delegated task. If the requested work is outside the plan, conflicts with an approved decision, or crosses the planning-only boundary, stop that portion and report the conflict before making product changes.
+3. Preserve the plan’s dependencies and gates. Do not mark dependent phases complete because an upstream document or UI exists; completion requires the evidence named in the plan.
+
+At the end of **every task**, each agent must leave a durable handoff in `docs/agent-handoffs/` using [`docs/agent-handoffs/TEMPLATE.md`](docs/agent-handoffs/TEMPLATE.md). The handoff must identify the task and plan phase; record implementation/documentation changes and key decisions; list exact files changed; separate completed work from pending work and blockers; report checks/evidence and failures; state risks, next action, and whether anything was committed, pushed, merged, or deployed. Do not report unverified outcomes as complete. For a task with multiple delegated agents, each agent writes its own handoff; the coordinating agent reconciles them into [`docs/IMPLEMENTATION-STATUS.md`](docs/IMPLEMENTATION-STATUS.md), updates phase/task state, and resolves contradictions before declaring the task complete.
+
+Keep `docs/IMPLEMENTATION-STATUS.md` as the concise repository-wide source of current phase state, done work, open work, blockers, and links to detailed handoffs. Update it in the same change whenever phase/task status changes. Do not overwrite another agent’s handoff; use a distinct date/task/agent filename. Handoffs and status updates are planning/project records, not permission to start implementation, connect external services, or deploy.
+
+## Product surfaces and end-to-end scope
+
+The planned product has four related surfaces:
+
+1. **Public marketing and signup:** structured, mostly static product, pricing, solution, country, resource, legal, calculator, comparison, article, and changelog pages; the captured route inventory contains 308 public URLs. ISP signup verifies the initial Owner's email, provisions the tenant idempotently, starts a 14-day trial, and provides a recoverable progress/support path.
+2. **Platform administration:** super-admin overview, tenant lifecycle and plan limits, platform operators and roles, billing and collection operations, provider/service status, support grants, audit history, security and recovery controls, product analytics, outreach, and platform configuration.
+3. **ISP tenant console:** tenant and branch dashboards; subscribers and leads; plans and service entitlements; sessions; routers/NAS and network map; billing, payments, collections, withdrawals, invoices, refunds, credits, expenses, vouchers, and loyalty; tickets; staff/RBAC; messaging and campaigns; analytics; onboarding; and tenant, legal-entity, domain, branding, integration, security, and retention settings.
+4. **Subscriber surfaces:** a subscriber account/renewal portal and tenant-branded captive portals. Captive flows support live package purchase or voucher redemption, payment confirmation, automatic account and entitlement creation, immediate network activation, on-screen credentials, optional credential SMS, and English/Kiswahili language selection.
+
+All panels need complete, permission-checked create/read/update/delete operations where the domain permits them. Financial and audit records are append-only or corrected through explicit reversals; deleting an operational record must not erase required financial, security, or legal history.
+
+## Launch and tenant model
+
+- Launch countries: Kenya, Uganda, and Tanzania. A tenant may operate in multiple countries; country, timezone, currency, legal, tax, and invoicing settings are assigned per branch/legal entity. Branch timezone defaults from country and can be overridden.
+- A tenant may have multiple legal entities and branches without a plan cap. Tenant subscription limits count subscribers and routers across the tenant. A billing legal entity is selected for the single MylesNet subscription invoice and its exact currency; no cross-entity conversion or wallet draw is allowed.
+- Use one shared Convex deployment with strict tenant and branch isolation for v1. Dedicated deployments may be considered for later tiers. Every read, mutation, action, job, file, cache key, and live subscription must enforce server-verified tenant context and branch scope.
+- Tenant signup is self-service after verified email. Do not collect an official business-registration identifier in v1. Permit duplicate business names; block duplicate Owner identity and reserved subdomains. A verified identity may join multiple tenants through an explicit tenant switch but may own only one tenant.
+- Tenant subdomains are provisioned by default. Custom portal domains are available on every plan using tenant DNS-record instructions, explicit verification, automatic TLS, and safe migration of previous callback addresses.
+- Regional data processing is a planning candidate, not an approved production residency claim: Convex Europe (Ireland) and Vercel Dublin (`dub1`) require latency, contract, legal-transfer, capacity, cost, and country review before production.
+
+## Approved technology direction
+
+Use the selected stack recorded in `docs/TECH-STACK.md` and the technical specification:
+
+- **Workspace:** pnpm workspaces and Turborepo.
+- **Web:** Next.js App Router, React, and TypeScript. Follow the user-directed v1.0 repository layout: `apps/web` for public/subscriber surfaces, `apps/admin` for authenticated platform and tenant operator surfaces, and `apps/storybook` for design documentation/visual review. Product route ownership and shared-session behavior must be documented before feature work.
+- **Realtime application backend:** Convex for typed queries, mutations, actions, transactional application writes, scheduled workflows, and live subscriptions. Convex must not sit on the RADIUS authentication/accounting request path.
+- **Identity:** WorkOS AuthKit. WorkOS organizations map to internal tenants; the application remains authoritative for branch membership, application roles, permissions, and tenant state.
+- **Design system:** the user-approved MylesNet Design System v1.0, with one DTCG token source, generated semantic CSS/Tailwind mappings, shared accessible UI primitives, and consistent shells across every audience. Do not scatter token values or hardcode panel-specific palettes.
+- **Network access:** FreeRADIUS 3.2.x and a dedicated PostgreSQL AAA store, operated as a redundant MylesNet-managed regional service. MikroTik RouterOS is first-class; use a least-privilege RouterOS 7 WireGuard provisioning flow limited to RADIUS and CoA/Disconnect. Do not expose router-admin access through that tunnel.
+- **Payments:** provider adapters, signed callbacks, idempotent processing, exactly-once ledger effects, visible exception queues, and explicit reconciliation. Initial country candidates are Daraja for Kenya, iOtec for Uganda, and ClickPesa for Tanzania with Selcom as backup, subject to legal/provider validation. Use separate MylesNet merchant accounts for MylesNet subscription invoices. Pooled tenant collection and payouts are enabled per country only after legal and provider approval.
+- **Hosting:** Vercel for Next.js with Dublin functions as the leading candidate; Convex Ireland is the leading managed-region candidate. These remain pre-production candidates pending validation.
+- **Communications:** keep transactional email and SMS choices behind provider adapters. Resend is a conditional application-email candidate, with SES Ireland if country review disallows it. WorkOS identity email is separate. Compare Africa's Talking and Infobip for SMS; Twilio is a price benchmark. Select only after delivery, pricing, security, and data-transfer review.
+- **Network-adjacent services:** keep RADIUS, RouterOS workers, payment integrations, and long-running jobs isolated from browser-facing authorization and from each other's secrets.
+
+Treat package versions in the scaffold as setup-time pins. Recheck supported versions, peer ranges, security advisories, and hosting compatibility when product implementation begins. Do not silently change the approved architecture during dependency upgrades.
+
+## Identity, authorization, and tenant safety
+
+- Built-in tenant roles: Owner, Admin, Finance, Network Operator, Support Agent, Sales/Agent, and Analyst/Read-only. Subscriber accounts are a separate identity type. There is exactly one active Owner per tenant.
+- Owner is fixed and cannot be edited. The Owner may customize other built-in role permissions. Custom roles can be created from scratch or cloned; save independent permission sets. Never delete built-in roles. Block deletion of an assigned custom role until members are reassigned; retain role history in audit events.
+- Owner stays tenant-wide. Admin and functional/custom roles may have tenant-wide or selected-branch scope. A member may combine one role per scope; tenant-wide grants apply everywhere and branch grants add only their chosen branches. Admins cannot delegate beyond their own permission ceiling.
+- Only the Owner grants high-risk permissions: withdrawals and payout destinations, refunds/credits, sensitive exports, credential/secret reveal or rotation, role delegation, bulk messaging, and destructive/bulk network operations. Admins may grant ordinary permissions within their ceiling. No self-escalation.
+- Every sensitive action uses MFA step-up; staff without MFA cannot perform such actions. Platform administrators must use MFA. Subscriber sign-in is email/phone plus password, with MFA step-up for sensitive subscriber actions.
+- WorkOS session validity is not application authorization. Re-evaluate current membership, tenant status, role, permission, and branch scope on each server operation and live subscription. On membership removal revoke active sessions and subscriptions immediately; on role/scope changes immediately recompute access and clear data no longer allowed.
+- Platform support has no routine tenant data access. A tenant Owner approves a scoped, visible, audited, read-only grant lasting at most one hour. Reversible writes are limited to approved internal support notes and non-sensitive contact/profile corrections. Emergency access needs two distinct platform approvers, remains read-only, is time-limited, and notifies the tenant.
+- Audit sign-in, membership and role changes, recovery, support access, financial mutations, secret operations, exports, bulk messaging, and network changes. Never trust client-supplied tenant/branch identifiers as authorization.
+
+## Billing, subscriber finance, and service lifecycle
+
+- MylesNet platform billing uses three monthly tiers with the same feature set and limits scaling by subscriber/router counts; exact tier names/prices remain to be set. All tiers may be prepaid annually at 15% off and renew annually unless canceled before renewal. Billing anchors to the first successfully paid invoice; short months use their last day and return to the anchor date later.
+- New tenants receive a 14-day trial without a payment method. If billing setup is incomplete at trial end, keep service running through a seven-day completion grace. Unpaid invoices get reminders seven, three, and one day before due. A seven-day failed-payment grace follows; after that suspend the tenant console, reject new RADIUS logins, and disconnect active sessions. Optional Owner-controlled wallet auto-pay is MFA protected, uses only the selected billing entity's exact-currency wallet, retries hourly while enabled, and restores service after full payment. The Owner can turn it off to stop future attempts.
+- Upgrades take effect after Owner confirmation and prorated payment; downgrades apply at next renewal. At quota, preserve existing accounts/services and block new additions. A voluntary cancellation ends at paid-period end; send reminders 30, 7, and 1 day before. Allow export and reactivation during the 30-day post-cancellation window, then begin deletion according to retention policy.
+- Subscriber payments can use tenant-owned merchant accounts or, where cleared, pooled collections paid out to tenants. Ask each tenant during onboarding. Model country-specific payout fees as fixed, percentage, or both. Withdrawal requests require an Owner email code each time; Owner or a user with dedicated branch-scoped withdrawal permission may initiate. Use saved verified entity destinations; Owner approves destination changes. Failed payouts restore principal automatically and remain as immutable failed records; retries are new requests.
+- Record cash, bank, and manual mobile-money payments with a reference and audit trail. One authorized member may record, credit, and activate immediately. Support full and partial refunds where provider rails allow; otherwise create a visible provider/manual exception. A full refund of an active entitlement cancels service and disconnects sessions; a partial refund leaves access unchanged. Refund second-approver policy is tenant-configurable.
+- Every provider-confirmed payment must have one financial effect and one subscriber activation at most. Record/reconcile at least 99% within one minute, expose unmatched payments immediately, and continue safe retries. At least 99% of valid confirmations should activate within 30 seconds.
+
+## Subscriber access and network behavior
+
+- v1 supports PPPoE and hotspot/captive portal access with vouchers. Plans compose speed, quota, validity/time, session limits, fair-use policy, schedules, and NAS restrictions. Shared templates may use branch-specific local price/currency/availability.
+- Each tenant chooses FUP reset frequency per plan (purchase, daily, weekly, monthly) and enforcement (throttle or disconnect/block) with a subscriber notice. Quota-exhaustion policy is tenant-configurable. Expired paid plans reject new login and disconnect existing sessions until renewal/payment.
+- First-time hotspot payment or voucher redemption automatically creates the subscriber and entitlement, activates confirmed access, auto-logs in, shows generated reusable credentials, and sends username/password by SMS when a phone is available. Separate promotional opt-in/STOP suppression from required service notices. Sender ID uses approved tenant branding or configured fallback.
+- MylesNet-managed redundant regional RADIUS target is 99.95% monthly availability; keep current sessions alive if RADIUS is unreachable, reject new logins until recovery, and never fail open. Track both successful session starts and eligible-login success rate; target at least 99.5% monthly eligible-login success.
+- MikroTik router onboarding is a required RouterOS 7 WireGuard provisioning wizard. The tunnel permits RADIUS authentication/accounting and CoA/Disconnect only; block WinBox, SSH, and RouterOS API. The generated setup is least-privilege, single-use, expiring, auditable, and can be rotated/revoked. Do not connect to real routers during planning setup.
+- Hosted captive portal target is 99.95% monthly availability. After confirmed payment, target activation within 30 seconds for at least 99% of valid confirmations.
+
+## Design, accessibility, and localization
+
+- Apply the approved token source and component contract from `docs/DESIGN-SYSTEM-HANDOFF.md` and the locally preserved design-system package. Maintain Light, Dark, and System themes, verified tenant branding boundaries, responsive shells for platform/tenant/subscriber surfaces, and consistent navigation and content geometry.
+- Use semantic tokens and shared components. Do not hardcode values, fork panel palettes, or accept tenant-provided overrides for status, focus, security, or layout-control tokens. Keep theme and density behavior consistent across all panels and portals.
+- Support English and Kiswahili at launch. Tenants choose a default language; customers may switch. Country defaults drive local currency, timezone, formatting, and permitted payment methods.
+- Meet keyboard, screen-reader, visible focus, contrast, responsive, and touch-target accessibility requirements from the design-system handoff. Keep private reference images local; they may contain live account information and must not enter public commits.
+
+## Data, reliability, operations, and measures
+
+- Use separate country/category retention schedules for subscriber, financial, RADIUS, security/audit, and consent records. Platform supplies defaults and guardrails; tenants may choose shorter lawful periods; legal holds override deletion. Validate country periods and data-transfer safeguards with counsel before launch.
+- Use append-only audit/financial history, idempotency keys, explicit reversals, and country-aware currency rules. Consolidated reports may show separate and converted totals using the latest official central-bank reference rate at view time, always with the rate and as-of time.
+- Business-hours support is Monday-Friday 08:00-17:00 EAT excluding public holidays, with 24/7 on-call for MylesNet-controlled tenant-wide/multi-tenant access or portal outages, broad payment outages, or major security incidents. P1 acknowledgement/triage target is 15 minutes, updates every 30 minutes, and internal minimum-service/workaround objective is 60 minutes subject to feasibility validation.
+- Twelve-month planning targets after public launch: 1,000 active paying ISP tenants and 100,000 active subscriber accounts. Reliability targets and definitions are in `docs/READINESS-DECISIONS.md`; review monthly and reassess assumptions quarterly.
+- Backups, restore drills, monitoring, incident response, provider reconciliation, and safe degraded modes are launch requirements. Never claim an SLO, compliance status, provider approval, or region is live until demonstrated and approved.
+
+## Repository and implementation structure
+
+- Keep applications under `apps/` and shared packages under `packages/`; use pnpm workspace boundaries and Turbo task pipelines. Respect the documented `apps/web`, `apps/admin`, and `apps/storybook` boundaries; use route groups and explicit server/client boundaries within each app.
+- Planned boundaries follow the repository contract in `docs/DESIGN-SYSTEM-HANDOFF.md`, which incorporates the approved v1.0 structure: `apps/web`, `apps/admin`, `apps/storybook`, `packages/design-system` with `tokens/`, `theme/`, `build/`, generated `dist/`, `docs/`, `tests/visual/`, nested `ui/`, `icons/`, `fonts/`, and `lint/`, plus the root `convex/` workspace. During planning, only reserve these boundaries; do not copy/build token or component implementation.
+- Design-system dependency direction is one-way: `packages/design-system/ui` imports generated output from `packages/design-system/dist`; applications import the UI package; applications and UI must not import `tokens/` directly. Generated `dist/` is ignored and never edited by hand. When the design-system phase is authorized, use its token-build pipeline and schema/migration rules, then add component specifications/stories/tests within each component folder.
+- Other planned shared packages include TypeScript configuration and lint/tooling. Implement these only when the user authorizes the relevant product phase and use the approved design-system source as the sole token source.
+- Keep secrets in ignored local environment files and managed secret stores. Commit `.env.example` with names and safe descriptions only; never print or commit secret values. Local development must use development environments, synthetic records, and isolated credentials.
+- Keep provider adapters, network control-plane workers, and RADIUS services separately deployable and credential-scoped. Do not add production URLs/keys to local defaults.
+- Keep planning documentation synchronized with implementation. For any design decision, record alternatives, security and operational effects, evidence, and revisit conditions.
+
+## Phase, branch, pull-request, and review policy
+
+1. Confirm the current phase and read the applicable canonical requirements, repository guidance, and Git status before editing. Preserve unrelated work and never stage unrelated files.
+2. Work on a focused phase branch. Keep each commit scoped to that phase. Immediately after the first commit, push the branch and open its pull request; push each later phase commit to that same PR. At phase completion, ensure all intended phase changes are committed and the PR description/checklist is current.
+3. Run the relevant project checks for the phase and fix regressions caused by the change. Report unrelated pre-existing failures separately. Do not add or run tests unless the user asks for testing; use non-test build/type/configuration checks where appropriate.
+4. Wait for Greptile to review the latest PR commit. Read the explicit confidence score and every review comment. Fix actionable issues in the **same task branch and PR Greptile reviewed**; do not open a follow-up PR or move a finding or its fix to another PR. Push fixes to that existing PR and request a fresh review. Do not proceed to another phase until the latest PR head has an explicit **5/5 confidence score, zero review comments, zero unresolved issues**, and required CI checks pass.
+5. Merge only after that exact review and check state is verified. If unavailable, leave the PR open and report what is pending. After merge, clean only the task worktree/branches that are dedicated, merged, and safe to remove; preserve shared or unrelated user work.
+6. Production deployment is a separate approval boundary. Do not deploy unless the user explicitly authorizes it and the documented release process is satisfied. Never point local development configuration at production.
+
+## Completion reporting
+
+At each task and phase boundary, complete the durable handoff and update `docs/IMPLEMENTATION-STATUS.md` before reporting completion. Summarize the scope completed, files/docs changed, checks and evidence, commit and PR, Greptile result, merge status, deployment status, pending work, and blocked decisions. Distinguish local setup from preview, merged source, provider approval, and production operation.

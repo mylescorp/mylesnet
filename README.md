@@ -18,7 +18,7 @@ docs/                     Product, architecture, access, and design specificatio
 
 ## Local development
 
-Requirements: Node.js 20.9 or later and pnpm 11.
+Requirements: Node.js `^22.13.0`, `^24.0.0`, or `>=26.0.0`, and pnpm 11.
 
 1. Copy `.env.example` to `.env` only if you need to rebuild your local configuration; an ignored local `.env` is already created for this workspace.
 2. Fill in development-only WorkOS credentials. The checked-in example contains placeholders, never secrets.
@@ -32,6 +32,8 @@ The scaffold uses the Convex development deployment recorded in `.env`. It does 
 Start with `AGENTS.md`, then use the specifications in `docs/`. The approved design-system source and captured reference galleries are preserved locally under ignored `docs/reference/` and `docs/reference-images/` paths because they include source material and live sample data. Do not commit these private reference files.
 
 The end-to-end phased roadmap is [Implementation Plan](docs/IMPLEMENTATION-PLAN.md). It is a planning handoff, not authorization to begin product implementation.
+
+Current phase state and remaining work are tracked in [Implementation Status](docs/IMPLEMENTATION-STATUS.md). Every agent task must leave a durable record in [Agent Handoffs](docs/agent-handoffs/README.md), using its [handoff template](docs/agent-handoffs/TEMPLATE.md).
 
 ## Project stage
 
