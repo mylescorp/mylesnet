@@ -425,6 +425,8 @@ Phases can overlap only when interfaces are approved and their prerequisites are
 
 ## 6. Cross-cutting delivery standards
 
+For the project-specific REA evidence workflow, target handling rules, stage-by-stage uses, and evidence-record format, follow [`REA-VALIDATION-PLAN.md`](REA-VALIDATION-PLAN.md). REA is supplemental evidence; it does not replace project tests, provider sandboxes, router/RADIUS labs, legal review, or launch gates.
+
 ### 6.1 Route, action, and CRUD coverage
 
 The full route inventory is acceptance scope, not a promise that each route uses the same backend operation. Each route/action entry must specify: surface; audience; branch/entity scope; required permission; plan/lifecycle availability; data sensitivity; CRUD/action meaning; audit event; loading/empty/error/denied states; reference image; and automated verification.

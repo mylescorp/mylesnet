@@ -20,6 +20,8 @@ At the end of **every task**, each agent must leave a durable handoff in `docs/a
 
 Keep `docs/IMPLEMENTATION-STATUS.md` as the concise repository-wide source of current phase state, done work, open work, blockers, and links to detailed handoffs. Update it in the same change whenever phase/task status changes. Do not overwrite another agent’s handoff; use a distinct date/task/agent filename. Handoffs and status updates are planning/project records, not permission to start implementation, connect external services, or deploy.
 
+Use REA according to [`docs/REA-VALIDATION-PLAN.md`](docs/REA-VALIDATION-PLAN.md): prefer existing references and passive inspection; use REA only when the question needs shipped/runtime evidence or a repeatable recorded web environment; use normal source tools for ordinary repository analysis. Any state-changing capture requires a disposable/seeded target. Record REA evidence and limitations in the task handoff; never treat REA output as provider, legal, network, or production-readiness approval.
+
 ## Product surfaces and end-to-end scope
 
 The planned product has four related surfaces:

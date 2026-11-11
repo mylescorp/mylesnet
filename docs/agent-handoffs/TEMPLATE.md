@@ -28,6 +28,7 @@
 - **Checks run:** `<exact command/action and result>`
 - **Checks not run:** `<what remains and why>`
 - **Evidence:** `<links, screenshots, logs, CI results, or artifact paths; redact sensitive data>`
+- **REA evidence:** `<Evidence IDs, target/environment, artifact path, coverage and unknowns; write “Not used” when applicable>`
 - **Failures:** `<new failures and pre-existing failures separated>`
 
 ## Remaining work
