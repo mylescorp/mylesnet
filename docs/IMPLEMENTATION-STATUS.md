@@ -7,7 +7,7 @@
 ## Current summary
 
 - **Active phase:** Phase 0 — close planning and turn decisions into build contracts.
-- **Current task:** MN-PLAN-009 — reconcile newly approved usage-pricing and subscriber-portal branding decisions into canonical planning documents; this task's own PR/review gates are in progress.
+- **Current task:** MN-PLAN-009 — reconcile approved usage-pricing, subscriber-portal branding, and guided CSV migration decisions into canonical planning documents; this task's own PR/review gates are in progress.
 - **Completed:** End-to-end implementation plan and handoff protocol documented; repository and planning documents reviewed; ordered Phase 0 kickoff plan prepared; MN-PLAN-003 decision-register changes merged.
 - **Pending:** MN-PLAN-003's required numerical Greptile score remains unverified despite PR #6 being merged; MN-PLAN-009 documentation/review gates; then requirement/route/action traceability, ADRs, data/threat contracts, country/operations packs, Phase 0 exit review, and explicit user authorization to begin implementation. See [Phase 0](IMPLEMENTATION-PLAN.md#phase-0--close-planning-and-turn-decisions-into-build-contracts), the [kickoff plan](EXECUTION-KICKOFF-PLAN.md), and [open gates](IMPLEMENTATION-PLAN.md#8-open-gates-and-explicit-non-decisions).
 - **Active blockers:** Vendor contracts/sandboxes, country-specific legal review, exact commercial values, operational capacity/owners, residency/cost validation, recovery targets, and other unresolved items listed in the plan.
@@ -45,7 +45,7 @@ Statuses: **Not started**, **In progress**, **Blocked**, or **Accepted**. “Acc
 | MN-PLAN-006 | 0 | Define data, event, and threat contracts | Pending | Coordinator | Depends on MN-PLAN-003 and relevant MN-PLAN-004/005 outputs |
 | MN-PLAN-007 | 0 | Prepare country and operations packs | Pending | Coordinator | Depends on MN-PLAN-003 and relevant MN-PLAN-005/006 outputs |
 | MN-PLAN-008 | 0 | Prioritize v1 stories and review Phase 0 exit gate | Pending | Coordinator | Depends on MN-PLAN-003 through MN-PLAN-007 |
-| MN-PLAN-009 | 0 | Reconcile approved usage-pricing and subscriber-portal branding decisions | In progress | Coordinator | Depends on MN-PLAN-003; [task handoff](agent-handoffs/2026-11-11-MN-PLAN-009-codex.md); [PR #10](https://github.com/mylescorp/mylesnet/pull/10) open; Greptile check passed with zero comments on head `431a9bc` but exposed no numerical 5/5 score; Vercel preview is blocked by the org's Hobby plan; merge gates pending |
+| MN-PLAN-009 | 0 | Reconcile approved usage-pricing, subscriber portal branding, and CSV migration decisions | In progress | Coordinator | Depends on MN-PLAN-003; [task handoff](agent-handoffs/2026-11-11-MN-PLAN-009-codex.md); [PR #10](https://github.com/mylescorp/mylesnet/pull/10) open; Greptile check passed with zero comments on head `431a9bc` but exposed no numerical 5/5 score; Vercel preview is blocked by the org's Hobby plan; merge gates pending |
 | MN-GOV-001 | 0 | Add mandatory agent handoff and status tracking | In progress | Coordinating agent | [Task handoff](agent-handoffs/2026-11-11-MN-GOV-001-coordinator.md); PR/review gates pending |
 | MN-GOV-002 | 0 | Require same-PR remediation for Greptile findings | In progress | Coordinating agent | [Task handoff](agent-handoffs/2026-11-11-MN-GOV-002-coordinator.md); PR/review gates pending |
 | MN-GOV-003 | 0 | Reconcile public sitemap route-family counts | In progress | Coordinating agent | [Task handoff](agent-handoffs/2026-11-11-MN-GOV-003-coordinator.md); PR/review gates pending |

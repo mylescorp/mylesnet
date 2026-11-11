@@ -15,6 +15,8 @@
 
 Reference limitations: `/accounts` showed a 404; the security route was gated by reauthentication; export paths can download data; and some pages showed loading states. Treat those as review notes, not proposed behavior.
 
+Import note: v1 supports guided CSV imports with validation, duplicate checks, a dry-run preview, explicit commit, audit trail and safe batch rollback. The observed `import-export` paths are reference evidence only; catalog the v1 import entities, entry points and exact route actions before implementation. Named system-specific connectors are deferred beyond v1.
+
 ## Proposed platform-admin route groups
 
 These are candidate navigation groupings for the approved platform surface. V1 includes platform administration and SaaS billing; exact route names, navigation, grouping, and action-level acceptance remain to be cataloged before implementation. The phase sequence is in [`IMPLEMENTATION-PLAN.md`](IMPLEMENTATION-PLAN.md).
@@ -64,6 +66,7 @@ Each tenant has exactly one active Owner. Owner is always tenant-wide; Admin, fu
 - Use permission actions, not role-name checks scattered through the UI. Roles are bundles of versioned permissions.
 - Resolve tenant from verified host/domain and authenticated membership. Never trust a browser-submitted tenant ID as the access boundary.
 - Apply tenant scope to database queries, exports, file URLs, cache keys, broadcasts, queue jobs, search, and webhook processing.
+- Gate CSV upload, mapping, dry-run, commit, job/row-result access and rollback with explicit import permissions and verified tenant/branch scope. Ignore tenant or branch identifiers supplied in CSV content as authorization; resolve scope from the authenticated operation. Never allow a dry run to mutate tenant records.
 - Staff membership removal/deactivation revokes access immediately: invalidate the membership and active sessions, terminate live subscriptions, clear tenant-scoped client data, and preserve the audit trail.
 - Role, permission, and branch-scope changes are enforced immediately across requests and live subscriptions; clear data no longer permitted by the new scope while leaving the user signed in.
 - Tenant Owners and Admins may invite staff and set initial role/branch scope. Admins cannot exceed their own permission ceiling; Owner approval is required for high-risk grants. Ordinary invitations cannot grant the Owner role; ownership changes use the separate transfer flow.

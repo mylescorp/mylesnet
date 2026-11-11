@@ -201,8 +201,8 @@ The approved v1 direction is one shared Convex deployment with strict logical te
 | Group | Pages/features (reference paths) | Proposed CRUD and actions |
 |---|---|---|
 | Overview | `/dashboard` | Read dashboard cards and live activity; drill into source records; attention items deep-link to authorized work. No direct data mutation on summary cards. |
-| Subscribers/customers | `/users`, `/users/create`, `/users/compensate`; customer search/detail, import/export | Create, list/read, update, deactivate/archive; contact/plan/expiry/device changes; imports with preview/validation/rollback; export by permission; batch compensation requires reason/approval and audit. |
-| Leads | `/leads`, `/leads/import-export` | Create/read/update/assign/stage; archive/convert with history; validate imports and prevent duplicate identifiers. |
+| Subscribers/customers | `/users`, `/users/create`, `/users/compensate`; customer search/detail, import/export | Create, list/read, update, deactivate/archive; contact/plan/expiry/device changes; guided CSV imports with validation, duplicate checks, dry-run preview, audit and safe batch rollback; export by permission; batch compensation requires reason/approval and audit. |
+| Leads | `/leads`, `/leads/import-export` | Create/read/update/assign/stage; archive/convert with history; guided CSV import with validation, duplicate checks, dry-run, audit and safe rollback. |
 | Support tickets | `/tickets`, `/tickets/create`, `/tickets/import-export`, `/tickets/analytics` | Create/read/update/assign/status/priority/comment/resolve/reopen; scoped imports/exports; reporting. Customer portal only sees own tickets. |
 | Sessions and packages | `/active-users`, `/packages`, `/packages/create` | Live read for sessions; disconnect/reconnect is a privileged command, not ordinary delete. Plans create/read/update/archive; used plans cannot be hard-deleted. |
 | NAS/router/network map | `/nas`, `/nas/create`, `/nas/71564`, `/nas/71564/web-console`, `/network-map` | Router registration and tenant mapping, status, configuration, sync, health, credential rotation; commands are permission-gated and audited. External router web console is not embedded as SaaS admin access. |
@@ -220,6 +220,10 @@ The approved v1 direction is one shared Convex deployment with strict logical te
 | Tenant subscription | `/subscription` | Read plan/usage and invoices; update plan/cancel only by owner/authorized finance role, with explicit effective date and confirmation. |
 
 The paths above follow the observed tenant routes. The references do not confirm every detail, form submission, destructive action, export, or external link. UI controls must be specified from product requirements before coding.
+
+#### Guided CSV import (v1)
+
+Provide a permission-gated, tenant/branch-scoped wizard for supported entity types. It offers templates/instructions, validates file structure and field mapping, checks duplicates within the file and against existing records in the selected tenant scope, and presents a dry-run preview before any mutation. Duplicate rows are flagged; the importer never silently merges or overwrites existing data. Require explicit commit, show per-row outcomes/progress, and write an audit trail for upload, mapping, validation, commit and rollback. Tag imported records with their `ImportJob` so rollback can safely target only the originating batch. Roll back only records that remain unchanged and have no downstream dependency; preserve immutable audit/financial history and route unsafe rows to an explicit reconciliation path. Named system-specific connectors are deferred beyond v1. Entity coverage, exact templates/matching keys, partial-failure behavior, file/batch limits and retention remain build-contract decisions.
 
 ### 5.5 Subscriber account portal (proposed)
 
@@ -340,6 +344,8 @@ All product surfaces share semantic tokens and component behavior while retainin
 
 **Tenant scope:** `TenantMember`, `TenantRole`, `TenantSettings`, `Subscriber`, `ServiceAccount`, `ServicePlan`, `NAS/Router`, `AccessProfile`, `RadiusCredentialReference`, `RadiusAccountingEvent`, `ActiveSessionProjection`, `PaymentAttempt`, `TenantPayment`, `LedgerEntry`, `Invoice`, `CreditNote`, `Expense`, `VoucherBatch`, `Voucher`, `SalesAgent`, `Campaign`, `MessageDelivery`, `SupportTicket`, `Equipment/CPE`, `ImportJob`, `TenantAuditEvent`.
 
+`ImportJob` records the tenant and optional branch scope, entity/template version, actor, secure source-file reference/digest, mapping, validation and duplicate summary, dry-run result, explicit commit state, row-level outcomes, retry/rollback state and audit correlation. Do not retain uploaded source contents longer than the approved retention policy or copy row-level secrets into logs/audit summaries.
+
 Every tenant-owned record has tenant ID, creation/update actor, timestamps, status/lifecycle, retention class and access rule. Secrets are references to a secret store, never plaintext application fields.
 
 ### Event ownership
@@ -352,6 +358,7 @@ Every tenant-owned record has tenant ID, creation/update actor, timestamps, stat
 | Router health/config result | Router worker or router callback/poll | Store time-stamped status and stream authorized updates. |
 | Message delivery | Messaging provider callback | Record idempotent delivery state and stream campaign progress. |
 | SaaS subscription event | Platform billing provider or authorized platform workflow | Update platform ledger/subscription state separately from tenant collection ledger. |
+| Tenant CSV import job | Authorized tenant operator and import service | Validate and preview without writes; on explicit commit, process idempotently in verified tenant/branch scope, report row outcomes, audit lifecycle, and allow only safe batch-scoped rollback. |
 
 ### Financial rules
 
@@ -435,7 +442,7 @@ The following must be reviewed and approved before implementation begins:
 5. RADIUS/network decision: service implementation, policy store, NAS tenant mapping, event outbox, outage behavior, test hardware and safe network.
 6. Payment/messaging/accounting provider list, sandbox availability, country/currency matrix, and callback contracts.
 7. Approved v1.0 DTCG source and cross-surface handoff are recorded. Before implementation, resolve the audit’s schema-ID, secondary-accent, shape-preset, dark-output, contrast/chart-validation and runtime-integration gaps; do not describe unrun checks as passed.
-8. Data dictionary, states, retention, PII classification, audit policy, financial ledger rules, export/deletion and migration plan.
+8. Data dictionary, states, retention, PII classification, audit policy, financial ledger rules, export/deletion and migration plan. For CSV imports, define supported entity/templates and source mappings, duplicate matching/resolution, limits/retention, partial-failure behavior and safe rollback boundaries; named system connectors are deferred beyond v1.
 9. Hosting/cost estimate, environments, domains, backups, monitoring, RPO/RTO, support and incident owners.
 10. Verification plan for CRUD, cross-tenant authorization, live events, payment idempotency, RADIUS authentication/accounting, responsive UI and accessibility.
 
@@ -718,7 +725,7 @@ sequenceDiagram
 
 Acceptance includes Convex/WAN outage, repeated interim updates, stop-before-start, duplicate packet, NAS tenant mismatch, full local queue, recovery drain and the approved fail-closed login policy while existing sessions continue.
 
-Provisioning, support grant, monthly usage invoicing/rating, domain verification, tenant offboarding and router command require equivalent sequence diagrams before those flows are implemented.
+Provisioning, support grant, monthly usage invoicing/rating, guided CSV import/commit/rollback, domain verification, tenant offboarding and router command require equivalent sequence diagrams before those flows are implemented.
 
 ### 14.10 ADRs, glossary, definition of done and readiness gate
 

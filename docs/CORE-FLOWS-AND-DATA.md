@@ -16,6 +16,17 @@
 
 Block a repeated verified Owner identity from owning another tenant and block duplicate subdomains; allow duplicate business names when those identifiers are distinct. Do not collect government-issued business registration IDs during v1 signup. Define failed verification/provisioning recovery before implementation. Tenant signup is self-service after email verification, with the selected 14-day trial and lifecycle rules documented in `READINESS-DECISIONS.md`.
 
+### Guided tenant CSV import (v1)
+
+1. An authorized tenant staff member selects an entity and tenant/branch scope, downloads the relevant CSV template/instructions, or uploads a prepared CSV. The supported entity list and exact field mappings are defined before implementation; named system-specific connectors are deferred beyond v1.
+2. The import service validates file type/size, headers, required fields, formats and tenant/branch references. It checks duplicates both within the uploaded file and against records already in the selected tenant scope. It never silently overwrites or merges existing records.
+3. Show a non-mutating dry-run preview with rows ready to import, rows with errors/warnings, duplicate candidates, and actionable row-level reasons. The operator must skip or resolve invalid/duplicate rows according to the entity-specific policy before confirmation. A dry run writes no tenant records.
+4. Require explicit confirmation to commit. Run the job idempotently within the verified tenant and branch scope; show progress, per-row outcomes and retryable failures. Record who uploaded, validated, committed or rolled back the job, the selected entity/scope, mapping/template version, source-file digest, timestamps and result counts in the audit trail. Do not copy row contents, credentials or other secrets into logs.
+5. Offer safe rollback for records created by that import batch. Rollback must not erase audit or immutable financial history, overwrite later edits, or delete records already depended on by other work. If a row cannot be reversed safely, preserve it and present an audited exception/reconciliation path instead of forcing deletion.
+6. Apply tenant/branch authorization, bounded file and row counts, secure temporary-file handling, retention rules, and queue/backpressure policy to every import job.
+
+**Open before build:** supported entity coverage, template schemas, duplicate matching/resolution rules, file/batch limits and retention, partial-commit semantics, retry behavior, and safe rollback cutoffs. Existing subscriber/lead import requirements use this shared guided CSV contract. No named system connector ships in v1.
+
 ### Tenant domain configuration and migration
 
 1. Tenant settings show the active domain and provide three choices: MylesNet subdomain, a domain the tenant owns, and **Buy a domain**.

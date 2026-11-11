@@ -69,11 +69,12 @@ No dependency is complete merely because a document, screen, or demo exists; use
 The following remain decisions or evidence gates, not assumptions for the kickoff plan to fill in:
 
 - Fixed KES/UGX/TZS PPPoE rates and monthly minimums, applicable tax including the Hotspot fee base, FX fallback/finality, and detailed usage event/rating behavior. The standard Hotspot/PPPoE formulas, monthly minimum rule, no-hard-cap policy, Enterprise qualification/quote fields, calculator inputs, and 30-day prospective rate-change notice are approved.
+- CSV is the approved v1 tenant-migration mechanism: guided imports with validation, duplicate checks, dry-run preview, explicit commit, audit and safe rollback; named system connectors are deferred. Supported entities, source/templates/mappings, duplicate resolution, limits/retention, partial failure and rollback boundaries remain open build contracts.
 - Country counsel approvals, data-transfer safeguards, precise retention schedules, and legal terms.
 - Payment provider contracts/sandboxes, fee schedules, direct-versus-pooled activation, settlement/refund/payout capabilities, and merchant-account ownership.
 - Email/SMS/WhatsApp vendor and country delivery evidence; DNS registrar and TLS automation proof.
 - Hosting/region contract, latency, cost, capacity, SLO definitions outside already approved targets, and scale budgets.
-- Backup frequency, RPO/RTO, disaster-recovery proof, incident/on-call owners, support staffing, migration sources, and public-launch cohort/date.
+- Backup frequency, RPO/RTO, disaster-recovery proof, incident/on-call owners, support staffing, CSV migration source/entity coverage and customer guidance, and public-launch cohort/date.
 - The user's explicit transition from planning into implementation; production deployment remains a separate approval gate.
 
 ## Documents reviewed for this kickoff

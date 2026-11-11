@@ -118,8 +118,9 @@ Phases can overlap only when interfaces are approved and their prerequisites are
 6. Define cross-country country pack requirements for Kenya, Uganda, and Tanzania: legal entity/currency/tax/invoice, payment collection/payout capability, SMS sender/delivery, language, timezone, data transfers, retention, support, and launch approval evidence.
 7. Define threat model and data classification. Identify secrets, credentials, PII, financial records, payment tokens, router/NAS metadata, AAA records, audit/support access, and screenshot/reference data.
 8. Set engineering working agreements: branch/PR/check/review policy, dependency update cadence, local synthetic data, environment separation, feature flags, security review, accessibility gates, release owner, incident commander, and rollback authority.
+9. Approve the v1 tenant data-migration approach: guided CSV import with validation, duplicate checks, dry-run preview, explicit commit, audit trail and safe rollback; defer named system connectors. Close the entity/template, matching, limits/retention, partial-failure and rollback contracts before implementation.
 
-**Deliverables:** reconciled canonical docs; ADRs; requirement/route/action/role/entitlement matrix; data dictionary and ownership map; event/API contract backlog; threat model; country launch checklist; prioritized v1 story map; operational assumptions and named owners.
+**Deliverables:** reconciled canonical docs; ADRs; requirement/route/action/role/entitlement matrix; data dictionary and ownership map; event/API contract backlog; threat model; country launch checklist; prioritized v1 story map; CSV import entity/template and reconciliation contracts; operational assumptions and named owners.
 
 **Exit gate:** no material contradiction on product scope, service boundaries, role ownership, currency/money rules, or network outage behavior; unresolved vendor/legal/cost values have explicit owners and do not block safe development environments. User approves moving from planning to implementation.
 
@@ -243,10 +244,15 @@ Phases can overlap only when interfaces are approved and their prerequisites are
 - All routes show loading, empty, error, stale/offline, denied, read-only, plan-disabled, over-quota, suspended and success states as applicable.
 - Branch and legal entity filters are explicit; every list, report, export, create form, job, and detail route preserves selected scope. No branch scope is inferred from hidden UI state.
 
+**Guided CSV data migration**
+
+- V1 provides permission-gated tenant/branch-scoped CSV imports with server-side validation, duplicate checks within the upload and against tenant data, non-mutating dry-run preview, explicit commit, per-row outcomes, audit trail, and safe batch-scoped rollback. Do not silently merge or overwrite duplicates.
+- Build named system-specific connectors after v1. Before implementation, specify which entities are importable, templates and field mapping, duplicate match/resolution, partial-commit and retry behavior, upload/batch limits and retention, and rollback eligibility/cutoffs.
+
 **Feature delivery order and record behavior**
 
-1. **Subscribers:** list/search/detail/create/update/archive, service entitlements, contact/consent, import preview/validation/rollback, scoped export; account identity deduplication; secrets masked and reveal permission-gated.
-2. **Leads:** CRUD, assignment/stages, import/export, conversion with history and dedupe.
+1. **Subscribers:** list/search/detail/create/update/archive, service entitlements, contact/consent, guided CSV import with validation, duplicate checks, dry-run, audit and safe rollback, scoped export; account identity deduplication; secrets masked and reveal permission-gated.
+2. **Leads:** CRUD, assignment/stages, guided CSV import/export, dry-run, validation, duplicate checks, audit, safe rollback, conversion with history and dedupe.
 3. **Support tickets:** CRUD/status/priority/assignment/comments/resolve/reopen, analytics, scoped import/export, subscriber own-ticket view.
 4. **Plans/packages:** create/read/update/archive shared templates; branch-local price/currency/availability; compose speed, quota, validity/time, session limits and fair-use policy. Preserve historical purchase/price terms.
 5. **Live sessions:** real-time view, filters, branch/router/subscriber details; disconnect/reconnect as audited privileged jobs; session history derived from AAA authority.
@@ -258,7 +264,7 @@ Phases can overlap only when interfaces are approved and their prerequisites are
 11. **Tenant settings:** branding, domain, PPPoE, hotspot, payment rails, SMS/email/WhatsApp, templates, loyalty, notifications, AI provider/key reference, accounting integrations, developer/API/webhooks, profile, security, retention, country/legal entity, timezone/currency, branch and tenant subscription. Each setting group has its own permission, validation, audit, and secret rotation rules.
 12. **Tenant subscription:** plan/usage/invoices/payment and owner-only auto-pay controls, separate from subscriber payment ledger.
 
-**Deliverables:** complete shell; route groups; route/action permission matrix; domain CRUD slices; import/export framework; search/filter/table/form patterns; branch-safe notifications; tenant setup checklist.
+**Deliverables:** complete shell; route groups; route/action permission matrix; domain CRUD slices; guided CSV import/export framework with dry-run, audit and batch rollback; search/filter/table/form patterns; branch-safe notifications; tenant setup checklist.
 
 **Exit gate:** all 73 captured tenant route/view entries map to an implemented, explicitly deferred, or replaced requirement with rationale; route links and CRUD actions are permission gated; branch/tenant scope works through direct URLs and exports; financial/audit history cannot be erased.
 
@@ -495,7 +501,7 @@ These remain open until evidence and an accountable owner close them; the plan d
 8. Convex Ireland and Vercel Dublin final region/contract/latency/capacity/cost review; scale budgets, expected largest tenant, SLO measurement definitions and sharding trigger.
 9. Backup frequency, RPO/RTO, retention, disaster recovery, maintenance policy, service-specific latency/freshness goals and incident status communications.
 10. CMS/editorial publishing workflow, AI assistant provider/security/availability, TR-069/ACS v1 scope, exact tenant subscription payment provider and supported methods per country.
-11. Business budget, team/capacity, named operational owners, rollout cohort, migration sources, and target public launch date.
+11. Business budget, team/capacity, named operational owners, rollout cohort, CSV source/entity coverage and customer migration guidance, and target public launch date. The guided CSV approach is approved; named system-specific connectors are deferred beyond v1.
 
 ## 9. Launch checklist and go/no-go
 

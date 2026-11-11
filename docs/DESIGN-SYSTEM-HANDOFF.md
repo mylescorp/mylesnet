@@ -260,6 +260,7 @@ Core patterns include:
 - Metrics/charts: units, currency, period, source and freshness; text summaries and labels independent of color.
 - Status badges and notices: platform-owned meanings, icon/text support and known/unknown/stale states.
 - Dialogs, drawers, menus, tabs, pagination, file/logo upload, permission gates, live regions and captive checkout.
+- Guided CSV import patterns: file selection and template help, field mapping, accessible dry-run summary, row-level validation/duplicate feedback, progress/results, explicit commit confirmation and safe-rollback confirmation. Show scope and permission errors without exposing other tenants' records.
 - Each realtime view distinguishes connecting, live, delayed, stale, reconnecting and offline.
 
 All interactive and data components support the relevant states: default, hover, focus, pressed, selected, disabled, loading, success, warning, error, empty, stale/offline, read-only, permission-denied, feature-disabled, over-quota, trial/grace and suspended. Do not show actions to an unauthorized user when their presence itself leaks sensitive capability; where a disabled action is useful, explain why. Server-side authorization remains authoritative.
