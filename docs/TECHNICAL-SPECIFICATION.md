@@ -139,7 +139,7 @@ The default proposal is a shared Convex deployment with logical tenant isolation
 
 ### 5.1 Public marketing site
 
-**Observed route coverage:** 308 sitemap URLs, including homepage. Route-family counts from the local route inventory: 36 feature pages, 33 blog index/article paths, 177 changelog paths, 4 solution pages, 4 comparisons, 1 integration directory, and 50 other routes (country pages, calculators/tools, pricing, affiliate, legal, and related content). The screenshot route manifest remains the path-level source of truth.
+**Observed route coverage:** 308 sitemap URLs: the homepage plus 307 non-homepage paths. Those 307 paths comprise 36 feature pages, 33 blog index/article paths, 177 changelog paths, 4 solution paths, 4 comparison paths, 1 integrations directory, and 52 other paths (country pages, calculators/tools, pricing, affiliate, legal, and related content). The screenshot capture manifest includes UI states in addition to the public sitemap paths; see `docs/public-site-review.md` for the reconciliation.
 
 **Feature families:**
 
