@@ -84,4 +84,4 @@ The main planning sources are `AGENTS.md`, `IMPLEMENTATION-PLAN.md`, `IMPLEMENTA
 
 ## Immediate next action
 
-Start **MN-PLAN-003**, the Phase 0 decision register and canonical reconciliation. Keep Phase 0 marked **In progress** until all six work items have evidence and the stated exit gate is met. Do not start Phase 1 or product implementation before the explicit user approval required by the charter.
+Continue **MN-PLAN-004**, the Phase 0 requirement and route/action traceability catalog, using the reconciled scope and vocabulary in MN-PLAN-003. MN-PLAN-003's own PR/review gate remains open; MN-PLAN-004 is stacked on that coordinator-owned branch and does not mark MN-PLAN-003 accepted. Keep Phase 0 marked **In progress** until all six work items have evidence and the stated exit gate is met. Do not start Phase 1 or product implementation before the explicit user approval required by the charter.

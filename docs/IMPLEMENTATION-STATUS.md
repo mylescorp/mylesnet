@@ -7,9 +7,9 @@
 ## Current summary
 
 - **Active phase:** Phase 0 — close planning and turn decisions into build contracts.
-- **Current task:** MN-PLAN-003 — decision register and canonical reconciliation; own PR, review, and merge gates are in progress.
+- **Current task:** MN-PLAN-004 — requirement and route/action traceability catalog; own PR/review gates are in progress. MN-PLAN-003 remains in progress on coordinator-owned PR #6; its current head has a 5/5 Greptile summary and passing checks, but the Greptile dashboard still shows two stale unresolved entries, so it has not been merged.
 - **Completed:** End-to-end implementation plan and handoff protocol documented; repository and planning documents reviewed; ordered Phase 0 kickoff plan prepared; MN-PLAN-003 documentation content prepared.
-- **Pending:** MN-PLAN-003 delivery gates; then requirement/route/action traceability, ADRs, data/threat contracts, country/operations packs, Phase 0 exit review, and explicit user authorization to begin implementation. See [Phase 0](IMPLEMENTATION-PLAN.md#phase-0--close-planning-and-turn-decisions-into-build-contracts), the [kickoff plan](EXECUTION-KICKOFF-PLAN.md), and [open gates](IMPLEMENTATION-PLAN.md#8-open-gates-and-explicit-non-decisions).
+- **Pending:** MN-PLAN-003 review/merge gate and MN-PLAN-004 review/merge gate; then ADRs, data/threat contracts, country/operations packs, Phase 0 exit review, and explicit user authorization to begin implementation. See [Phase 0](IMPLEMENTATION-PLAN.md#phase-0--close-planning-and-turn-decisions-into-build-contracts), the [kickoff plan](EXECUTION-KICKOFF-PLAN.md), the [traceability catalog](REQUIREMENT-ROUTE-TRACEABILITY.md), and [open gates](IMPLEMENTATION-PLAN.md#8-open-gates-and-explicit-non-decisions).
 - **Active blockers:** Vendor contracts/sandboxes, country-specific legal review, exact commercial values, operational capacity/owners, residency/cost validation, recovery targets, and other unresolved items listed in the plan.
 - **Production:** No product service deployment is authorized or reported as active by this status file.
 
@@ -39,8 +39,8 @@ Statuses: **Not started**, **In progress**, **Blocked**, or **Accepted**. “Acc
 |---|---:|---|---|---|---|
 | MN-PLAN-001 | 0 | Create full implementation roadmap | Done | Coordinating agent | [Implementation plan](IMPLEMENTATION-PLAN.md) |
 | MN-PLAN-002 | 0 | Analyze repository and prepare Phase 0 execution kickoff | Done | Coordinating agent | [Task handoff](agent-handoffs/2026-11-11-MN-PLAN-002-codex.md); [kickoff plan](EXECUTION-KICKOFF-PLAN.md) |
-| MN-PLAN-003 | 0 | Create decision register and reconcile canonical documents | In progress | Coordinator | [Decision register](DECISION-REGISTER.md); [task handoff](agent-handoffs/2026-11-11-MN-PLAN-003-codex.md); [PR #6](https://github.com/mylescorp/mylesnet/pull/6) review/merge pending |
-| MN-PLAN-004 | 0 | Build requirement and route/action traceability catalog | Pending | Coordinator | Depends on MN-PLAN-003; see [kickoff plan](EXECUTION-KICKOFF-PLAN.md#ordered-phase-0-work) |
+| MN-PLAN-003 | 0 | Create decision register and reconcile canonical documents | In progress | Coordinator | [Decision register](DECISION-REGISTER.md); [task handoff](agent-handoffs/2026-11-11-MN-PLAN-003-codex.md); [PR #6](https://github.com/mylescorp/mylesnet/pull/6) remains open pending resolution of stale Greptile dashboard entries |
+| MN-PLAN-004 | 0 | Build requirement and route/action traceability catalog | In progress | Coordinator | [Traceability catalog](REQUIREMENT-ROUTE-TRACEABILITY.md); [task handoff](agent-handoffs/2026-11-11-MN-PLAN-004-codex.md); own PR/review gate pending; depends on MN-PLAN-003 content |
 | MN-PLAN-005 | 0 | Prepare architecture decision records and contracts | Pending | Coordinator | Depends on MN-PLAN-003 and MN-PLAN-004; see [kickoff plan](EXECUTION-KICKOFF-PLAN.md#ordered-phase-0-work) |
 | MN-PLAN-006 | 0 | Define data, event, and threat contracts | Pending | Coordinator | Depends on MN-PLAN-003 and relevant MN-PLAN-004/005 outputs |
 | MN-PLAN-007 | 0 | Prepare country and operations packs | Pending | Coordinator | Depends on MN-PLAN-003 and relevant MN-PLAN-005/006 outputs |
