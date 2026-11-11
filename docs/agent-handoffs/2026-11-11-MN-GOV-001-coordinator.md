@@ -29,9 +29,9 @@ Make the end-to-end implementation plan mandatory context for repository work an
 
 ## Verification and evidence
 
-- **Checks run:** Python read-only scan checked relative Markdown links in `docs/IMPLEMENTATION-PLAN.md` and verified required scope markers; the command is available in session history.
+- **Checks run:** Inline Python read-only Markdown-link scan across the seven changed Markdown files found no broken relative links; `git diff --check` passed after whitespace cleanup.
 - **Checks not run:** No product tests, dependency installs, builds, or runtime checks; this is a documentation-only change and the project charter remains planning-only.
-- **Evidence:** Repository status and diff review remain pending at handoff creation; current branch is `docs/agent-handoff-governance`.
+- **Evidence:** Changed-file diff reviewed; current PR check snapshot showed Greptile Review `IN_PROGRESS` with no completed score or comments available. Current branch is `docs/agent-handoff-governance`.
 - **Failures:** None observed.
 
 ## Remaining work
@@ -42,13 +42,13 @@ Make the end-to-end implementation plan mandatory context for repository work an
 
 ### Pending
 
-- Review the final diff and run documentation link/format checks.
-- Commit/push the focused branch, open the PR, and complete required CI/Greptile review workflow as available.
-- Update `docs/IMPLEMENTATION-STATUS.md` with final PR/review/merge state before closing the task.
+- Wait for Greptile to complete review of the current PR head; read the explicit score and every comment, fix actionable issues, and request another review as required.
+- Merge only after current-head Greptile explicitly reports 5/5 confidence with zero unresolved issues and required checks pass.
+- Update `docs/IMPLEMENTATION-STATUS.md` with final review/merge state before closing the task.
 
 ### Blocked
 
-- **Current blocker:** none for local documentation work. Remote delivery remains pending PR/review gates; no claim of merge or deployment is made.
+- **Current blocker:** Greptile Review is still in progress; no score or completed review is available. Remote delivery remains pending required review gates; no claim of merge or deployment is made.
 
 ## Risks and handoff instructions
 
@@ -58,7 +58,7 @@ Make the end-to-end implementation plan mandatory context for repository work an
 
 ## Delivery state
 
-- **Commit/branch:** not committed; branch `docs/agent-handoff-governance`
-- **PR/review:** not created
+- **Commit/branch:** Current head is recorded on [PR #2](https://github.com/mylescorp/mylesnet/pull/2), branch `docs/agent-handoff-governance`
+- **PR/review:** [PR #2](https://github.com/mylescorp/mylesnet/pull/2); Greptile review in progress, score not yet reported
 - **Merge:** not merged
 - **Deployment:** not deployed
