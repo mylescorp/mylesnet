@@ -119,9 +119,9 @@ Phases can overlap only when interfaces are approved and their prerequisites are
 7. Define threat model and data classification. Identify secrets, credentials, PII, financial records, payment tokens, router/NAS metadata, AAA records, audit/support access, and screenshot/reference data. See the [data ownership and classification map](DATA-OWNERSHIP-AND-CLASSIFICATION.md), [threat model](THREAT-MODEL.md), [API/error/event contract backlog](API-ERROR-EVENT-CONTRACT-BACKLOG.md), and [synthetic-data/environment rules](SYNTHETIC-DATA-AND-TEST-ENVIRONMENTS.md).
 8. Set engineering working agreements: branch/PR/check/review policy, dependency update cadence, local synthetic data, environment separation, feature flags, security review, accessibility gates, release owner, incident commander, and rollback authority.
 
-**Deliverables:** reconciled canonical docs; ADRs; requirement/route/action/role/entitlement matrix; data dictionary and ownership map; event/API contract backlog; threat model; country launch checklist; prioritized v1 story map; operational assumptions and named owners.
+**Deliverables:** reconciled canonical docs; ADRs; requirement/route/action/role/entitlement matrix; data dictionary and ownership map; event/API contract backlog; threat model; country launch checklist; [prioritized v1 story map and Phase 0 exit review](PRIORITIZED-V1-STORY-MAP.md); operational assumptions and named owners.
 
-**Exit gate:** no material contradiction on product scope, service boundaries, role ownership, currency/money rules, or network outage behavior; unresolved vendor/legal/cost values have explicit owners and do not block safe development environments. User approves moving from planning to implementation.
+**Exit gate:** no material contradiction on product scope, service boundaries, role ownership, currency/money rules, or network outage behavior; unresolved vendor/legal/cost values have explicit owners and do not block safe development environments. The story map records evidence against these conditions but does not satisfy missing owner appointments or user authorization. User approves moving from planning to implementation.
 
 ### Phase 1 — Workspace, environments, and security spine
 
