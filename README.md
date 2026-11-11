@@ -35,6 +35,8 @@ The end-to-end phased roadmap is [Implementation Plan](docs/IMPLEMENTATION-PLAN.
 
 Current phase state and remaining work are tracked in [Implementation Status](docs/IMPLEMENTATION-STATUS.md). Every agent task must leave a durable record in [Agent Handoffs](docs/agent-handoffs/README.md), using its [handoff template](docs/agent-handoffs/TEMPLATE.md).
 
+The project-specific [REA validation plan](docs/REA-VALIDATION-PLAN.md) describes how to use REA evidence safely during planning, implementation, and launch verification.
+
 ## Project stage
 
 This is a planning/setup repository. Do not build product workflows until the user explicitly starts the development phase. See `AGENTS.md` for the end-to-end project charter and delivery gates.
