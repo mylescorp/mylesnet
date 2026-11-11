@@ -40,7 +40,7 @@ Resolve the public route-family mismatch identified in PR #1's Greptile review. 
 
 ### Pending
 
-- Obtain a fresh Greptile review for PR #4's latest head and fix any findings on the same branch and PR.
+- Obtain an explicit numerical 5/5 confidence score for PR #4's latest head; the completed review of `82432f4` was approved with zero comments but did not report a score. Fix any new findings on the same branch and PR.
 - Merge only after Greptile explicitly reports 5/5 confidence with zero comments and unresolved issues, and required checks pass.
 
 ### Blocked
@@ -50,12 +50,12 @@ Resolve the public route-family mismatch identified in PR #1's Greptile review. 
 ## Risks and handoff instructions
 
 - **Risks/limitations:** The route manifest is local-only and its screenshot-record total includes UI states; do not describe screenshot rows as sitemap URLs.
-- **Next action:** Continue PR #4 review; fix all findings on its branch, then merge only after its review and check gates pass.
+- **Next action:** Request review of the current PR #4 head and record the explicit score; fix any findings on its branch, then merge only after its review and check gates pass.
 - **User approval required:** None for the requested documentation correction; do not deploy.
 
 ## Delivery state
 
 - **Commit/branch:** Changes are committed and pushed on `fix/pr1-route-count-greptile`.
-- **PR/review:** [PR #4](https://github.com/mylescorp/mylesnet/pull/4) targets `main`; open. Greptile reviewed the initial head and raised one handoff consistency finding; no explicit confidence score has been reported.
+- **PR/review:** [PR #4](https://github.com/mylescorp/mylesnet/pull/4) targets `main`; open. Greptile's review of `82432f4` approved with zero comments and the prior thread is resolved; no explicit numerical confidence score was reported. This handoff update requires review at the resulting latest head.
 - **Merge:** Not merged.
 - **Deployment:** Vercel preview is ready; not deployed to production.
