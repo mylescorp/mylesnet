@@ -47,7 +47,7 @@ Statuses: **Not started**, **In progress**, **Blocked**, or **Accepted**. “Acc
 | MN-PLAN-008 | 0 | Prioritize v1 stories and review Phase 0 exit gate | Pending | Coordinator | Depends on MN-PLAN-003 through MN-PLAN-007 |
 | MN-GOV-001 | 0 | Add mandatory agent handoff and status tracking | In progress | Coordinating agent | [Task handoff](agent-handoffs/2026-11-11-MN-GOV-001-coordinator.md); PR/review gates pending |
 | MN-GOV-002 | 0 | Require same-PR remediation for Greptile findings | In progress | Coordinating agent | [Task handoff](agent-handoffs/2026-11-11-MN-GOV-002-coordinator.md); PR/review gates pending |
-| MN-GOV-003 | 0 | Reconcile public sitemap route-family counts | In progress | Coordinating agent | [Task handoff](agent-handoffs/2026-11-11-MN-GOV-003-coordinator.md); PR/review gates pending |
+| MN-GOV-003 | 0 | Reconcile public sitemap route-family counts | Done | Coordinating agent | [Original task handoff](agent-handoffs/2026-11-11-MN-GOV-003-coordinator.md); [post-merge closeout](agent-handoffs/2026-11-11-MN-GOV-003-codex.md); [PR #4](https://github.com/mylescorp/mylesnet/pull/4) merged at `b9d1b14`; latest Greptile score 5/5, review thread resolved, and all reported checks passed |
 
 For ongoing work, add one row per independently actionable task. Use a stable ID, mark dependencies, link the handoff, and keep **Done** distinct from **Pending** and **Blocked**. Do not delete completed rows; archive obsolete scope with a reason and replacement link.
 
