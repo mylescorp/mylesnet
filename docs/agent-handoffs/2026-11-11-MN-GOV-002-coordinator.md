@@ -29,7 +29,7 @@ Make it explicit that actionable Greptile findings are fixed on the same task br
 
 - **Checks run:** `pnpm install --frozen-lockfile --offline` — passed; `pnpm typecheck` — passed; `pnpm build` — passed; `git diff --check` — passed; a relative Markdown link check — passed; `rg -ni 'centipid' AGENTS.md` — no matches.
 - **Checks not run:** Product tests were not run because tests were not requested and the change adds no product workflow.
-- **Evidence:** Commit `a5690b1` is pushed to the existing PR #2 branch. Greptile reviewed PR #2 and flagged a mismatched phase map and unsupported Node.js floor; both are corrected in the current working diff. Review request remains scoped to PR #2; a fresh latest-head score is still required.
+- **Evidence:** Commit `a5690b1` added the same-PR rule and commit `4b4baf5` fixed Greptile's phase-map and Node.js findings on PR #2. The `4b4baf5` Greptile check succeeded (63 files reviewed, 0 new comments) and its review was approved; both earlier review threads are resolved. GitHub did not expose a numeric confidence score, so the explicit 5/5 gate is not verified. This handoff update creates a new PR head that also requires review.
 - **Failures:** None observed.
 
 ## Remaining work
@@ -40,22 +40,22 @@ Make it explicit that actionable Greptile findings are fixed on the same task br
 
 ### Pending
 
-- Commit and push the fixes to PR #2; request and verify a fresh review of its latest head. Fix any further findings on this same PR until the required score and zero-issue gate is met.
+- Request and verify a fresh review of the PR head containing this handoff update. Fix any further findings on this same PR until the explicit score and zero-issue gate is met.
 - Complete the task only after the latest-head review reports explicit 5/5 confidence with zero comments/unresolved issues and required checks pass.
 
 ### Blocked
 
-- Greptile's score for the corrected head is pending.
+- **Current blocker:** GitHub shows an approved Greptile review with zero new comments, but no explicit numeric 5/5 score. Do not merge unless that score can be verified for the latest PR head.
 
 ## Risks and handoff instructions
 
-- **Risks/limitations:** Review evidence tied to an older SHA does not satisfy the gate for the latest PR head.
-- **Next action:** Push the reviewed fixes to PR #2 and trigger/verify Greptile for that current head; fix any findings on PR #2.
+- **Risks/limitations:** An approval and zero new comments do not prove a 5/5 score. Review evidence tied to an older SHA does not satisfy the gate for the latest PR head.
+- **Next action:** Verify the fresh latest-head review; if its numeric score remains unavailable, keep the PR open and obtain access to the score.
 - **User approval required:** None for this documentation update. Merge and production deployment remain gated by repository policy and explicit authorization.
 
 ## Delivery state
 
-- **Commit/branch:** `a5690b1` / `docs/agent-handoff-governance`.
-- **PR/review:** [PR #2](https://github.com/mylescorp/mylesnet/pull/2); latest-head review pending.
+- **Commit/branch:** `a5690b1` (same-PR rule), `4b4baf5` (Greptile fixes), and this handoff update / `docs/agent-handoff-governance`.
+- **PR/review:** [PR #2](https://github.com/mylescorp/mylesnet/pull/2); `4b4baf5` approved with 63 files reviewed and 0 new comments, but no numeric score; fresh review required after this update.
 - **Merge:** not merged.
 - **Deployment:** not deployed.
