@@ -55,26 +55,28 @@ Provide an ISP with one tenant workspace to manage subscribers, plans, network a
 5. RADIUS authentication must remain responsive through transient UI/backend outages; its policy lookup and accounting durability require a separately designed network boundary.
 6. Screenshots guide layout and visual language. They do not establish undocumented business rules, legal terms, or exact interactions.
 
-## 3. Proposed technical architecture
+## 3. Approved technical direction and remaining choices
 
-### Stack proposal
+The stack and boundary choices below are reconciled to the project charter, [`READINESS-DECISIONS.md`](READINESS-DECISIONS.md), and [`TECH-STACK.md`](TECH-STACK.md). Earlier draft alternatives are retained only where labeled as superseded or candidate. The [`DECISION-REGISTER.md`](DECISION-REGISTER.md) records authority, evidence, owners, dependencies, and revisit triggers. This remains a planning specification; selected direction is not evidence of a deployed service.
 
-| Layer | Proposed technology | Responsibilities |
+### V1 stack direction
+
+| Layer | V1 direction / remaining status | Responsibility / boundary |
 |---|---|---|
-| Web framework | Next.js 16.x Active LTS, latest stable patch at project kickoff; App Router, TypeScript, React | Marketing site, platform console, tenant console, customer portal, server-rendered pages, and HTTP routes. |
+| Web framework | Next.js App Router, React, TypeScript; `apps/web` for public/subscriber routes, `apps/admin` for authenticated platform/tenant surfaces, and `apps/storybook` for design documentation/visual review. | Respect application ownership and server/client boundaries; document cross-surface session behavior before feature work. |
 | Live app backend | Convex | Typed queries/mutations/actions, reactive subscriptions, transactional application writes, scheduled jobs, and live dashboard state. |
-| Identity | WorkOS AuthKit for Next.js | Staff sign-in, invitation and membership lifecycle, MFA, organization session, and optional enterprise SSO/SCIM. |
+| Identity | WorkOS AuthKit for Next.js; enterprise SSO/SCIM deferred beyond v1. | Staff sign-in, invitation and membership lifecycle, MFA, and organization identity. The application owns authorization and current tenant/branch access. |
 | Authorization | Convex server-side policy functions, with WorkOS organization membership as identity context | Enforce platform/tenant role and permission on every query, mutation, action, export, and job. |
 | Tenant identity | One WorkOS organization mapped to one internal `tenantId` | Organization identifies the workspace; internal tenant record owns product data, branding, domains, subscription and status. |
-| UI system | Tailwind CSS, shadcn/ui, Lucide icons | Shared accessible primitives; distinct token themes for marketing, platform, tenant, subscriber, and captive portal surfaces. |
-| RADIUS service | FreeRADIUS 3 or a dedicated Go RADIUS service | UDP authentication/accounting and network-facing policy decisions, isolated from web sessions. Choice remains open. |
-| Network policy store | Open decision: replicated low-latency store (candidate PostgreSQL/Redis) or bounded backend lookup | Keep RADIUS policy reads fast and define behavior when Convex or the WAN is unavailable. |
+| UI system | User-approved MylesNet Design System v1.0; Tailwind mappings and shared primitives consume generated semantic tokens. | One DTCG source and consistent accessible shells; do not fork per-panel palettes or import tokens directly in apps. |
+| RADIUS service | FreeRADIUS 3.2.x. The earlier Go-service option is superseded for v1. | UDP authentication/accounting stays outside browser authorization and Convex request paths. |
+| Network policy store | Dedicated PostgreSQL AAA store. The earlier PostgreSQL/Redis choice and bounded Convex-lookup alternatives are superseded for v1. | Keep RADIUS policy/accounting behavior in the independently operated network plane. |
 | Router worker | Dedicated least-privilege RouterOS worker/service | Router provisioning, health polling, hotspot file sync, and approved RouterOS commands. |
 | Background work | Convex scheduler/actions for bounded work; dedicated queue/worker for long-running or network-dependent work | Payment retries, imports, messaging, router jobs, domain operations, and durable event delivery. |
 | Payments | Provider adapter interface; signed webhooks; idempotent Convex mutations | Separate gateway integration from application ledger rules. Do not trust browser redirects as settlement confirmation. |
 | Messaging | Email, SMS, and WhatsApp provider adapters | Notifications, verification codes, billing reminders, campaigns, and delivery status. Provider choices remain open. |
 | File storage | Convex file storage or private S3-compatible storage | Branding assets, exports, statements, invoices and generated documents; retention/export needs decide final option. |
-| Hosting | Next.js on Vercel or Node containers; managed Convex; isolated RADIUS/router services; Cloudflare DNS/WAF | Final region, provider, network reachability, budgets, and service ownership are open decisions. |
+| Hosting | Vercel is the Next.js host direction, with Dublin (`dub1`) the leading function-region candidate; Convex Europe (Ireland) is the leading managed-region candidate. The earlier Node-container/Cloudflare hosting alternatives are not selected for v1. | Validate region, plan, contract, latency, capacity, failover, cost, DNS/WAF, data-transfer safeguards, and operational ownership before production. |
 | Observability | Convex deployment monitoring, structured logs, Sentry/OpenTelemetry, RADIUS/router metrics | Trace requests and jobs across the web, payment, messaging, RADIUS, and router boundaries. |
 
 Use a supported stable Next.js release, not a canary build. The exact patch, package manager, deployment target, Convex plan, hosting region, worker runtime, and network data store must be pinned only after a compatibility/cost review.
@@ -89,7 +91,7 @@ flowchart LR
   NX <--> CVX[Convex app backend]
   CVX --> LIVE[Reactive tenant and platform views]
   PAY[Payment providers] -->|signed HTTPS webhook| CVX
-  NAS[MikroTik NAS] -->|RADIUS UDP| RAD[FreeRADIUS or Go service]
+  NAS[MikroTik RouterOS 7 NAS] -->|RADIUS UDP over approved WireGuard path| RAD[FreeRADIUS 3.2.x]
   RAD <--> POLICY[Low-latency policy/accounting store]
   RAD -->|durable event delivery| CVX
   CVX --> JOBS[Queued jobs / RouterOS worker]
@@ -133,7 +135,7 @@ Every live query is tenant-scoped and permission-checked. Show reconnecting, sta
 7. Unknown, suspended, domain-mismatched, or ambiguous tenants fail closed.
 8. Prove isolation with two-tenant negative cases before release.
 
-The default proposal is a shared Convex deployment with logical tenant isolation. Stronger isolation through separate deployments or an external relational store is an open architecture decision for regulated or high-volume tenants. Do not describe logical isolation as physical database-per-tenant isolation.
+The approved v1 direction is one shared Convex deployment with strict logical tenant and branch isolation. Dedicated deployments may be considered for later tiers after a documented scale, security, legal, and cost review; they are not a v1 alternative. Do not describe logical isolation as physical database-per-tenant isolation.
 
 ## 5. Panels, layouts and feature requirements
 
@@ -242,7 +244,8 @@ The paths above follow the observed tenant routes. The references do not confirm
 - Persist accounting Start/Interim/Stop idempotently; maintain a recoverable active-session projection in Convex for live panel subscriptions.
 - Disconnect/CoA and router changes are auditable jobs with approval policy, timeout, response, retry and rollback/compensation record.
 - Router secrets are encrypted in a secret manager, never returned in API/UI, logs, exports, screenshots or browser storage.
-- Network path (outbound agent versus approved inbound reachability), RADIUS fail-open/fail-closed behavior, and local policy store remain open decisions.
+- Use FreeRADIUS 3.2.x with the dedicated PostgreSQL AAA store. If RADIUS connectivity fails, retain current sessions and reject new logins; never fail open. RouterOS 7 provisioning uses a least-privilege WireGuard tunnel limited to RADIUS and CoA/Disconnect, with WinBox, SSH, and RouterOS API blocked.
+- Still specify HA topology, the exact allowed tunnel paths and source checks, policy synchronization/cache invalidation, accounting recovery, supported RouterOS patch/device matrix, provisioning-token lifetime, and isolated lab acceptance. Do not connect real routers during planning.
 
 ## 6. CRUD and RBAC specification
 
@@ -388,7 +391,7 @@ Every tenant-owned record has tenant ID, creation/update actor, timestamps, stat
 
 - RADIUS service accepts only expected NAS identities, shared secrets and source/network policy; rotate credentials without logging them.
 - Rate-limit malformed/auth-failure traffic; monitor latency, accepts/rejects/timeouts/retries and accounting lag.
-- Use bounded timeout and retry budgets. Decide fail-open/fail-closed behavior explicitly for database/network outage.
+- Use bounded timeout and retry budgets. RADIUS outage behavior is approved: keep current sessions and reject new logins; never fail open. Specify separate degraded-mode behavior for other database/network dependencies without weakening that policy.
 - Buffer accounting locally/durably if Convex cannot be reached; deduplicate on NAS/session/event identifiers.
 - Router commands use least-privilege accounts, allowlisted actions, approval where impactful, audit, timeout and result capture.
 - Do not expose Winbox/RouterOS console credentials or management ports through the browser application.
@@ -447,18 +450,16 @@ The following must be reviewed and approved before implementation begins:
 
 ## 12. Decisions still open
 
-- Final product name/brand and how closely to match reference platform versus create a distinct identity.
-- First-release segments, launch geography, supported currencies, languages and legal entity.
-- Which public marketing routes are hand-authored/static versus CMS-managed; whether all 308 routes are in launch scope.
-- Super-admin navigation, support access approval policy, platform finance responsibilities and audit retention.
-- Exact role/permission granularity, tenant self-service and subscriber identity model.
-- Convex shared deployment versus dedicated deployments for high-isolation tenants; backup/export, region, capacity and cost model.
-- RADIUS implementation (FreeRADIUS or Go), local policy/accounting store, availability and router reachability model.
-- Initial router models/RouterOS versions, RouterOS API commands, captive portal hosting/template sync and rollback.
-- Initial payment, SMS, email, WhatsApp, domain, DNS/TLS and accounting providers.
-- Platform billing method, pricing tiers, trial/grace/suspend/refund rules.
+- Exact product-brand expression and reference-derived visual treatment; the product name and four-surface scope are approved.
+- Which public routes need editable CMS behavior, content ownership, and editorial/release workflow. All 308 captured public URLs are in v1 scope as static or structured content unless a justified editing need is approved.
+- Exact platform-admin navigation and detailed support/audit workflow contracts. The platform surface and the charter's scoped support-grant policy are approved; route/action acceptance remains to be cataloged.
+- Fine-grained role/action permissions, subscriber authentication/recovery contracts, and negative acceptance cases. The v1 built-in roles, branch-scope model, and SSO/SCIM deferral are approved.
+- Workload, rate/query/queue limits, indexes, capacity and cost budgets; future dedicated-tenant thresholds. V1 uses one shared Convex deployment with strict tenant/branch isolation.
+- RouterOS device/version lab matrix, allowed connectivity paths, provisioning implementation, portal asset sync/rollback and provider-return/outage handling. FreeRADIUS 3.2.x, PostgreSQL AAA, and fail-closed new-login behavior are approved.
+- Provider contracts, sandbox/live readiness, merchant-account ownership/fees, country-specific pooled-collection approval, and the selected email/SMS/WhatsApp/domain/DNS/TLS/accounting vendors. Candidate providers are recorded in [`DECISION-REGISTER.md`](DECISION-REGISTER.md); candidate status is not approval.
+- Exact plan names, prices, quotas, tax and overage values; same-feature tiers and the trial/grace/renewal direction are approved.
 - Design-system source gaps listed in [MYLESNET-DESIGN-SYSTEM-V1.0-AUDIT.md](MYLESNET-DESIGN-SYSTEM-V1.0-AUDIT.md): schema IDs, secondary-accent behavior, shape-preset status, dark resolved JSON completeness, exhaustive contrast/chart validation, approved font/logo assets and runtime theme compilation.
-- Numeric latency/availability targets, supported devices, data retention, RPO/RTO, support ownership and deployment budget.
+- Metric-source/acceptance definitions for approved targets, service-specific latency and event freshness, supported-device coverage, exact retention periods, data-transfer approvals, RPO/RTO, deployment/operations budget and named service owners.
 
 ## 13. Technology references
 
@@ -496,13 +497,13 @@ Initial applicability examples:
 | Tenant identity and data isolation | `all_tenants` | No cross-tenant data; context/scope always visible to staff | Server-derived tenant context on every operation. |
 | Tenant subscriber CRUD | `all_tenants` subject to role | Hide or make unavailable according to role policy | Tenant membership + permission + resource scope. |
 | Tenant-owned custom domain | `all_tenants` across subscription tiers | Offer domain setup on every plan; do not claim active before DNS/TLS verification | Domain ownership challenge, DNS A-record verification, TLS readiness and unique tenant-host mapping. |
-| Platform-brand removal | `plan:white_label` (provisional key) | Show an upgrade path when unavailable | Server entitlement plus the platform's legal/operational branding rules. |
+| Tenant theme/brand inputs | `all_tenants`; theme features are not tier-gated | Offer only fields in the approved v1.0 schema; show validation and publish status | Branding permission, strict schema validation, safe theme derivation and publish audit. |
 | Advanced analytics/export volume | Candidate plan-gated capability; exact key/tiers open | Read-only/upgrade/quota explanation | Dataset permission, entitlement, quota and export rate limit. |
 | Branch-specific staff access | `all_tenants` if branches are MVP; otherwise future capability | Clear scope selector and branch-bound view | Membership scope predicate on every entity and action. |
 | Platform support session | `platform_only` | No tenant impersonation affordance without eligible operator grant | Grant approval, tenant, reason, expiry, action scope and audit validation. |
 | Tenant theme and brand inputs | `all_tenants`; the three subscription tiers share a feature set and scale only by subscriber/router limits | v1.0 input schema, platform defaults, asset ownership and publish validation | Branding permission, input validation, safe theme derivation and publish audit. Custom domains are also available on every tier but use the separate domain control plane. |
 
-Plan names, feature-to-tier mapping, quota quantities, grace period and tenant exception authority remain approval decisions. A named entitlement key must exist before a screen or backend check is built. There is no “frontend-only plan check.”
+Plan names, prices, quota quantities, tax treatment and some exception authorities remain open. The feature set is shared across tiers; custom domains are available on every plan. Do not introduce a `plan:white_label` entitlement. Exact MylesNet attribution behavior within tenant-facing areas must follow the design handoff/legal review and is not an entitlement decision. A named entitlement key must exist before a screen or backend check is built. There is no “frontend-only plan check.”
 
 ### 14.2 Tenant hierarchy and context propagation
 
@@ -512,7 +513,7 @@ The proposed hierarchy is:
 SaaS platform
 └── ISP tenant (maps one-to-one to a WorkOS organization)
     ├── Staff memberships (tenant-wide or scoped to one or more branches)
-    ├── Branch/site (optional product hierarchy; MVP requirement open)
+    ├── Branch/site (required v1 hierarchy; cross-country operation supported)
     │   ├── NAS / router / access point
     │   ├── subscribers and service resources (tenant-owned; optional branch assignment)
     │   └── branch-scoped jobs, sessions, tickets and reports
@@ -528,7 +529,7 @@ Rules:
 - Tenant Owner may edit the permission bundles of built-in roles tenant-locally except for the fixed Owner role; Admin may compose custom roles only within the Admin's own permission ceiling. Changes never alter platform templates or other tenants.
 - Custom roles can be created from scratch or cloned from an existing role as an independent permission set with no live inheritance. Enforce the creator's permission ceiling and Owner approval for high-risk grants.
 - Built-in roles cannot be deleted. The Owner or an Admin with role-management permission may delete a custom role only after all staff assignments are removed; Admins stay within their permission ceiling. Preserve the retired role definition and history in the audit trail.
-- A person/account may own at most one ISP tenant. Whether a staff identity may also be invited to other WorkOS organizations remains open; every action must bind to the active verified organization and resolved internal `tenantId`.
+- A person/account may own at most one ISP tenant and a verified staff identity may belong to multiple tenant organizations. Tenant switching is explicit; every operation binds to the active verified organization and resolved internal `tenantId`, and clears data from the prior tenant context.
 - Subscriber identity, staff identity and RADIUS credentials remain distinct by default. Any account linking needs an explicit identity and recovery threat model.
 - Hostname/domain identifies a tenant-facing surface, not an authenticated person. A custom domain must resolve to a verified tenant mapping; authorization still uses authenticated identity and membership.
 - Platform support access is a scoped, expiring grant and must be labeled on every page/action. It never converts a platform identity into a tenant owner identity.
@@ -609,7 +610,7 @@ The lifecycle state machine must distinguish `pending_verification`, `provisioni
 | Signup/provisioning | Verify first Owner's email before automatic provisioning; phone may be verified later. Block repeated Owner identities and subdomains, but permit duplicate business names; do not collect government registration IDs in v1. Preserve old subdomains as redirect aliases after verified Owner-requested rename. Create WorkOS organization and internal tenant idempotently; assign first Owner; record plan/trial; show retryable progress and support correlation ID. Partial failures resume safely within bounded retries, then expose a support path. |
 | Invitation/membership | Tenant Owner or Admin may invite through WorkOS AuthKit by verified email; invitation is single-use and expires after 7 days. Enforce tenant/branch scope and role approval policy before sending. Admins stay within their permission ceiling, high-risk grants need Owner approval, and invitations cannot assign Owner; use the separate transfer flow. Acceptance updates verified membership; revoke/expiry leaves an audit record. Owner or tenant-wide Admin may deactivate a non-Owner member; branch-scoped Admin may revoke access only in assigned branches. The Owner is protected from ordinary staff deactivation. Removing/deactivating a member immediately invalidates membership and active sessions, stops live subscriptions, and clears tenant-scoped client data while retaining the audit record. Role, permission, and branch-scope changes immediately recompute authorization and live subscriptions, clear data no longer permitted, and preserve the sign-in session. |
 | Owner transfer | Sole current Owner initiates with MFA step-up; incoming Owner verifies identity, accepts and completes MFA step-up (enrolling if needed). Incoming Owner selects the former Owner's post-transfer role: tenant-wide Admin by default, a narrower role, or no access. Commit ownership and role changes atomically so exactly one active Owner remains; immediately recompute access and notify all verified tenant contacts. If the current Owner cannot initiate, use the approved owner-recovery workflow. |
-| Enterprise SSO/SCIM | Optional/plan-gated decision; map identity provider organization to internal tenant; provision/deprovision only configured groups/roles; preserve platform boundary; test conflicting manual and SCIM ownership. |
+| Enterprise SSO/SCIM | Deferred beyond v1; it is not a v1 plan entitlement. Any later inclusion requires a separate approved scope, identity mapping, group/role rules, and conflicting manual/SCIM ownership tests. |
 | MFA/recovery | Platform admins require MFA at sign-in; tenant staff enrollment is optional except that high-risk actions require an enrolled factor and verified MFA step-up. Recovery does not bypass tenant membership; privileged recovery is audited. |
 | Tenant switch | Select only from verified memberships; change active context; flush old tenant cache/subscriptions/search/notifications; show new tenant identity before rendering data. |
 | Plan transition | Recompute entitlement and quota state; notify affected operators; schedule behavior at effective boundary; retain data and define downgrade/export behavior. |
@@ -641,9 +642,9 @@ Availability, latency, event-to-screen freshness, error budget, support hours, s
 - Every schema/data migration states forward/backward compatibility, batch size, tenant checkpoint, idempotency, lock/latency impact, rollback/compensation and observability. Use expand/migrate/contract for zero-downtime changes; old and new code may run concurrently during rollout.
 - Backup design states data/assets/secrets scope, encryption, frequency, retention, isolation, restore order, provider dependency, tenant-selective export/restore, RPO/RTO, test frequency and named owner. Restore drills use an isolated environment and prove data integrity and tenant boundaries.
 - Tenant export/deletion applies consistently to primary data, files, search/indexes, caches, analytics, logs and backups according to approved retention/legal hold; describe the residual backup expiry behavior.
-- Recovery/DR procedures specify degraded-mode behavior for Convex, identity, payment, DNS, RADIUS policy store and router reachability. Network authentication behavior is a security/product decision, not an implicit fail-open.
+- Recovery/DR procedures specify degraded-mode behavior for Convex, identity, payment, DNS, RADIUS policy store and router reachability. RADIUS follows the approved policy: keep current sessions, reject new logins, and never fail open.
 
-Exact scale figures, hosting regions, sharding technology, RPO/RTO, backup retention and migration windows are open decisions that need workload/cost evidence before production approval.
+V1 uses the shared Convex deployment direction; dedicated tenant deployments are a possible later-tier option. Vercel Dublin and Convex Ireland remain leading region candidates rather than production approvals. Exact scale figures, latency, hosting contracts/costs, cross-border approvals, future sharding/dedicated triggers, RPO/RTO, backup retention and migration windows require workload, legal, and recovery evidence before production approval.
 
 ### 14.9 Critical flow sequence contracts
 
@@ -713,7 +714,7 @@ sequenceDiagram
   Relay->>Store: Mark delivered or schedule retry
 ```
 
-Acceptance includes Convex/WAN outage, repeated interim updates, stop-before-start, duplicate packet, NAS tenant mismatch, full local queue, recovery drain and approved fail-open/closed behavior.
+Acceptance includes Convex/WAN outage, repeated interim updates, stop-before-start, duplicate packet, NAS tenant mismatch, full local queue, recovery drain and the approved fail-closed login policy while existing sessions continue.
 
 Provisioning, support grant, plan downgrade, domain verification, tenant offboarding and router command require equivalent sequence diagrams before those flows are implemented.
 
@@ -741,12 +742,12 @@ Before development begins, approve the documents listed in §11 plus the followi
 
 The following are explicit blockers to a final production-ready specification, not reasons to invent a choice:
 
-- Whether branch/site hierarchy is in MVP and whether subscribers/resources can belong to multiple sites.
-- Tenant data isolation tiers, WorkOS SSO/SCIM availability, tenant region/data residency and internal user-to-organization mapping rules.
-- Plan names, features, metering units, thresholds, overage, trial, grace, proration, dunning, suspension and exception approval.
-- Payment, messaging, DNS/TLS, accounting and RADIUS implementation providers; sandbox and reconciliation details.
+- Branch/site hierarchy and cross-country operation are in v1. Still open: resource-by-resource branch assignment, shared/multi-branch resources, null semantics, indexes, and acceptance cases.
+- V1 shared Convex, strict tenant/branch isolation, WorkOS organization-to-tenant mapping, and SSO/SCIM deferral are approved. Still open: detailed access contracts, future isolation triggers, final region/legal-transfer approval, and operating cost.
+- Tiers share one feature set, and custom domains are available on every plan. Still open: plan names/prices, quota values, tax, metering/overage, and remaining effective-time/exception rules.
+- Payment, messaging, DNS/TLS, accounting and portal vendors; provider contracts/sandboxes, settlement and reconciliation ownership, and country-specific activation evidence. FreeRADIUS 3.2.x is the approved v1 RADIUS implementation.
 - Per-tenant/per-user rate limits, query/page caps, queue fairness, largest tenant, initial/target volumes and cost guardrails.
-- Numeric availability, latency, event freshness, incident response, support and maintenance targets for each service.
+- Measurement sources for approved availability/login/payment targets; service-specific latency/event-freshness budgets, support/incident staffing, maintenance policy, and operational ownership.
 - Backup/restore approach, retention/legal hold, tenant export/delete semantics, RPO/RTO, regions and shard/dedicated-tenant trigger.
 - Compliance scope and evidence needs; privacy notice/consent, audit retention, breach notification and data-subject request ownership.
 - Named owners for platform, security, network operations, finance, customer support, accessibility, design system and incident response.

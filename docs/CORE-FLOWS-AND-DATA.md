@@ -103,8 +103,8 @@ These are proposed logical domains within the Convex application backend; they d
 
 ## Architecture decisions tied to the model
 
-- Choose between a shared Convex deployment with tenant-scoped documents/indexes and stronger isolation using separate deployments or an external relational store. Evaluate how isolation, noisy neighbors, backup/restore, tenant export/deletion, and platform-wide analytics will work.
+- V1 uses one shared Convex deployment with strict server-verified tenant and branch isolation; separate deployments are a possible later-tier option, not an open v1 choice. Define tenant-scoped indexes, noisy-neighbor controls, backup/restore, export/deletion, migrations and platform-wide analytics before implementation. See [`DECISION-REGISTER.md`](DECISION-REGISTER.md).
 - Real-time projections in Convex must have a named source of truth. Do not write the same payment, subscription, or RADIUS record independently in Convex and a second database without an idempotent sync/outbox design.
-- Network access/authentication needs high availability and predictable latency; define its authoritative data source, cache invalidation, fail-open/fail-closed behavior, and accounting retention separately from ordinary dashboard queries.
+- Network access/authentication is separate from ordinary dashboard queries and uses FreeRADIUS 3.2.x with PostgreSQL AAA. Preserve current sessions and reject new logins on RADIUS loss; never fail open. Define the remaining source-sync, cache invalidation, HA/recovery, and accounting-retention contracts separately.
 - Tenant billing needs integer minor units or currency-aware decimal rules, explicit currency per transaction, idempotency keys, immutable settlement records, and deterministic reconciliation.
 - Personally identifiable information, payment tokens, router credentials, and captive portal logs need separate access and retention rules.

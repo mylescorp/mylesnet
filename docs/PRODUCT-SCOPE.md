@@ -44,7 +44,7 @@ Give internet service providers one tenant workspace to manage subscribers, inte
 5. **Operations breadth:** vouchers/agents, support, campaigns, inventory, analytics, custom domains, accounting integrations, and mobile-sized views.
 6. **Production readiness:** security review, isolation/recovery drills, provider certification, monitoring, incident response, migration, and release procedures.
 
-The stage order is a proposal. It must be reconciled with user priorities, actual provider sandboxes, and the network deployment model before implementation.
+The stages above are retained as an early product-scope proposal. They are superseded as the execution sequence by [`IMPLEMENTATION-PLAN.md`](IMPLEMENTATION-PLAN.md), whose phases, dependencies, and exit gates are authoritative. Provider sandboxes and network deployment evidence remain inputs to the relevant plan phases, not reasons to use this older sequence.
 
 ## Product principles
 

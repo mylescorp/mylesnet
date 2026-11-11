@@ -17,7 +17,7 @@ Reference limitations: `/accounts` showed a 404; the security route was gated by
 
 ## Proposed platform-admin route groups
 
-These are candidate navigation groups. Decide which are needed for the first release and whether platform billing belongs in the same panel.
+These are candidate navigation groupings for the approved platform surface. V1 includes platform administration and SaaS billing; exact route names, navigation, grouping, and action-level acceptance remain to be cataloged before implementation. The phase sequence is in [`IMPLEMENTATION-PLAN.md`](IMPLEMENTATION-PLAN.md).
 
 | Group | Candidate pages/actions |
 |---|---|
