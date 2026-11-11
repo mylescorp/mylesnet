@@ -10,12 +10,13 @@ These contracts connect the approved architecture boundaries to requirement IDs.
 | Contract | Boundary and required behavior | Related requirements / sequences |
 |---|---|---|
 | `IC-APP-01` | Surface ownership: `apps/web` public/subscriber, `apps/admin` platform/tenant operations, `apps/storybook` design review; server/client and cache boundaries are explicit. Hostname is routing context only. | `REQ-PUB-*`, `REQ-SIGNUP-01`, `REQ-PLAT-*`, `REQ-TEN-*`, `REQ-SUB-*`, `REQ-CAP-*`; `SEQ-SIGNUP-01`, `SEQ-IAM-01` |
+| `IC-APP-02` | Resolve hostnames only through verified tenant-host records; derive tenant context and cache scope on the server. Never share private/authenticated data across tenant, user, or branch scopes. Host and theme context are presentation/routing inputs, never authorization. Unknown or suspended tenant hosts fail closed. | `REQ-SIGNUP-01`, `REQ-PLAT-*`, `REQ-TEN-*`, `REQ-SUB-*`, `REQ-CAP-*`; `SEQ-IAM-01`, `SEQ-DOMAIN-01` |
 | `IC-IAM-01` | A verified WorkOS staff identity and organization are resolved server-side to the internal tenant; WorkOS membership is not application permission. Subscriber identity stays separate. | `REQ-SIGNUP-01`, `REQ-PLAT-04`, `REQ-TEN-10`, `REQ-IAM-01/02`; `SEQ-SIGNUP-01`, `SEQ-IAM-01/02` |
 | `IC-IAM-02` | Current tenant status, membership, role, permission, branch/resource scope and MFA step-up are checked at each operation; membership removal and permission/scope changes immediately stop access and stale feeds. | `REQ-PLAT-04`, `REQ-PLAT-05`, `REQ-TEN-02/05/09/10/11`, `REQ-IAM-01/02`; `SEQ-IAM-01/02`, `SEQ-SUPPORT-01` |
 | `IC-DATA-01` | Every tenant-owned row, file, event, export, cache key, search document, job and subscription carries server-derived tenant scope; optional branch semantics are explicit; never trust client tenant/branch IDs. | All `REQ-TEN-*`, `REQ-SUB-*`, `REQ-CAP-*`, `REQ-NET-*`; `SEQ-IAM-01`, `SEQ-PAY-01`, `SEQ-RADIUS-01`, `SEQ-EXPORT-01` |
 | `IC-RADIUS-01` | FreeRADIUS uses the dedicated PostgreSQL AAA runtime store; Convex is off the packet path. Durable accounting/outbox events are tenant-resolved, idempotent, retried and reconcilable; outage policy remains fail-closed for new logins. | `REQ-NET-01`, `REQ-TEN-05`; `SEQ-RADIUS-01` |
 | `IC-ROUTER-01` | A separately credentialed RouterOS 7 worker accepts only authorized, allowlisted jobs; tunnel allows RADIUS and CoA/Disconnect only, with timeout, result, audit, rotation and revocation. | `REQ-NET-02`, `REQ-TEN-05/11`; `SEQ-ROUTER-01` |
-| `IC-PAY-01` | Signed, replay-checked provider event maps through trusted merchant/provider configuration; durable idempotent processing creates one payment effect and at most one service activation. Browser redirect is not settlement authority. | `REQ-PLAT-03`, `REQ-TEN-07/08/12`, `REQ-SUB-02`, `REQ-CAP-01`; `SEQ-PAY-01`, `SEQ-PLAN-01` |
+| `IC-PAY-01` | Verify signature, replay window, schema, merchant/tenant mapping, payment intent, amount, and currency before creating any financial effect. Persist the accepted raw callback separately and durably; quarantine mismatches without ledger posting or activation. Valid processing is idempotent and creates at most one payment effect and one service activation. Browser redirect is not settlement authority. | `REQ-PLAT-03`, `REQ-TEN-07/08/12`, `REQ-SUB-02`, `REQ-CAP-01`; `SEQ-PAY-01`, `SEQ-PLAN-01` |
 | `IC-LEDGER-01` | Platform subscriptions and tenant subscriber collections use separate ledgers/merchant accounts; settled facts are append-only, currencies are exact, and correction is a linked reversal. Country pooled collection remains disabled until approved. | `REQ-PLAT-03`, `REQ-TEN-07/08/12`, `REQ-SUB-02`, `REQ-CAP-01`; `SEQ-PAY-01`, `SEQ-PLAN-01` |
 | `IC-DOMAIN-01` | A tenant host maps only after explicit ownership verification and DNS/TLS readiness; old hosts remain until Owner confirms callback migration and stop-serving; host never grants identity access. | `REQ-TEN-11`, `REQ-PUB-05`; `SEQ-DOMAIN-01` |
 | `IC-THEME-01` | One DTCG source generates semantic mappings; validated tenant brand inputs cannot override security/status/focus/layout tokens; theme is presentation context, not authorization. | `REQ-TEN-01/11`, all public and portal surfaces; source gaps in MN-DEC-021 |
@@ -35,9 +36,9 @@ These contracts connect the approved architecture boundaries to requirement IDs.
 | `SEQ-SIGNUP-01` | Verified email → idempotent WorkOS organization/internal tenant/Owner provisioning → initialized trial/settings → ready only after Owner access succeeds; bounded retry preserves progress and offers support correlation. | `REQ-SIGNUP-01`, `AC-SIGNUP-01` |
 | `SEQ-IAM-01` | Staff signs in through WorkOS → server resolves organization to tenant → checks current tenant/member/role/scope → returns permitted context; switching clears old tenant state first. Revocation or scope change closes feeds and clears disallowed data. | `REQ-PLAT-04`, `REQ-TEN-10`, `AC-PLAT-04`, `AC-TEN-10` |
 | `SEQ-IAM-02` | Owner transfer or recovery follows `J-IAM-01/02`, including verification, MFA, current/trusted contacts, cooling-off/independent approval where specified, immediate access recomputation, notification and audit. No support grant is implied. | `REQ-IAM-01/02`, `AC-IAM-01/02` |
-| `SEQ-PAY-01` | Create scoped idempotent intent → provider checkout → verify signed/replay-safe event → resolve merchant and tenant server-side → append payment once → reconcile → activate once or show an exception; retries preserve immutable evidence. | `J-SUB-02`, `J-CAP-01`, `AC-SUB-02`, `AC-CAP-01`, `REQ-PLAT-03` |
+| `SEQ-PAY-01` | Create scoped idempotent intent → provider checkout → verify signed/replay-safe event → durably store raw event separately → resolve merchant, tenant and intent → validate amount/currency → append payment once only when valid → activate once or quarantine without ledger effect; retries preserve immutable evidence. | `J-SUB-02`, `J-CAP-01`, `AC-SUB-02`, `AC-CAP-01`, `REQ-PLAT-03` |
 | `SEQ-PLAN-01` | Owner confirms plan action with required MFA → exact billing legal entity/currency and entitlement version are checked → invoice/ledger effect is recorded → effective transition applies with notice and quota behavior; downgrade never silently removes existing accounts/services. | `REQ-PLAT-03`, `REQ-TEN-12`, `AC-PLAT-03`, `AC-TEN-12` |
-| `SEQ-RADIUS-01` | NAS maps to tenant through trusted registration → FreeRADIUS checks dedicated PostgreSQL AAA policy → durably stores accounting/outbox event → relay submits tenant-resolved idempotent projection to Convex → recovery drains/reconciles; new logins fail closed on RADIUS loss. | `J-NET-01`, `REQ-NET-01`, `AC-NET-01` |
+| `SEQ-RADIUS-01` | Authentication requests use the dedicated PostgreSQL AAA policy store; accounting starts/interim/stops are durably persisted with their outbox before the NAS receives an accounting response → relay submits tenant-resolved idempotent projection to Convex → recovery drains/reconciles; new logins fail closed on RADIUS loss. | `J-NET-01`, `REQ-NET-01`, `AC-NET-01` |
 | `SEQ-ROUTER-01` | Authorized Owner/Network Operator previews request → single-use/expiring setup or allowlisted job runs through isolated worker → worker records result/timeout and audit → secret/config is revoked or rotated as required. Lab-only until authorized. | `J-NET-02`, `REQ-NET-02`, `AC-NET-02` |
 | `SEQ-DOMAIN-01` | Owner requests host → system checks uniqueness and issues DNS proof → Owner explicitly verifies A record → TLS becomes ready → verified mapping activates → old host stays active through callback migration → Owner explicitly stops old host, which remains reserved. | `REQ-TEN-11`, `AC-TEN-11` |
 | `SEQ-SUPPORT-01` | Support requests tenant/resource/reason/case/expiry → Owner approves, or emergency path uses two distinct approvers → time-bound visible grant begins → each access is scoped/audited → expiry/revocation closes access and tenant is notified per policy. Export stays prohibited. | `REQ-PLAT-05`, `AC-PLAT-05`, `AC-X-02/03` |
@@ -143,6 +144,8 @@ sequenceDiagram
   participant App as Payment application boundary
   participant Provider as Payment provider
   participant Hook as Verified callback boundary
+  participant Inbox as Durable callback inbox
+  participant Intent as Payment intent and merchant mapping
   participant Ledger as Tenant ledger
   Subscriber->>Portal: Start eligible purchase
   Portal->>App: Create scoped idempotent payment intent
@@ -150,11 +153,22 @@ sequenceDiagram
   Portal->>Provider: Begin hosted/tokenized checkout
   Provider->>Hook: Send signed provider event
   Hook->>Hook: Verify signature, replay window and schema
-  Hook->>App: Resolve trusted merchant mapping and accept durable event
-  App->>Ledger: Append payment effect once
-  App->>App: Reconcile amount/currency and create entitlement at most once
+  Hook->>Inbox: Persist verified raw event idempotently
+  Inbox-->>Hook: Confirm durable acceptance
+  Hook-->>Provider: Acknowledge accepted event
+  Hook->>App: Process accepted event
+  App->>Intent: Resolve merchant, tenant and payment intent
+  Intent-->>App: Expected tenant, amount and currency
+  App->>App: Validate provider event against intent
+  alt Mapping and amount/currency match
+    App->>Ledger: Append payment effect once
+    App->>App: Create entitlement and activate at most once
+  else Unknown mapping or mismatch
+    App->>Inbox: Quarantine event; record exception
+    Note over App,Ledger: No financial effect or service activation
+  end
   App-->>Portal: Publish authorized reactive state or exception
-  Note over Hook,Ledger: Duplicate, late, mismatched or out-of-order events remain idempotent and reconcilable
+  Note over Hook,Inbox: Raw evidence is retained separately from immutable ledger effects
 ```
 
 ### `SEQ-PLAN-01` — upgrade or scheduled downgrade
@@ -189,17 +203,22 @@ sequenceDiagram
   participant AAA as Dedicated PostgreSQL AAA store
   participant Relay as Durable event relay
   participant Convex as Convex projection
-  NAS->>Radius: Access-Request or accounting packet
-  Radius->>AAA: Resolve NAS tenant and runtime policy
-  AAA-->>Radius: Policy and session result
-  Radius-->>NAS: Bounded accept or reject response
-  NAS->>Radius: Start, interim or stop event
-  Radius->>AAA: Persist idempotent accounting event and outbox
-  Relay->>AAA: Read pending outbox item
-  Relay->>Convex: Send tenant-resolved event with stable identity
-  Convex->>Convex: Deduplicate and update authorized projection
-  Convex-->>Relay: Durable acceptance or retryable result
-  Relay->>AAA: Mark delivered or retain for bounded retry
+  alt Authentication request
+    NAS->>Radius: Access-Request
+    Radius->>AAA: Resolve NAS tenant and runtime policy
+    AAA-->>Radius: Policy and session result
+    Radius-->>NAS: Bounded accept or reject response
+  else Accounting request
+    NAS->>Radius: Accounting start, interim or stop
+    Radius->>AAA: Persist idempotent event and outbox
+    AAA-->>Radius: Confirm durable write
+    Radius-->>NAS: Accounting response after durable write
+    Relay->>AAA: Read pending outbox item
+    Relay->>Convex: Send tenant-resolved event with stable identity
+    Convex->>Convex: Deduplicate and update authorized projection
+    Convex-->>Relay: Durable acceptance or retryable result
+    Relay->>AAA: Mark delivered or retain for bounded retry
+  end
   Note over Radius,AAA: If RADIUS is unavailable, existing sessions continue where possible and new logins fail closed
 ```
 

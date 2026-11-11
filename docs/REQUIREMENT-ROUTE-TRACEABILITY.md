@@ -26,10 +26,10 @@ Route rows inherit their requirement contracts above; those requirements also in
 
 | Requirement/journey family | Interface and sequence contracts |
 |---|---|
-| Public/signup and tenant provisioning (`REQ-PUB-*`, `REQ-SIGNUP-01`) | [`IC-APP-01`, `IC-IAM-01`, `SEQ-SIGNUP-01`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#interface-contract-registry) |
-| Platform and tenant staff identity, roles, and revocation (`REQ-PLAT-04`, `REQ-TEN-10`, `REQ-IAM-01/02`) | [`IC-IAM-01/02`, `IC-DATA-01`, `SEQ-IAM-01/02`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#sequence-registry) |
+| Public/signup and tenant provisioning (`REQ-PUB-*`, `REQ-SIGNUP-01`) | [`IC-APP-01/02`, `IC-IAM-01`, `SEQ-SIGNUP-01`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#interface-contract-registry) |
+| Platform and tenant staff identity, roles, and revocation (`REQ-PLAT-04`, `REQ-TEN-10`, `REQ-IAM-01/02`) | [`IC-APP-02`, `IC-IAM-01/02`, `IC-DATA-01`, `SEQ-IAM-01/02`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#sequence-registry) |
 | Tenant access, branch scope, exports, and audit (`REQ-PLAT-02/05/07`, `REQ-TEN-02/09/13`) | [`IC-DATA-01`, `IC-EXPORT-01`, `IC-STORAGE-01`, `SEQ-SUPPORT-01`, `SEQ-EXPORT-01`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#interface-contract-registry) |
-| Tenant domains and branding (`REQ-TEN-11`, public and portal host resolution) | [`IC-DOMAIN-01`, `IC-THEME-01`, `SEQ-DOMAIN-01`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#sequence-registry) |
+| Tenant domains and branding (`REQ-TEN-11`, public and portal host resolution) | [`IC-APP-02`, `IC-DOMAIN-01`, `IC-THEME-01`, `SEQ-DOMAIN-01`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#sequence-registry) |
 | Platform billing and tenant subscriber payments (`REQ-PLAT-03`, `REQ-TEN-07/08/12`, `REQ-SUB-02`, `REQ-CAP-01`) | [`IC-PAY-01`, `IC-LEDGER-01`, `IC-EVENT-01`, `SEQ-PAY-01`, `SEQ-PLAN-01`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#interface-contract-registry) |
 | Network sessions, accounting, and router commands (`REQ-TEN-05`, `REQ-NET-01/02`) | [`IC-RADIUS-01`, `IC-ROUTER-01`, `IC-DATA-01`, `IC-OBS-01`, `SEQ-RADIUS-01`, `SEQ-ROUTER-01`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#sequence-registry) |
 | Lifecycle, deletion, backup, and recovery (`REQ-PLAT-02/03/07`, `REQ-TEN-12/13`, `AC-D-03`) | [`IC-STORAGE-01`, `IC-RECOVERY-01`, `IC-MIGRATION-01`, `SEQ-OFFBOARD-01`, `SEQ-RESTORE-01`](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md#interface-contract-registry) |
