@@ -26,9 +26,9 @@ Make it explicit that actionable Greptile findings are fixed on the same task br
 
 ## Verification and evidence
 
-- **Checks run:** `git diff --check` — passed; `rg -ni 'centipid' AGENTS.md` — no matches.
+- **Checks run:** `git diff --check` — passed; a relative Markdown link check over the three changed files — passed; `rg -ni 'centipid' AGENTS.md` — no matches.
 - **Checks not run:** Product tests, dependency installs, and builds are not applicable to this documentation-only change; tests are not run unless requested.
-- **Evidence:** Review request is scoped to PR #2. The remote head must be checked again after commit/push because the in-flight Greptile check may apply to an earlier commit.
+- **Evidence:** Commit `a5690b1` is pushed to the existing PR #2 branch. Review request is scoped to PR #2; the earlier in-flight review was for an older head and does not satisfy the latest-head gate.
 - **Failures:** None observed.
 
 ## Remaining work
@@ -39,7 +39,7 @@ Make it explicit that actionable Greptile findings are fixed on the same task br
 
 ### Pending
 
-- Validate the documentation diff, commit and push to the existing PR #2, and request a fresh Greptile review of its latest head.
+- Request and verify a fresh Greptile review of PR #2's latest head; fix any findings on this same PR and repeat until the required score and zero-issue gate is met.
 - Complete the task only after the latest-head review reports explicit 5/5 confidence with zero comments/unresolved issues and required checks pass.
 
 ### Blocked
@@ -49,12 +49,12 @@ Make it explicit that actionable Greptile findings are fixed on the same task br
 ## Risks and handoff instructions
 
 - **Risks/limitations:** Review evidence tied to an older SHA does not satisfy the gate for the latest PR head.
-- **Next action:** Finish validation, push this change to PR #2, then verify the current-head review and check results.
+- **Next action:** Trigger/verify Greptile for the current PR #2 head; fix any findings on PR #2.
 - **User approval required:** None for this documentation update. Merge and production deployment remain gated by repository policy and explicit authorization.
 
 ## Delivery state
 
-- **Commit/branch:** Not committed; branch `docs/agent-handoff-governance`.
+- **Commit/branch:** `a5690b1` / `docs/agent-handoff-governance`.
 - **PR/review:** [PR #2](https://github.com/mylescorp/mylesnet/pull/2); latest-head review pending.
 - **Merge:** not merged.
 - **Deployment:** not deployed.
