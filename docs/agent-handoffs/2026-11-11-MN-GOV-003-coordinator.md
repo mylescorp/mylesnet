@@ -40,22 +40,22 @@ Resolve the public route-family mismatch identified in PR #1's Greptile review. 
 
 ### Pending
 
-- Run documentation checks, commit, push, and open a focused follow-up PR against `main` because PR #1 is already merged.
-- Obtain a fresh current-head Greptile review and fix any findings on that follow-up PR. Merge only if the required explicit 5/5 score and zero-issue gate is verifiable.
+- Obtain a fresh Greptile review for PR #4's latest head and fix any findings on the same branch and PR.
+- Merge only after Greptile explicitly reports 5/5 confidence with zero comments and unresolved issues, and required checks pass.
 
 ### Blocked
 
-- PR #1 is merged and cannot accept new commits. The route-count correction must ship in a follow-up PR.
+- None. PR #1 is merged, so this correction is tracked on follow-up PR #4.
 
 ## Risks and handoff instructions
 
 - **Risks/limitations:** The route manifest is local-only and its screenshot-record total includes UI states; do not describe screenshot rows as sitemap URLs.
-- **Next action:** Complete Markdown link validation, commit and push this documentation-only correction, then deliver the follow-up PR.
+- **Next action:** Continue PR #4 review; fix all findings on its branch, then merge only after its review and check gates pass.
 - **User approval required:** None for the requested documentation correction; do not deploy.
 
 ## Delivery state
 
-- **Commit/branch:** Not committed; branch `fix/pr1-route-count-greptile`.
-- **PR/review:** Not yet created; target `main`.
+- **Commit/branch:** Changes are committed and pushed on `fix/pr1-route-count-greptile`.
+- **PR/review:** [PR #4](https://github.com/mylescorp/mylesnet/pull/4) targets `main`; open. Greptile reviewed the initial head and raised one handoff consistency finding; no explicit confidence score has been reported.
 - **Merge:** Not merged.
-- **Deployment:** Not deployed.
+- **Deployment:** Vercel preview is ready; not deployed to production.
