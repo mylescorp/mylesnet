@@ -15,7 +15,7 @@ Deliver in gated increments. Each phase produces reviewable requirements, code/c
 
 ### Delivery principles
 
-1. **Resolve requirements before implementation.** Keep approved decisions, proposals, and unresolved gates clearly labeled. Do not infer exact prices, quotas, legal terms, retention periods, provider contracts, or SLOs that are still open.
+1. **Resolve requirements before implementation.** Keep approved decisions, proposals, and unresolved gates clearly labeled. Do not infer exact local price amounts, service-package quota values, tax/FX details, legal terms, retention periods, provider contracts, or SLOs that remain open.
 2. **Establish isolation first.** Tenant and branch context is resolved on trusted server boundaries. Every query, mutation, action, subscription, file, export, job, callback, cache, and search path is scoped and tested.
 3. **Keep authoritative systems explicit.** Convex owns SaaS application state and realtime projections. WorkOS owns staff authentication. FreeRADIUS plus PostgreSQL owns time-critical AAA behavior. Payment providers own payment evidence; immutable ledgers record financial effects. No dual-write without an outbox/idempotency contract.
 4. **Use adapters and country capability gates.** Country, legal entity, currency, provider, rail, and approval state determine what is available. Unsupported or unapproved paths remain disabled with visible explanation.
@@ -114,7 +114,7 @@ Phases can overlap only when interfaces are approved and their prerequisites are
 2. Reconcile stale lines in canonical docs and annotate previous alternatives rather than erasing useful history. In particular, resolve old claims about whether multi-branch is in v1, whether RADIUS outage behavior is open, whether SSO/SCIM is in scope, whether subscription providers are shared with subscriber collection accounts, and whether plans gate white-label/domain access.
 3. Approve an ADR set before implementation: application split/session topology; WorkOS organization mapping; Convex tenant/branch authorization and realtime revocation; data/region strategy; RADIUS source of truth and outbox; payment ledger, pooled-vs-direct merchant model and country gates; domains/DNS/TLS/callback transition; theme compiler and theme schema; storage/exports/backups; deployment/rollback; observability and SLO measurement.
 4. Produce a complete story and acceptance catalog for all surface routes and actions. Use stable requirement IDs; map each route to roles, branch scope, CRUD/action verbs, plan/tenant lifecycle state, data classes, reference capture, and acceptance cases.
-5. Freeze v1 scope and exclusions. Capture unresolved commercial values (tier names/prices/limits), legal terms, precise retention periods, provider contracts/sandbox readiness, DNS registrar, SMS/email selection, accountant adapters, scale budgets, RPO/RTO, support staffing, and CMS/editorial workflow.
+5. Freeze v1 scope and exclusions. Record the approved Hotspot/PPPoE usage model and Enterprise quote path; capture unresolved fixed KES/UGX/TZS rates and minimums, tax treatment, market/cost evidence, FX edge-case policy, legal terms, precise retention periods, provider contracts/sandbox readiness, DNS registrar, SMS/email selection, accountant adapters, scale budgets, RPO/RTO, support staffing, and CMS/editorial workflow.
 6. Define cross-country country pack requirements for Kenya, Uganda, and Tanzania: legal entity/currency/tax/invoice, payment collection/payout capability, SMS sender/delivery, language, timezone, data transfers, retention, support, and launch approval evidence.
 7. Define threat model and data classification. Identify secrets, credentials, PII, financial records, payment tokens, router/NAS metadata, AAA records, audit/support access, and screenshot/reference data.
 8. Set engineering working agreements: branch/PR/check/review policy, dependency update cadence, local synthetic data, environment separation, feature flags, security review, accessibility gates, release owner, incident commander, and rollback authority.
@@ -192,16 +192,17 @@ Phases can overlap only when interfaces are approved and their prerequisites are
 
 - Health overview: tenant counts/state, onboarding/provisioning failures, job/queue health, service incidents, payment status, integration health, usage summaries with minimized subscriber PII.
 - Tenant directory/details: search, lifecycle, country/entities/branches, owner and verified contacts, domains, plan, usage, onboarding timeline, suspend/reactivate, cancellation/offboarding/export status, reason-confirmed destructive actions.
-- Plan catalog: three monthly tiers, identical feature set with subscriber/router quotas scaled. Exact names, prices, included limits, currency tables, tax presentation, and change policy remain commercial decisions. No branch/legal entity caps; custom domain is included in every tier.
-- Subscription billing: 14-day trial from email verification without payment method; require billing setup and tenant confirmation before first charge; 7-day completion grace at trial end; tier upgrades immediate after Owner confirmation and prorated difference payment; downgrades next renewal; quota reached retains existing data/services and blocks new records while explaining upgrade.
-- Subscription invoice payment: selected billing legal entity and its exact currency; MylesNet-owned merchant accounts separate from tenant collection accounts. Daraja/iOtec/ClickPesa/Selcom are candidates subject to validation. Manual Pay for mobile money/bank/card; provider fees absorbed in plan price. Invoice reminders 7/3/1 days before due; stop once paid.
+- Usage-pricing catalog: Hotspot at 3% of confirmed audited sales before provider fees, less refunds/reversals; PPPoE at the fixed local equivalent of USD $0.25 per distinct billable account-month; one $5-equivalent monthly minimum on combined use, including zero-use paid months. Standard Hotspot/PPPoE share features and allow both modes on one tenant. No hard subscriber/router caps or per-staff/per-voucher charges. Exact local rates, minimums, tax treatment, and price evidence remain open; no branch/legal-entity caps and custom domains are available across offers.
+- Enterprise: custom quote for 10,000+ active subscribers or a documented multi-region/regulatory requirement; quote intake collects company name, work email, countries served, estimated subscribers, Hotspot/PPPoE usage, and a short needs summary. Enterprise may negotiate annual commitments and tailored onboarding, migration, integrations/API/branding and support/contract terms. Dedicated infrastructure or stronger guarantees need separate validation.
+- Subscription billing: 14-day trial from email verification without payment method; require billing setup and tenant confirmation before first charge; seven-day completion grace at trial end. Standard usage renews monthly with no annual discount; Enterprise cadence/commitments may be negotiated. Usage changes affect the next invoice; there are no standard tier upgrade/downgrade or subscriber/router quota transitions.
+- Subscription invoice payment: selected billing legal entity and its exact currency; MylesNet-owned merchant accounts separate from tenant collection accounts. Daraja/iOtec/ClickPesa/Selcom are candidates subject to validation. Manual Pay for mobile money/bank/card; MylesNet absorbs its own invoice processing costs. Invoice reminders 7/3/1 days before due; stop once paid.
 - Optional wallet auto-pay for eligible MylesNet-managed collection tenants only: Owner MFA-step-up controls; off by default; selected billing entity wallet and exact invoice currency only; first attempt one day before due; retry hourly while short, including during suspension; completed payment restores service; disabling cancels future attempts immediately.
-- Monthly and annual renewal; annual 15% discount; auto-renew unless Owner cancels before next renewal; cancellation mid annual term has no prorated refund and service continues to paid-through date. First successful paid invoice anchors billing; missing day uses last day of cycle then returns to anchor date.
+- Standard monthly renewal auto-renews unless Owner cancels before next renewal; service continues to paid-through date. The first successful paid invoice anchors billing; a missing day uses the last day of that cycle and returns to the original anchor date next cycle. No standard annual discount; Enterprise may negotiate annual terms.
 - Support access, operator roles/MFA, tenant domain health, integration status without exposing secrets, audit/policy, and platform controls.
 
-**Deliverables:** platform route catalog and shell; tenant lifecycle console; versioned plan/entitlement service; invoice and payment ledger; subscription dunning/recovery; usage counters; operator and audit views.
+**Deliverables:** platform route catalog and shell; tenant lifecycle console; versioned price schedule and entitlement service; idempotent Hotspot/PPPoE meters and invoice rating; invoice and payment ledger; subscription dunning/recovery; Enterprise quote intake; operator and audit views.
 
-**Exit gate:** subscription invoices and tenant collections are separate ledgers/accounts; entitlements are server-evaluated; trial, upgrade/downgrade, limits, suspension/recovery, reminders, auto-pay and cancellation scenarios reconcile without double charge; no unapproved pooled payout is enabled.
+**Exit gate:** subscription invoices and tenant collections are separate ledgers/accounts; usage is metered and rated exactly once with traceable local-currency/FX/tax lines; no hard subscriber/router cap is imposed; entitlements and payment state are server-evaluated; trial, suspension/recovery, reminders, auto-pay and cancellation reconcile without duplicate charges; no unapproved pooled payout is enabled.
 
 ### Phase 5 — Public website, signup, account onboarding, and domains
 
@@ -211,7 +212,7 @@ Phases can overlap only when interfaces are approved and their prerequisites are
 
 1. Import all 308 public sitemap URLs as structured route/content records. The 307 non-homepage paths comprise 36 feature pages, 33 blog index/article paths, 177 changelog paths, 4 solution paths, 4 comparison paths, 1 integrations directory, and 52 other paths; count the homepage separately as URL 308. The screenshot manifest also includes UI captures beyond sitemap pages. Preserve intended canonical paths, metadata, redirects, internal links, and sitemap membership.
 2. Render mostly static/server-rendered content for SEO, accessibility, and global CDN caching. Add a CMS only after editorial ownership, roles, preview, approval, versioning, scheduled publishing, redirect, and rollback requirements are decided. Marketing publication cannot mutate tenant operations.
-3. Rebuild navigation, search/discovery, pricing, consent/cookie behavior where required, calculators/tools, legal pages, changelog/blog listing and detail pages, responsive layouts and accessible menus.
+3. Rebuild navigation, search/discovery, Hotspot/PPPoE pricing, anonymous pre-tax usage calculator, coarse-IP country/currency default with USD fallback and manual selector, Enterprise quote request, consent/cookie behavior where required, calculators/tools, legal pages, changelog/blog listing and detail pages, responsive layouts and accessible menus.
 4. Reconcile all route slugs against `docs/reference-images/public-site-screenshots/route-manifest.csv`. Treat screenshots as private; no credentials/PII/sample tenant values in content.
 
 **Signup/onboarding**
@@ -224,7 +225,7 @@ Phases can overlap only when interfaces are approved and their prerequisites are
 
 **Domain lifecycle**
 
-- Default MylesNet subdomain; custom portal domain on all tiers. Domain flow follows reference: show tenant domain and generated DNS A-record instructions; verify explicitly; issue TLS automatically; surface pending/active/failure and safe retry.
+- Default MylesNet subdomain; custom portal domain is available across all offers. Domain flow follows the approved reference behavior: show tenant domain and generated DNS A-record instructions; verify explicitly; issue TLS automatically; surface pending/active/failure and safe retry.
 - Maintain previous callback/portal addresses until tenant confirms migration and explicitly stops serving them. Never silently break callbacks. Define wildcard DNS strategy, DNS ownership verification, rate limits, certificate renewal, domain takeover prevention, registrar link and support flow in ADR/runbook.
 - “Buy a domain” opens an approved external registrar; tenant returns to the DNS setup workflow.
 
@@ -419,7 +420,7 @@ Phases can overlap only when interfaces are approved and their prerequisites are
 5. Maintain rollback plans for app versions, schema changes, token/theme outputs, portal assets, provider routes, RADIUS policies and router provisioning. Never roll back a financial ledger by deleting posted records; use compensating entries.
 6. Resolve pilot defects, publish known limitations/support guidance, confirm contract and operational owners, and run go/no-go with product, engineering, security, network, finance, support, and country legal stakeholders.
 7. Public GA only when every launch country is individually approved or clearly disabled, targets and capacity have evidence, pricing/terms are published, support and incident coverage is staffed, and cancellation/export/deletion paths work.
-8. After GA, monthly scorecard and quarterly assumptions review; capacity planning toward 1,000 tenant / 100,000 subscriber targets. Consider dedicated deployments only after measured isolation/noisy-neighbor trigger, migration/backup tooling, and commercial tier design.
+8. After GA, monthly scorecard and quarterly assumptions review; capacity planning toward 1,000 tenant / 100,000 subscriber targets. Consider dedicated deployments only after a measured isolation/noisy-neighbor trigger, migration/backup tooling, and a separately approved commercial/infrastructure design.
 
 **Deliverables:** pilot report; per-country go/no-go record; production release and rollback runbooks; support/known-limitations docs; GA readiness decision; post-launch scorecard.
 
@@ -484,7 +485,7 @@ Do not add or run tests until requested/authorized under the project instruction
 
 These remain open until evidence and an accountable owner close them; the plan does not invent values:
 
-1. Tier names, prices, exact subscriber/router included limits, tax treatment, price versioning and plan-change communications.
+1. Fixed KES/UGX/TZS PPPoE rates and monthly minimums, tax treatment including the Hotspot fee base, invoice FX fallback/finality, rate publication/effective-date details, and cost/legal validation. Approved meter formulas, no-cap policy, and 30-day prospective rate-change notice remain requirements.
 2. Legal agreements and country-specific approval for pooled collection/payout, direct merchant onboarding, refunds, payout speed, KYC/AML, licensing and taxes.
 3. Provider contract and production selection/approval for Daraja, iOtec, ClickPesa/Selcom; separate MylesNet subscription merchant accounts and tenant collection credentials.
 4. Payment fees and exact withdrawal fee schedules per country/rail; provider limits/throughput and “instant” payout evidence.
@@ -501,7 +502,7 @@ These remain open until evidence and an accountable owner close them; the plan d
 ### Product and commercial
 
 - [ ] V1 stories/route/action matrix approved; all 308 public and 73 tenant reference entries mapped.
-- [ ] Three tier price/limit catalog approved, tax and cancellation terms published, trial and grace logic validated.
+- [ ] Hotspot/PPPoE local rate and minimum schedule, tax/FX handling, and Enterprise commercial terms approved; trial, monthly invoice, cancellation, and grace logic validated.
 - [ ] Signup, tenant switch, branch/entity configuration, domain, support, export and offboarding journeys complete.
 - [ ] English and Kiswahili customer-facing copy, terms, privacy and country variants approved.
 
