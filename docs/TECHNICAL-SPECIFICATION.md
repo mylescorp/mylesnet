@@ -718,7 +718,7 @@ sequenceDiagram
 
 Acceptance includes Convex/WAN outage, repeated interim updates, stop-before-start, duplicate packet, NAS tenant mismatch, full local queue, recovery drain and the approved fail-closed login policy while existing sessions continue.
 
-Provisioning, support grant, plan downgrade, domain verification, tenant offboarding and router command require equivalent sequence diagrams before those flows are implemented.
+Provisioning, support grant, monthly usage invoicing/rating, domain verification, tenant offboarding and router command require equivalent sequence diagrams before those flows are implemented.
 
 ### 14.10 ADRs, glossary, definition of done and readiness gate
 
