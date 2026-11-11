@@ -97,6 +97,8 @@ Use the technical specification's representative envelope as the starting contra
 | `RECON-003` | WorkOS identity/org ↔ internal membership/tenant status reconciliation | `REC-001`–`REC-003` | Required; provider event strategy and identity owner open. |
 | `EXPORT-001` | Scoped async export and reauthorized expiring download | `AC-X-01/02/03`, `IC-EXPORT-01` | Owner approval/MFA/audit boundary captured; storage, manifest and retention details open. |
 
+For the tenant CSV import lifecycle under `JOB-001`, see the [guided CSV migration contract](CSV-MIGRATION-CONTRACT.md). It details authority rechecks, preview/commit sequencing, idempotent row processing, rollback boundaries, and unresolved job policy choices.
+
 ## Related artifacts
 
 - [Data ownership and classification](DATA-OWNERSHIP-AND-CLASSIFICATION.md)
