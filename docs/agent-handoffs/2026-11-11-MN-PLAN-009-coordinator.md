@@ -20,6 +20,7 @@ Define how REA will be used during MylesNet planning, implementation, and launch
 - Defined repository placement, evidence-ledger fields, investigation priorities, usage boundaries, and an end-of-task REA checklist.
 - Linked the plan from `AGENTS.md`, the implementation roadmap, README, and handoff template.
 - Added this task to the implementation status ledger.
+- Strengthened root `AGENTS.md` so every agent must read the REA validation plan at task start, even when REA is not needed; clarified that this is a consultation requirement, not a reason to invoke REA unnecessarily.
 
 ## Implementation or documentation details
 
@@ -30,7 +31,7 @@ Define how REA will be used during MylesNet planning, implementation, and launch
 
 ## Verification and evidence
 
-- **Checks run:** Inline Python relative-link scan across seven changed Markdown files found no broken links; `git diff --cached --check` passed after whitespace cleanup.
+- **Checks run:** Inline Python relative-link scan across seven changed Markdown files found no broken links; `git diff --cached --check` passed after whitespace cleanup. Previous PR head `4f6c0f9` had passing Vercel preview and Gitleaks checks; the root-instruction follow-up requires checks to rerun.
 - **Checks not run:** No browser capture, live reference interaction, product tests, builds, or provider/network experiments. This task documents the future workflow only.
 - **Evidence:** Existing references and route inventories are referenced by path; no new REA capture was made. PR #14 Vercel preview deployed successfully and Gitleaks passed. Greptile responded “Your trial has ended,” so no confidence score or findings were supplied for the current head.
 - **Failures:** None observed.
@@ -59,7 +60,7 @@ Define how REA will be used during MylesNet planning, implementation, and launch
 
 ## Delivery state
 
-- **Commit/branch:** Branch `codex/mn-rea-usage-plan`; status-only follow-up commit pending
+- **Commit/branch:** Branch `codex/mn-rea-usage-plan`; follow-up is included in PR #14
 - **PR/review:** [PR #14](https://github.com/mylescorp/mylesnet/pull/14); Vercel preview passed; Gitleaks passed; Greptile returned a trial-ended notice without a score
 - **Merge:** not merged
 - **Deployment:** not deployed
