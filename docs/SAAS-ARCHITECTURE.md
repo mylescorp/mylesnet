@@ -35,6 +35,8 @@
 7. Add RouterOS provisioning jobs, captive portal asset sync, notifications, and provider adapters.
 8. Add observability, backup/restore drills, production hardening, and release automation.
 
+These conceptual stages are an early proposal, not an independent roadmap. Use [`IMPLEMENTATION-PLAN.md`](IMPLEMENTATION-PLAN.md) for the approved phase sequence, dependencies, and exit evidence; provider and operations gates remain country-specific.
+
 ## Security rules
 
 - Every tenant query and queued job must be scoped to an authenticated tenant context.

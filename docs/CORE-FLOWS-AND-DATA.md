@@ -51,7 +51,7 @@ Reference: [saved domain settings](reference-images/reference-domain-settings.pn
 5. Record Start, Interim-Update, and Stop accounting idempotently; derive active sessions from bounded, recoverable accounting state.
 6. If policy requires disconnect/CoA, enqueue a tenant-authorized command and record request, response, timeout, and retry state.
 
-The RADIUS credential/access lookup design must be reconciled with Convex tenant isolation and network availability. Candidates are a replicated low-latency policy store or a carefully bounded backend lookup. A durable queue/outbox must retain accounting events through a Convex outage; no RADIUS process should receive WorkOS or platform-admin credentials.
+FreeRADIUS 3.2.x uses a dedicated PostgreSQL AAA store; Convex is not on the RADIUS authentication or accounting request path. Define how approved tenant/branch policy state is synchronized to AAA, along with cache invalidation and accounting-event delivery through a Convex outage. On RADIUS loss, keep existing sessions and reject new logins; never fail open. No RADIUS process should receive WorkOS or platform-admin credentials. See [`DECISION-REGISTER.md`](DECISION-REGISTER.md).
 
 ### Captive-portal purchase and service activation
 
@@ -103,8 +103,8 @@ These are proposed logical domains within the Convex application backend; they d
 
 ## Architecture decisions tied to the model
 
-- Choose between a shared Convex deployment with tenant-scoped documents/indexes and stronger isolation using separate deployments or an external relational store. Evaluate how isolation, noisy neighbors, backup/restore, tenant export/deletion, and platform-wide analytics will work.
+- V1 uses one shared Convex deployment with strict server-verified tenant and branch isolation; separate deployments are a possible later-tier option, not an open v1 choice. Define tenant-scoped indexes, noisy-neighbor controls, backup/restore, export/deletion, migrations and platform-wide analytics before implementation. See [`DECISION-REGISTER.md`](DECISION-REGISTER.md).
 - Real-time projections in Convex must have a named source of truth. Do not write the same payment, subscription, or RADIUS record independently in Convex and a second database without an idempotent sync/outbox design.
-- Network access/authentication needs high availability and predictable latency; define its authoritative data source, cache invalidation, fail-open/fail-closed behavior, and accounting retention separately from ordinary dashboard queries.
+- Network access/authentication is separate from ordinary dashboard queries and uses FreeRADIUS 3.2.x with PostgreSQL AAA. Preserve current sessions and reject new logins on RADIUS loss; never fail open. Define the remaining source-sync, cache invalidation, HA/recovery, and accounting-retention contracts separately.
 - Tenant billing needs integer minor units or currency-aware decimal rules, explicit currency per transaction, idempotency keys, immutable settlement records, and deterministic reconciliation.
 - Personally identifiable information, payment tokens, router credentials, and captive portal logs need separate access and retention rules.
