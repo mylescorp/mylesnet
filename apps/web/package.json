@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@mylesnet/ui": "workspace:*",
+    "@vercel/speed-insights": "^2.1.0",
     "@workos-inc/authkit-nextjs": "4.6.3",
     "@workos-inc/node": "12.2.0",
     "convex": "1.49.0",
