@@ -33,6 +33,8 @@ Start with `AGENTS.md`, then use the specifications in `docs/`. The approved des
 
 The end-to-end phased roadmap is [Implementation Plan](docs/IMPLEMENTATION-PLAN.md). It is a planning handoff, not authorization to begin product implementation.
 
+Current phase state and remaining work are tracked in [Implementation Status](docs/IMPLEMENTATION-STATUS.md). Every agent task must leave a durable record in [Agent Handoffs](docs/agent-handoffs/README.md), using its [handoff template](docs/agent-handoffs/TEMPLATE.md).
+
 ## Project stage
 
 This is a planning/setup repository. Do not build product workflows until the user explicitly starts the development phase. See `AGENTS.md` for the end-to-end project charter and delivery gates.

@@ -8,6 +8,18 @@ The project is currently in planning and repository-foundation setup. Until the 
 
 The authoritative detailed requirements are in `docs/TECHNICAL-SPECIFICATION.md`, `docs/PRODUCT-SCOPE.md`, `docs/CORE-FLOWS-AND-DATA.md`, `docs/ROUTES-AND-ACCESS.md`, `docs/READINESS-DECISIONS.md`, `docs/TECH-STACK.md`, and `docs/DESIGN-SYSTEM-HANDOFF.md`. Read the relevant sections before changing the architecture. If these documents conflict, prefer the newest explicitly approved decision in `READINESS-DECISIONS.md`, record the reconciliation, and update the affected canonical document.
 
+## Mandatory implementation-plan and agent handoff protocol
+
+The approved end-to-end roadmap is [`docs/IMPLEMENTATION-PLAN.md`](docs/IMPLEMENTATION-PLAN.md). It is the execution map for all work in this repository. Before starting a task, every agent (including the coordinating agent) must:
+
+1. Read this `AGENTS.md`, the current Git status, the relevant implementation-plan phase, and the canonical requirement documents for the requested scope.
+2. State the applicable phase and acceptance criteria in its task plan or delegated task. If the requested work is outside the plan, conflicts with an approved decision, or crosses the planning-only boundary, stop that portion and report the conflict before making product changes.
+3. Preserve the plan’s dependencies and gates. Do not mark dependent phases complete because an upstream document or UI exists; completion requires the evidence named in the plan.
+
+At the end of **every task**, each agent must leave a durable handoff in `docs/agent-handoffs/` using [`docs/agent-handoffs/TEMPLATE.md`](docs/agent-handoffs/TEMPLATE.md). The handoff must identify the task and plan phase; record implementation/documentation changes and key decisions; list exact files changed; separate completed work from pending work and blockers; report checks/evidence and failures; state risks, next action, and whether anything was committed, pushed, merged, or deployed. Do not report unverified outcomes as complete. For a task with multiple delegated agents, each agent writes its own handoff; the coordinating agent reconciles them into [`docs/IMPLEMENTATION-STATUS.md`](docs/IMPLEMENTATION-STATUS.md), updates phase/task state, and resolves contradictions before declaring the task complete.
+
+Keep `docs/IMPLEMENTATION-STATUS.md` as the concise repository-wide source of current phase state, done work, open work, blockers, and links to detailed handoffs. Update it in the same change whenever phase/task status changes. Do not overwrite another agent’s handoff; use a distinct date/task/agent filename. Handoffs and status updates are planning/project records, not permission to start implementation, connect external services, or deploy.
+
 ## Product surfaces and end-to-end scope
 
 The planned product has four related surfaces:
@@ -110,4 +122,4 @@ Treat package versions in the scaffold as setup-time pins. Recheck supported ver
 
 ## Completion reporting
 
-At each phase boundary, summarize the scope completed, files/docs changed, checks and evidence, commit and PR, Greptile result, merge status, deployment status, and any blocked decisions. Distinguish local setup from preview, merged source, provider approval, and production operation.
+At each task and phase boundary, complete the durable handoff and update `docs/IMPLEMENTATION-STATUS.md` before reporting completion. Summarize the scope completed, files/docs changed, checks and evidence, commit and PR, Greptile result, merge status, deployment status, pending work, and blocked decisions. Distinguish local setup from preview, merged source, provider approval, and production operation.

@@ -540,7 +540,7 @@ A capability is complete only when all applicable items are satisfied:
 
 The project remains in **planning/repository-foundation** until the user explicitly authorizes implementation. Once authorized, execute a focused implementation phase with documented requirements, isolated branch/worktree where safe, requested checks, review workflow, and production kept as a separate approval. The repository instructions prescribe PR delivery and current-head Greptile 5/5 with zero unresolved issues before merge when a Git remote and PR workflow are available. Production deployment remains a distinct explicit approval boundary.
 
-Maintain this plan as a living index. When a decision changes, update the decision register and affected canonical specification, then revise phase dependencies/acceptance criteria before coding the impacted capability. Mark phases “not started / in progress / blocked / accepted” with evidence and date; do not claim a gate passed on screenshots alone.
+Maintain this plan as a living index. When a decision changes, update the decision register and affected canonical specification, then revise phase dependencies/acceptance criteria before coding the impacted capability. Mark phases “not started / in progress / blocked / accepted” with evidence and date; do not claim a gate passed on screenshots alone. Every agent task must create a durable handoff using [`agent-handoffs/TEMPLATE.md`](agent-handoffs/TEMPLATE.md); the coordinating agent maintains [`IMPLEMENTATION-STATUS.md`](IMPLEMENTATION-STATUS.md) as the current status and pending-work index.
 
 ## 12. Glossary
 
