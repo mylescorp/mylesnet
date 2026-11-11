@@ -51,7 +51,7 @@ Reference: [saved domain settings](reference-images/reference-domain-settings.pn
 5. Record Start, Interim-Update, and Stop accounting idempotently; derive active sessions from bounded, recoverable accounting state.
 6. If policy requires disconnect/CoA, enqueue a tenant-authorized command and record request, response, timeout, and retry state.
 
-The RADIUS credential/access lookup design must be reconciled with Convex tenant isolation and network availability. Candidates are a replicated low-latency policy store or a carefully bounded backend lookup. A durable queue/outbox must retain accounting events through a Convex outage; no RADIUS process should receive WorkOS or platform-admin credentials.
+FreeRADIUS 3.2.x uses a dedicated PostgreSQL AAA store; Convex is not on the RADIUS authentication or accounting request path. Define how approved tenant/branch policy state is synchronized to AAA, along with cache invalidation and accounting-event delivery through a Convex outage. On RADIUS loss, keep existing sessions and reject new logins; never fail open. No RADIUS process should receive WorkOS or platform-admin credentials. See [`DECISION-REGISTER.md`](DECISION-REGISTER.md).
 
 ### Captive-portal purchase and service activation
 
