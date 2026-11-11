@@ -46,3 +46,291 @@ These contracts connect the approved architecture boundaries to requirement IDs.
 | `SEQ-RESTORE-01` | Isolated restore request with role/incident approval → restore encrypted snapshot/assets under controlled credentials → validate tenant isolation, retention/legal holds and ledger/audit integrity → record RPO/RTO/data integrity → only separately authorized service recovery may promote restored service. | `IC-RECOVERY-01`; technical-specification §14.8 |
 
 These outlines are planning contracts. Detailed failure states, payload schemas, retry limits, provider-specific behavior, operational ownership, and acceptance automation remain Phase 0/implementation work. In particular, router lab proof, support-grant workflow, plan downgrade, tenant offboarding, and restore drill remain unperformed.
+
+## Sequence diagrams
+
+These diagrams make the service handoffs and trust boundaries explicit. They intentionally omit concrete API payloads, provider configuration, and implementation details that remain open.
+
+### `SEQ-SIGNUP-01` — verified signup and idempotent provisioning
+
+```mermaid
+sequenceDiagram
+  actor Prospect
+  participant Web as Signup surface
+  participant WorkOS as WorkOS AuthKit
+  participant Provisioner as Trusted provisioning boundary
+  participant Convex as Application data
+  Prospect->>Web: Submit signup and Owner identity
+  Web->>WorkOS: Begin email verification
+  WorkOS-->>Prospect: Verification challenge
+  Prospect->>WorkOS: Verify email
+  WorkOS-->>Web: Verified Owner identity
+  Web->>Provisioner: Request provisioning with idempotency key
+  Provisioner->>WorkOS: Create or resume tenant organization
+  WorkOS-->>Provisioner: Organization identity
+  Provisioner->>Convex: Create or resume tenant, Owner, trial and defaults
+  Convex-->>Provisioner: Durable state and progress
+  Provisioner-->>Web: Ready only after Owner access succeeds
+  opt Transient or partial failure
+    Provisioner->>Convex: Persist retryable progress and support correlation
+    Provisioner-->>Web: Show pending state and safe retry path
+  end
+```
+
+### `SEQ-IAM-01` — staff sign-in, tenant switching, and revocation
+
+```mermaid
+sequenceDiagram
+  actor Staff
+  participant Surface as Next.js surface
+  participant WorkOS as WorkOS AuthKit
+  participant App as Server authorization boundary
+  participant Live as Convex subscriptions
+  Staff->>Surface: Start sign-in
+  Surface->>WorkOS: Authenticate and verify organization membership
+  WorkOS-->>Surface: Verified identity and organization context
+  Surface->>App: Resolve organization to internal tenant
+  App->>App: Check current tenant, membership, role and branch scope
+  App-->>Surface: Return permitted context
+  Staff->>Surface: Switch tenant
+  Surface->>Live: Close previous tenant subscriptions
+  Surface->>Surface: Clear previous tenant client state
+  Surface->>App: Resolve selected verified organization
+  App->>App: Recheck current membership, permission and tenant state
+  App-->>Surface: Return new scoped context
+  App->>Live: Reauthorize each live update
+  Note over App,Live: Membership removal or scope change stops disallowed feeds and clears their data
+```
+
+### `SEQ-IAM-02` — ownership transfer and recovery
+
+```mermaid
+sequenceDiagram
+  actor Current as Current Owner or claimant
+  participant Surface as Tenant/ recovery surface
+  participant App as Identity and ownership service
+  participant Incoming as Incoming Owner
+  participant Support as Trained Support
+  participant Security as Distinct Security Admin
+  participant Contacts as Previously verified contacts
+  Current->>Surface: Request ownership transfer or recovery
+  Surface->>App: Verify identity, tenant and allowed path
+  opt Normal owner transfer
+    App-->>Incoming: Require verified invitation and acceptance
+    Incoming->>App: Accept and complete MFA step-up
+    App->>App: Atomically change Owner and former-Owner access
+  end
+  opt All verified methods are lost
+    App->>Support: Open minimized recovery case
+    Support->>App: Verify current business and claimant authority
+    Support->>Contacts: Call an existing trusted contact
+    App->>App: Apply cooling-off and prior-contact notices
+    opt No trusted contact or high-risk case
+      Support->>Security: Request distinct MFA-protected approval and required evidence review
+      Security->>App: Approve or reject with reason
+    end
+    App->>App: Record decision and dispute path; grant no routine tenant-data access
+  end
+  App-->>Contacts: Notify verified contacts of request and decision
+```
+
+### `SEQ-PAY-01` — payment settlement and one-time activation
+
+```mermaid
+sequenceDiagram
+  actor Subscriber
+  participant Portal as Subscriber/captive portal
+  participant App as Payment application boundary
+  participant Provider as Payment provider
+  participant Hook as Verified callback boundary
+  participant Ledger as Tenant ledger
+  Subscriber->>Portal: Start eligible purchase
+  Portal->>App: Create scoped idempotent payment intent
+  App-->>Portal: Pending intent and safe reference
+  Portal->>Provider: Begin hosted/tokenized checkout
+  Provider->>Hook: Send signed provider event
+  Hook->>Hook: Verify signature, replay window and schema
+  Hook->>App: Resolve trusted merchant mapping and accept durable event
+  App->>Ledger: Append payment effect once
+  App->>App: Reconcile amount/currency and create entitlement at most once
+  App-->>Portal: Publish authorized reactive state or exception
+  Note over Hook,Ledger: Duplicate, late, mismatched or out-of-order events remain idempotent and reconcilable
+```
+
+### `SEQ-PLAN-01` — upgrade or scheduled downgrade
+
+```mermaid
+sequenceDiagram
+  actor Owner as Tenant Owner
+  participant App as Subscription boundary
+  participant Provider as MylesNet billing provider
+  participant Ledger as Platform ledger
+  Owner->>App: Request plan change and confirm with MFA
+  App->>App: Resolve selected billing entity and exact invoice currency
+  alt Upgrade
+    App->>Provider: Request prorated payment
+    Provider-->>App: Verified payment result
+    App->>Ledger: Append invoice and payment effects
+    App->>App: Apply upgraded entitlement after payment
+  else Downgrade
+    App->>Ledger: Record requested next-renewal change
+    App->>Owner: Confirm effective date and quota impact
+    App->>App: Preserve current services until effective boundary
+  end
+  Note over App,Ledger: No cross-entity conversion; existing accounts/services are not silently deleted at quota
+```
+
+### `SEQ-RADIUS-01` — authentication and accounting outbox
+
+```mermaid
+sequenceDiagram
+  participant NAS as Router or NAS
+  participant Radius as FreeRADIUS
+  participant AAA as Dedicated PostgreSQL AAA store
+  participant Relay as Durable event relay
+  participant Convex as Convex projection
+  NAS->>Radius: Access-Request or accounting packet
+  Radius->>AAA: Resolve NAS tenant and runtime policy
+  AAA-->>Radius: Policy and session result
+  Radius-->>NAS: Bounded accept or reject response
+  NAS->>Radius: Start, interim or stop event
+  Radius->>AAA: Persist idempotent accounting event and outbox
+  Relay->>AAA: Read pending outbox item
+  Relay->>Convex: Send tenant-resolved event with stable identity
+  Convex->>Convex: Deduplicate and update authorized projection
+  Convex-->>Relay: Durable acceptance or retryable result
+  Relay->>AAA: Mark delivered or retain for bounded retry
+  Note over Radius,AAA: If RADIUS is unavailable, existing sessions continue where possible and new logins fail closed
+```
+
+### `SEQ-ROUTER-01` — least-privilege router onboarding/command boundary
+
+```mermaid
+sequenceDiagram
+  actor Operator as Owner or Network Operator
+  participant Surface as Tenant console
+  participant App as Authorization and job boundary
+  participant Worker as Isolated network worker
+  participant Router as RouterOS 7 device
+  participant Radius as RADIUS endpoints
+  Operator->>Surface: Request onboarding or allowed operation
+  Surface->>App: Submit tenant, branch, NAS and requested scope
+  App->>App: Verify permission, MFA, scope and single-use expiry
+  App->>Worker: Queue only an approved, allowlisted task
+  Worker-->>Surface: Return safe one-time setup/configuration status
+  Operator->>Router: Apply setup in an authorized lab or customer process
+  Router->>Radius: Establish approved RADIUS and CoA/Disconnect path
+  Router-->>App: Report bounded status through approved channel
+  App->>App: Audit issue, result, failure, rotation or revocation
+  Note over Worker,Router: This contract does not expose WinBox, SSH or RouterOS API through the RADIUS tunnel
+```
+
+The exact worker-to-device command transport remains open. If an operation requires router-admin access, it stays disabled until a separately approved, least-privilege path and lab evidence exist.
+
+### `SEQ-DOMAIN-01` — DNS verification, TLS readiness, and migration
+
+```mermaid
+sequenceDiagram
+  actor Owner as Tenant Owner
+  participant App as Domain control boundary
+  participant DNS as Public DNS
+  participant TLS as TLS provider
+  participant Portal as Tenant portal routing
+  participant Provider as External payment provider
+  Owner->>App: Request custom host
+  App->>App: Check tenant and hostname uniqueness
+  App-->>Owner: Show domain-specific A-record instruction
+  Owner->>DNS: Publish requested A record
+  Owner->>App: Explicitly request Verify DNS
+  App->>DNS: Resolve and verify ownership/routing record
+  DNS-->>App: Verification result
+  App->>TLS: Request certificate after verification
+  TLS-->>App: HTTPS readiness result
+  App->>Portal: Activate verified host mapping
+  opt Host migration
+    App->>Provider: Identify callback URL that may need external update
+    Provider-->>App: Report update status when available
+    App-->>Owner: Keep previous host active pending confirmation
+    Owner->>App: Confirm integrations moved and stop old host
+    App->>Portal: Retire old mapping and reserve host to same tenant
+  end
+```
+
+### `SEQ-SUPPORT-01` — scoped support grant
+
+```mermaid
+sequenceDiagram
+  actor Agent as Platform Support
+  participant App as Support grant service
+  actor Owner as Tenant Owner
+  actor Admin1 as Platform approver one
+  actor Admin2 as Distinct platform approver two
+  participant Audit as Append-only audit
+  Agent->>App: Request tenant/resource scope, case, reason and expiry
+  alt Routine access
+    App-->>Owner: Show requested scope and read-only boundary
+    Owner->>App: Approve or reject
+  else Emergency access
+    App->>Admin1: Request emergency approval
+    App->>Admin2: Request distinct second approval
+    Admin1->>App: Approve or reject
+    Admin2->>App: Approve or reject
+    App-->>Owner: Notify tenant of emergency grant
+  end
+  App->>Audit: Record scope, approvers, start and expiry
+  App-->>Agent: Allow only approved time-bound support view
+  Agent->>Audit: Record scoped reads and permitted writes
+  App->>Audit: Revoke at expiry or explicit revocation
+  Note over Agent,App: Finance, roles, secrets, network, messaging, export, delete and suspension remain outside the grant
+```
+
+### `SEQ-EXPORT-01` — Owner-authorized tenant export
+
+```mermaid
+sequenceDiagram
+  actor Owner as Tenant Owner
+  actor Caller as Authorized export operator
+  participant App as Export authorization boundary
+  participant Job as Bounded export job
+  participant Store as Private file storage
+  Owner->>App: Approve exact tenant/branch/data scope and purpose
+  Caller->>App: Request export and complete MFA step-up
+  App->>App: Check permission, field reads and bounded scope
+  App->>Job: Queue minimized export with expiry and audit context
+  Job->>Store: Write private tenant-scoped file
+  Job-->>App: Record completion or failure
+  Caller->>App: Request generated file
+  App->>App: Recheck identity, tenant, scope, expiry and approval
+  App->>Store: Read authorized export
+  Store-->>Caller: Return expiring access
+  Note over Owner,App: SupportGrant cannot approve, generate or retrieve this tenant-data export
+```
+
+### `SEQ-OFFBOARD-01` and `SEQ-RESTORE-01` — offboarding and isolated restore
+
+```mermaid
+sequenceDiagram
+  actor Owner as Tenant Owner or authorized lifecycle operator
+  participant App as Tenant lifecycle boundary
+  participant Export as Export service
+  participant Retention as Retention and legal-hold policy
+  participant Backup as Encrypted backup store
+  participant Recovery as Isolated recovery environment
+  Owner->>App: Request cancellation or authorized offboarding
+  App->>App: Preview impact, transition timing and export window
+  App->>Export: Offer tenant-authorized export path
+  App->>App: At effective time, stop service and revoke credentials/jobs/domains
+  App->>Retention: Evaluate per-category schedule and legal hold
+  Retention-->>App: Permit deletion/anonymization or preserve held records
+  App->>App: Record deletion job and completion evidence
+  opt Recovery drill or incident restore
+    Owner->>Recovery: Request separately approved restore
+    Recovery->>Backup: Read isolated encrypted snapshot/assets
+    Backup-->>Recovery: Restore under controlled credentials
+    Recovery->>Recovery: Check tenant boundaries, ledger/audit integrity and retention
+    Recovery-->>App: Report integrity and measured recovery point/time
+    Note over App,Recovery: No production promotion occurs without separate authorization
+  end
+```
+
+The 30-day post-cancellation export window is approved. Category retention periods, backup expiry, RPO/RTO, restore frequency, and recovery ownership remain open and must be supplied before production readiness.
