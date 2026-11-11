@@ -39,7 +39,7 @@ Statuses: **Not started**, **In progress**, **Blocked**, or **Accepted**. “Acc
 |---|---:|---|---|---|---|
 | MN-PLAN-001 | 0 | Create full implementation roadmap | Done | Coordinating agent | [Implementation plan](IMPLEMENTATION-PLAN.md) |
 | MN-PLAN-002 | 0 | Analyze repository and prepare Phase 0 execution kickoff | Done | Coordinating agent | [Task handoff](agent-handoffs/2026-11-11-MN-PLAN-002-codex.md); [kickoff plan](EXECUTION-KICKOFF-PLAN.md) |
-| MN-PLAN-003 | 0 | Create decision register and reconcile canonical documents | In progress | Coordinator | [Decision register](DECISION-REGISTER.md); [task handoff](agent-handoffs/2026-11-11-MN-PLAN-003-codex.md); PR/review/merge pending |
+| MN-PLAN-003 | 0 | Create decision register and reconcile canonical documents | In progress | Coordinator | [Decision register](DECISION-REGISTER.md); [task handoff](agent-handoffs/2026-11-11-MN-PLAN-003-codex.md); [PR #6](https://github.com/mylescorp/mylesnet/pull/6) review/merge pending |
 | MN-PLAN-004 | 0 | Build requirement and route/action traceability catalog | Pending | Coordinator | Depends on MN-PLAN-003; see [kickoff plan](EXECUTION-KICKOFF-PLAN.md#ordered-phase-0-work) |
 | MN-PLAN-005 | 0 | Prepare architecture decision records and contracts | Pending | Coordinator | Depends on MN-PLAN-003 and MN-PLAN-004; see [kickoff plan](EXECUTION-KICKOFF-PLAN.md#ordered-phase-0-work) |
 | MN-PLAN-006 | 0 | Define data, event, and threat contracts | Pending | Coordinator | Depends on MN-PLAN-003 and relevant MN-PLAN-004/005 outputs |
