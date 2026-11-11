@@ -18,7 +18,7 @@ docs/                     Product, architecture, access, and design specificatio
 
 ## Local development
 
-Requirements: Node.js 20.9 or later and pnpm 11.
+Requirements: Node.js 22 or later and pnpm 11.
 
 1. Copy `.env.example` to `.env` only if you need to rebuild your local configuration; an ignored local `.env` is already created for this workspace.
 2. Fill in development-only WorkOS credentials. The checked-in example contains placeholders, never secrets.
