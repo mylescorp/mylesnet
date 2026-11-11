@@ -19,17 +19,19 @@ Record the authoritative merge and check state for MN-PLAN-005 in the repository
 - Verified Gitleaks, Greptile Review, Vercel, and Vercel Preview Comments all report success on the merged head.
 - Verified the three historical inline findings are resolved. The latest explicit 5/5 summary remains tied to stale head `3002756`; GitHub's PR review data has no explicit numeric 5/5 for `f580ba0`.
 - Updated the central status ledger to record the merge while preserving the missing current-head score as an open review-gate evidence gap.
+- Refreshed the repository-wide merge state: PRs #9, #10, #11, #12, #13, and #14 also merged. The status ledger records their exact merge commits and available check/review evidence; PR #10's merged head has a recorded 4/5 summary with two findings, and this task does not move those findings to a different PR.
+- Corrected the Phase 0 story map's stale statement that PRs #7–#11 remained open, while retaining the phase's unresolved owner, evidence, review, and authorization gates.
 
 ## Implementation or documentation details
 
-- **Files changed:** `docs/IMPLEMENTATION-STATUS.md`; `docs/agent-handoffs/2026-11-11-MN-GOV-001-002-closeout-codex.md`; this handoff.
+- **Files changed:** `docs/IMPLEMENTATION-STATUS.md`; `docs/PRIORITIZED-V1-STORY-MAP.md`; `docs/agent-handoffs/2026-11-11-MN-GOV-001-002-closeout-codex.md`; this handoff.
 - **Approach:** Record only verifiable state. A successful Greptile check and resolved historical findings are not represented as an explicit numeric score.
 - **Decisions made:** The ADR/document contract content is merged; the repository-wide status labels the delivery merged while separately recording that the latest-head 5/5 score is not visible.
 - **Decisions left open:** Whether an authoritative current-head score exists outside the GitHub review/check evidence collected here. Product implementation remains subject to the Phase 0 exit gate and explicit user authorization.
 
 ## Verification and evidence
 
-- **Checks run:** `gh pr view 8` confirmed merged state, head, merge commit, actor, and check rollup; `gh run view 43088310989` confirmed Gitleaks success on `f580ba0`; GitHub review/thread queries confirmed three resolved threads and no explicit 5/5 review body on that head. `git diff --check` and Markdown-link validation are pending.
+- **Checks run:** `gh pr view 8` confirmed merged state, head, merge commit, actor, and check rollup; `gh run view 43088310989` confirmed Gitleaks success on `f580ba0`; GitHub review/thread queries confirmed three resolved threads and no explicit 5/5 review body on that head. `gh pr list` and `gh pr view 9`–`14` confirmed their merged states and merge commits; PR #10's merged-head summary shows 4/5 with two findings. `git diff --check` passed and a local Markdown-link scan passed across all four changed files.
 - **Checks not run:** No product tests/builds; this is a documentation-only evidence update and tests were not requested.
 - **Evidence:** [PR #8](https://github.com/mylescorp/mylesnet/pull/8), merge `363d2a9`, head `f580ba0`; all four reported checks succeeded; three historical review threads resolved.
 - **Failures:** No check failure. The explicit numeric Greptile score on the merged head is unavailable in GitHub's review data.
@@ -43,8 +45,8 @@ Record the authoritative merge and check state for MN-PLAN-005 in the repository
 ### Pending
 
 - Finish documentation checks and push this status/handoff update through our own open PR #15.
-- When the user reports Greptile restored, obtain authoritative score evidence for the latest head if still available and record it without changing the merged PR.
-- Continue remaining Phase 0 work only on our own branches and PRs; do not edit the separate open PRs for MN-PLAN-006/007/008.
+- When the user reports review restored, recheck the latest review evidence for merged PRs #8–#14. Ask the MN-PLAN-010 owner to resolve PR #10's merged 4/5/two-finding exception; do not transfer review findings to another PR.
+- Keep Phase 0 open for the named-owner, external-evidence, independent-sign-off, review, and explicit-authorization gates recorded in the story map and implementation plan.
 
 ### Blocked
 
@@ -53,7 +55,7 @@ Record the authoritative merge and check state for MN-PLAN-005 in the repository
 ## Risks and handoff instructions
 
 - **Risks/limitations:** PR #8 merged, but the visible check and resolved comments do not prove the explicit 5/5 score required by repository instructions. Do not describe the Phase 0 gate as passed based on this record.
-- **Next action:** Continue planning documentation independently. Revisit the missing score and any dependent gates when the user reports review restoration.
+- **Next action:** Complete and publish this own-PR status reconciliation without requesting review. Revisit the recorded score gaps and PR #10 findings through their original task context only after the user reports review restoration.
 - **User approval required:** Explicit approval remains required before product implementation; production deployment was not requested or performed.
 
 ## Delivery state
