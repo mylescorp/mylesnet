@@ -37,6 +37,23 @@ Route rows inherit their requirement contracts above; those requirements also in
 
 The full contract definitions and their limits are indexed in the [ADR set](adr/README.md). Contract links do not close open provider, branch-assignment, regional, design-system, legal, retention, RPO/RTO, or SLO measurement decisions.
 
+## Cross-cutting data, event, and threat contracts
+
+The route/action rows below inherit these data-ownership, classification, event, synthetic-data, and threat controls through their requirement IDs. The labels are working handling levels, not a legal classification scheme; exact retention periods and accountable owners remain open in the linked artifacts.
+
+| Requirement/journey family | Record/data contract | Threats and flow contract |
+|---|---|---|
+| Signup, tenant, legal entity and branch lifecycle (`REQ-SIGNUP-01`, `REQ-TEN-11`) | [`REC-001`–`REC-003`, `REC-014`](DATA-OWNERSHIP-AND-CLASSIFICATION.md#critical-record-and-event-ownership-map); synthetic provisioning rules in [SYN rules](SYNTHETIC-DATA-AND-TEST-ENVIRONMENTS.md#synthetic-fixture-rules) | [`THR-002`, `THR-003`, `THR-009`, `THR-014`](THREAT-MODEL.md#threat-register); [`EVT-003`](API-ERROR-EVENT-CONTRACT-BACKLOG.md#contract-backlog) |
+| Platform and tenant identity, membership, roles and revocation (`REQ-PLAT-04`, `REQ-TEN-10`, `REQ-IAM-01/02`) | [`REC-001`, `REC-003`, `REC-017`](DATA-OWNERSHIP-AND-CLASSIFICATION.md#critical-record-and-event-ownership-map) | [`THR-002`, `THR-003`, `EVT-003`, `EVT-006`](THREAT-MODEL.md#threat-register) |
+| Subscriber accounts, entitlements, sessions, service access (`REQ-TEN-02/05`, `REQ-SUB-*`, `REQ-CAP-02`, `REQ-NET-01`) | [`REC-004`, `REC-005`, `REC-007`, `REC-008`](DATA-OWNERSHIP-AND-CLASSIFICATION.md#critical-record-and-event-ownership-map); [`API-001`, `EVT-002`](API-ERROR-EVENT-CONTRACT-BACKLOG.md#contract-backlog) | [`THR-001`, `THR-003`, `THR-006`, `THR-014`](THREAT-MODEL.md#threat-register) |
+| Tenant collection and MylesNet subscription finance (`REQ-PLAT-03`, `REQ-TEN-07/08/12`, `REQ-SUB-02`, `REQ-CAP-01`) | [`REC-009`–`REC-012`](DATA-OWNERSHIP-AND-CLASSIFICATION.md#critical-record-and-event-ownership-map); [`EVT-001`, `RECON-001`](API-ERROR-EVENT-CONTRACT-BACKLOG.md#contract-backlog) | [`THR-004`, `THR-005`, `THR-012`](THREAT-MODEL.md#threat-register) |
+| NAS, RADIUS accounting, router onboarding/commands (`REQ-TEN-05`, `REQ-NET-01/02`) | [`REC-006`–`REC-008`](DATA-OWNERSHIP-AND-CLASSIFICATION.md#critical-record-and-event-ownership-map); [`EVT-002`, `EVT-004`, `RECON-002`](API-ERROR-EVENT-CONTRACT-BACKLOG.md#contract-backlog) | [`THR-006`, `THR-007`, `THR-013`, `THR-014`](THREAT-MODEL.md#threat-register) |
+| Tenant domains, themes, private files and exports (`REQ-TEN-09/11/13`, `REQ-PLAT-02/05/07`, `AC-X-01/02/03`) | [`REC-013`–`REC-015`](DATA-OWNERSHIP-AND-CLASSIFICATION.md#critical-record-and-event-ownership-map); [`EXPORT-001`](API-ERROR-EVENT-CONTRACT-BACKLOG.md#contract-backlog) | [`THR-008`, `THR-009`, `THR-010`, `THR-012`](THREAT-MODEL.md#threat-register) |
+| Imports, reports, background jobs, reference assets (`REQ-TEN-09/13`, public/tenant route references) | [`REC-016`, `REC-019`](DATA-OWNERSHIP-AND-CLASSIFICATION.md#critical-record-and-event-ownership-map); [synthetic-data rules](SYNTHETIC-DATA-AND-TEST-ENVIRONMENTS.md) | [`THR-010`, `THR-011`, `THR-013`, `THR-014`](THREAT-MODEL.md#threat-register); [`JOB-001`](API-ERROR-EVENT-CONTRACT-BACKLOG.md#contract-backlog) |
+| Audit, telemetry, incidents, retention and recovery (`REQ-PLAT-01/07`, `REQ-TEN-01/13`, `AC-D-03`) | [`REC-017`–`REC-019`](DATA-OWNERSHIP-AND-CLASSIFICATION.md#critical-record-and-event-ownership-map); [retention register](DATA-OWNERSHIP-AND-CLASSIFICATION.md#retention-and-legal-hold-register) | [`THR-010`–`THR-014`](THREAT-MODEL.md#threat-register); [`EVT-006`, `SEQ-RESTORE-01`](API-ERROR-EVENT-CONTRACT-BACKLOG.md#contract-backlog) |
+
+The crosswalk points to the [data ownership/classification inventory](DATA-OWNERSHIP-AND-CLASSIFICATION.md), [threat model](THREAT-MODEL.md), [API/error/event backlog](API-ERROR-EVENT-CONTRACT-BACKLOG.md), and [synthetic-data/environment rules](SYNTHETIC-DATA-AND-TEST-ENVIRONMENTS.md). These are planning contracts; they do not authorize tests against live services or production data.
+
 ## Public and signup requirements
 
 | Requirement | Actor and permission | Scope and applicability | Data class and audit | Acceptance case |
