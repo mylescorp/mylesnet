@@ -43,8 +43,9 @@ Define how REA will be used during MylesNet planning, implementation, and launch
 
 ### Pending
 
-- Commit and push this focused branch, create a PR, and complete review/check gates.
-- Update the status ledger with the final PR, Greptile, merge, and deployment state.
+- Complete current-head Greptile review and required checks; remediate findings and request a fresh review when the PR head changes.
+- Merge only when the explicit current-head 5/5 and zero-unresolved-issues gate and required checks pass.
+- Update the status ledger with final review, merge, and deployment state.
 
 ### Blocked
 
@@ -53,12 +54,12 @@ Define how REA will be used during MylesNet planning, implementation, and launch
 ## Risks and handoff instructions
 
 - **Risks/limitations:** AgentEnv is capture-bounded; do not treat its unobserved operations as supported. A UI/browser outcome is not payment, network, legal, security, or production evidence.
-- **Next action:** Validate links and diff, then follow the repository PR/review process.
+- **Next action:** Monitor PR #14's current-head checks, request/inspect Greptile's explicit score and findings, and update this handoff/status after each head change.
 - **User approval required:** Product implementation, production use, or any real state-changing provider/router scenario still needs its applicable explicit approval.
 
 ## Delivery state
 
-- **Commit/branch:** not committed; branch `codex/mn-rea-usage-plan`
-- **PR/review:** not created
+- **Commit/branch:** `04b9e260748d66a3c793891d2c17996a4578ec59` on `codex/mn-rea-usage-plan`
+- **PR/review:** [PR #14](https://github.com/mylescorp/mylesnet/pull/14); Greptile not yet reported; Gitleaks in progress; Vercel preview reported success
 - **Merge:** not merged
 - **Deployment:** not deployed
