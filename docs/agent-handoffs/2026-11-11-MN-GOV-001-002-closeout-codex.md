@@ -19,19 +19,20 @@ Reconcile the MN-GOV-001 and MN-GOV-002 task records with the actual merged stat
 - GitHub's review payload and check output do not include an explicit numeric confidence score. This handoff records that limitation and makes no 5/5 claim.
 - Updated the status ledger to record MN-GOV-001/002 as merged and completed, correct the stale MN-PLAN-004 row, and reflect the current MN-PLAN-005 PR #8 state and the user's temporary instruction to continue documentation work without review.
 - Opened our own PR #15 against `main`; its Vercel, Vercel Preview Comments, and Gitleaks checks passed on observed head `5b7da5b`.
+- Rechecked MN-PLAN-005 PR #8 after the user directed us to continue: it was merged by `Mylesoft` at `363d2a9` from head `f580ba0`. Gitleaks, Greptile Review, Vercel, and Vercel Preview Comments show success, and all earlier review findings are resolved. GitHub review data contains no explicit 5/5 score for `f580ba0`; the prior 5/5 is tied to stale head `3002756`.
 
 ## Implementation or documentation details
 
 - **Files changed:** `docs/IMPLEMENTATION-STATUS.md`; `docs/agent-handoffs/2026-11-11-MN-GOV-001-002-closeout-codex.md`.
-- **Approach:** Preserve the original task handoffs. Add a distinct reconciliation record and keep evidence tied to the exact merged head.
-- **Decisions made:** The two governance deliverables are present in merged PR #2 and are recorded as done. The status explicitly says no numeric Greptile confidence score was exposed. The temporary review deferral applies to continuing planning documentation; PR #8 remains unmerged with its review gate pending.
+- **Approach:** Preserve the original task handoffs. Add a distinct reconciliation record and keep evidence tied to exact PR heads and merge commits.
+- **Decisions made:** The two governance deliverables are present in merged PR #2 and are recorded as done. The status explicitly says no numeric Greptile confidence score was exposed for PR #2 or PR #8's merged head. PR #8's merge is recorded as externally completed, without claiming that its required 5/5 gate was verified. Continue planning documentation without new reviews until the user reports restoration.
 - **Decisions left open:** None for this status reconciliation. Product implementation and production deployment remain outside scope.
 
 ## Verification and evidence
 
-- **Checks run:** `gh pr view 2 --json ...` confirmed PR #2's state, merge commit, latest head, approval, and check result; `gh pr checks 2` passed; GitHub GraphQL review-thread query confirmed both threads resolved. `git diff --check` passed; an inline Python scan found no broken relative Markdown links in the two changed files. On PR #15 head `5b7da5b`, Vercel, Vercel Preview Comments, and Gitleaks passed.
+- **Checks run:** `gh pr view 2 --json ...` confirmed PR #2's state, merge commit, latest head, approval, and check result; `gh pr checks 2` passed; GitHub GraphQL review-thread query confirmed both threads resolved. `gh pr view 8`, `gh run view 43088310989`, and GitHub review-thread queries confirmed PR #8 merged at `363d2a9`, checks successful, three threads resolved, and no explicit numeric score for `f580ba0`. `git diff --check` passed; an inline Python scan found no broken relative Markdown links in the two changed files. On PR #15 head `5b7da5b`, Vercel, Vercel Preview Comments, and Gitleaks passed.
 - **Checks not run:** No product tests or builds; this is a documentation-only update and tests were not requested.
-- **Evidence:** [PR #2](https://github.com/mylescorp/mylesnet/pull/2) merged at `b07651d`; exact head `7afe2341a211e7d550168ef3a62c7fdc6b13f6bc`; latest Greptile state `APPROVED`; `Greptile Review` check passed; both review threads resolved. Our [PR #15](https://github.com/mylescorp/mylesnet/pull/15) has the three required non-review checks passing on observed head `5b7da5b`.
+- **Evidence:** [PR #2](https://github.com/mylescorp/mylesnet/pull/2) merged at `b07651d`; exact head `7afe2341a211e7d550168ef3a62c7fdc6b13f6bc`; latest Greptile state `APPROVED`; `Greptile Review` check passed; both review threads resolved. [PR #8](https://github.com/mylescorp/mylesnet/pull/8) merged at `363d2a9` from `f580ba0`; all checks successful and prior review threads resolved; no explicit 5/5 exposed for that head. Our [PR #15](https://github.com/mylescorp/mylesnet/pull/15) has the three required non-review checks passing on observed head `5b7da5b`.
 - **Failures:** No check failure observed. The numeric Greptile score is not present in GitHub's current review/check payload.
 
 ## Remaining work
@@ -52,12 +53,12 @@ Reconcile the MN-GOV-001 and MN-GOV-002 task records with the actual merged stat
 ## Risks and handoff instructions
 
 - **Risks/limitations:** PR #2's merged head has an approved Greptile review and a passing Greptile check, but no explicit numeric score is visible. Do not restate this as a verified 5/5.
-- **Next action:** Continue other eligible planning work using our own branches and PRs. When the user reports Greptile restored, resume current-head review on open PRs.
+- **Next action:** Continue eligible Phase 0 documentation through our own branches and PRs without requesting review. When the user reports Greptile restored, review the latest heads and reconcile the missing current-head PR #8 score with the user before treating its merge gate as satisfied.
 - **User approval required:** No additional approval is required for this documentation PR; keep it open and do not merge while the user has deferred review.
 
 ## Delivery state
 
-- **Commit/branch:** `5b7da5b` on `codex/mn-gov-001-002-post-merge-closeout`; PR metadata and handoff updated in a follow-up commit on the same branch.
-- **PR/review:** [Our PR #15](https://github.com/mylescorp/mylesnet/pull/15) targets `main`; Vercel, Preview Comments, and Gitleaks pass on observed head `5b7da5b`. Greptile review is temporarily deferred at the user's direction.
+- **Commit/branch:** `5b7da5b` on `codex/mn-gov-001-002-post-merge-closeout`; this handoff/status update will be committed and pushed on the same branch.
+- **PR/review:** [Our PR #15](https://github.com/mylescorp/mylesnet/pull/15) targets `main`; Vercel, Preview Comments, and Gitleaks passed on head `43d2297`. Greptile review is temporarily deferred at the user's direction.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed.
