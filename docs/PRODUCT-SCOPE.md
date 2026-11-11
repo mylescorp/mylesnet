@@ -12,14 +12,14 @@ Give internet service providers one tenant workspace to manage subscribers, inte
 |---|---|---|
 | Public website | ISP prospects and customers | Marketing pages, feature/pricing information, docs, signup and recovery. Reference coverage includes the 308 public sitemap URLs in the saved route manifest. |
 | Platform control plane | SaaS owner and platform operators | Tenant lifecycle, SaaS plans/subscriptions, platform health, provider status, support access, platform audit. This panel was not observed in reference platform; it is a new requirement. |
-| Tenant console | ISP owner and staff | Subscriber, network, finance, voucher, support, outreach, analytics, and tenant settings. The route inventory is derived from the signed-in reference review. |
-| Subscriber portal | ISP customers | Account status, plan purchase/renewal, invoices or receipts, payment status, support entry points, and service instructions. |
+| Tenant console | ISP owner and staff | Subscriber, network, finance, voucher, support, outreach, analytics, tenant settings, and guided CSV data migration. The route inventory is derived from the signed-in reference review. |
+| Subscriber portal | ISP customers | Tenant-branded account status, plan purchase/renewal, invoices or receipts, payment status, support entry points, and service instructions. |
 | Captive portal | Guests and hotspot subscribers | Tenant-branded plan selection, voucher/login, payment handoff, terms/privacy, and post-payment connection result. |
 | Router/RADIUS data plane | MikroTik NAS devices and subscribers | Authenticate and account for PPPoE/Hotspot sessions; enforce plan attributes and expiry; report session state to the tenant console. |
 
 ## Tenant-console capability groups
 
-- **Overview and customer operations:** dashboard, subscribers, leads, tickets, imports/exports, customer compensation/outage credits.
+- **Overview and customer operations:** dashboard, subscribers, leads, tickets, guided CSV imports/exports, customer compensation/outage credits. Imports validate and detect duplicates, show a dry-run preview, record an audit trail, and support safe rollback; named system connectors are deferred beyond v1.
 - **Network:** active sessions, internet packages, NAS/router inventory, network map, CPE and firmware, equipment, fiber map, PPPoE and Hotspot settings.
 - **Finance:** payments, invoices, expenses, loyalty points, payment gateways, accounting integration, reconciliation, and finance exports.
 - **Vouchers and sales:** voucher batches/templates, voucher sales, agents, commissions, package assignments, and redemption history.

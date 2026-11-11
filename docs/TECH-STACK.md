@@ -20,7 +20,7 @@ The current foundation pins Next.js `16.4.6`, React `19.3.1`, Convex `1.49.0`, W
 
 ## Application data and tenant boundaries
 
-- Use one shared Convex deployment for v1 with strict logical tenant/branch isolation; consider dedicated deployments only as a later isolation tier.
+- Use one shared Convex deployment for v1 with strict logical tenant/branch isolation; dedicated deployments are a possible future isolation option after workload, security, legal, and cost review, not an included offer.
 - Map each WorkOS organization to one internal `tenantId`. Resolve organization, active tenant, branch scope, account state, roles, and permissions on the server for every operation. Never authorize from a client-supplied tenant or branch ID.
 - Keep public pages and captive portal assets lightweight and independently cacheable. Resolve tenant domains safely; unknown or suspended tenants fail closed.
 - Keep payment ledgers, audit events, membership history, and security records append-only; use explicit reversals/corrections.
@@ -60,8 +60,11 @@ If RADIUS connectivity fails, keep current sessions active and reject new logins
 
 ## Platform subscription and hosting
 
-- Launch with three monthly tiers whose feature sets match and whose subscriber/router limits scale. Exact tier names and prices remain undecided. Annual prepayment is 15% below the equivalent monthly total.
-- Start a 14-day trial after email verification without requiring a payment method. Billing setup has a seven-day completion grace. Failed invoice payment has a separate seven-day grace, followed by console/network suspension. See `READINESS-DECISIONS.md` for cancellation, renewal, auto-pay, upgrade, downgrade, and retry behavior.
+- Standard self-service modes are Hotspot and PPPoE, with the same standard feature set and usage metering that may be combined on one monthly invoice. Hotspot is 3% of confirmed audited sales before provider fees, less refunds/reversals; PPPoE is USD $0.25 reference per distinct non-test account with a valid PPPoE entitlement during the billing month, counted once without proration. There are no hard subscriber/router caps or per-staff/per-voucher charges.
+- Apply one $5-equivalent monthly minimum to combined usage, including zero-usage paid months. Calculate Hotspot fees in sale currency, convert using the official central-bank rate at invoice issuance, and preserve the applied rate and timestamp. Exact KES/UGX/TZS unit rates and minimums need validation. Prices exclude tax; itemize applicable taxes separately by billing entity. MylesNet absorbs its own subscription invoice processing costs.
+- Use monthly billing for standard usage plans; there is no standard annual discount. Enterprise is custom-quoted for 10,000+ active subscribers or documented multi-region/regulatory needs and may negotiate annual commitments and tailored services. Give at least 30 days' notice of rate changes and apply them prospectively.
+- The public calculator is anonymous; visitors enter monthly Hotspot revenue and billable PPPoE account estimates, and it applies the confirmed-sales/counting rules and local minimum before tax. Choose KES/UGX/TZS using coarse IP country detection in launch markets; fall back to USD elsewhere or on lookup failure, with a visible manual selector and no GPS/precise-location storage.
+- Start a 14-day trial after email verification without requiring a payment method. Require billing setup and confirmation before first charge; incomplete setup receives a seven-day completion grace. Failed invoice payment has a separate seven-day grace, followed by console/network suspension. See `READINESS-DECISIONS.md` for monthly renewal, auto-pay, cancellation, and retry behavior.
 - Host Next.js on Vercel with Dublin functions as the leading candidate and static assets on the global CDN. Use separate MylesNet payment merchant accounts for subscription invoices.
 - Keep the network plane independently deployable: RADIUS, RouterOS workers, and long-running provider work must not share browser sessions or broad credentials.
 - Use structured logs, correlation IDs, metrics/alerts, provider reconciliation, backups, and restore drills. Sentry/OpenTelemetry are candidate observability tools pending privacy/cost review.
