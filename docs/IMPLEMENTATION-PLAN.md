@@ -77,23 +77,30 @@ flowchart LR
   P1 --> P3[3. Identity, tenancy & RBAC]
   P2 --> P4[4. Platform lifecycle & SaaS billing]
   P3 --> P4
-  P3 --> P5[5. Tenant core operations]
-  P2 --> P5
-  P5 --> P6[6. RADIUS & router lab]
-  P5 --> P7[7. Finance & payment rails]
-  P6 --> P8[8. Subscriber & captive portals]
-  P7 --> P8
-  P4 --> P9[9. Marketing, signup & domains]
-  P5 --> P10[10. Outreach, support & analytics]
+  P2 --> P5[5. Public website, signup & domains]
+  P3 --> P5
+  P4 --> P5
+  P2 --> P6[6. Tenant core operations]
+  P3 --> P6
+  P4 --> P6
+  P6 --> P7[7. RADIUS & router lab]
+  P6 --> P8[8. Finance & payment rails]
+  P7 --> P9[9. Subscriber & captive portals]
+  P8 --> P9
+  P4 --> P10[10. Outreach, support & analytics]
   P6 --> P10
   P7 --> P10
-  P8 --> P11[11. Hardening, legal & operations]
+  P8 --> P10
+  P9 --> P10
+  P5 --> P11[11. Hardening, legal & operations]
+  P7 --> P11
+  P8 --> P11
   P9 --> P11
   P10 --> P11
   P11 --> P12[12. Country pilots & GA]
 ```
 
-Phases can overlap only when interfaces are approved and their prerequisites are satisfied. The critical path is requirements and threat model → tenant/security spine → tenant and platform foundations → independent RADIUS/payment proofs → portal activation → country readiness → controlled launch. No calendar estimate is assigned because team size, budget, provider access, and implementation start date are not set.
+Phases can overlap only when interfaces are approved and their prerequisites are satisfied. The critical path is requirements and threat model → tenant/security spine → tenant and platform foundations → public signup and tenant operations → independent RADIUS/payment proofs → portal activation → country readiness → controlled launch. No calendar estimate is assigned because team size, budget, provider access, and implementation start date are not set.
 
 ## 5. Phase plans
 
