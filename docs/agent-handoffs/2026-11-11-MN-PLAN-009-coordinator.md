@@ -32,7 +32,7 @@ Define how REA will be used during MylesNet planning, implementation, and launch
 
 - **Checks run:** Inline Python relative-link scan across seven changed Markdown files found no broken links; `git diff --cached --check` passed after whitespace cleanup.
 - **Checks not run:** No browser capture, live reference interaction, product tests, builds, or provider/network experiments. This task documents the future workflow only.
-- **Evidence:** Existing references and route inventories are referenced by path; no new REA capture was made.
+- **Evidence:** Existing references and route inventories are referenced by path; no new REA capture was made. PR #14 Vercel preview deployed successfully and Gitleaks passed. Greptile responded “Your trial has ended,” so no confidence score or findings were supplied for the current head.
 - **Failures:** None observed.
 
 ## Remaining work
@@ -43,23 +43,23 @@ Define how REA will be used during MylesNet planning, implementation, and launch
 
 ### Pending
 
-- Complete current-head Greptile review and required checks; remediate findings and request a fresh review when the PR head changes.
+- Greptile review is blocked until its service trial is reactivated; obtain an explicit current-head score and findings, remediate as needed, and request a fresh review after any head change.
 - Merge only when the explicit current-head 5/5 and zero-unresolved-issues gate and required checks pass.
 - Update the status ledger with final review, merge, and deployment state.
 
 ### Blocked
 
-- None for drafting this plan. Any state-changing future REA scenario remains blocked until it targets an explicitly disposable/seeded environment.
+- Greptile review for PR #14 is unavailable because its configured trial ended. Any state-changing future REA scenario remains blocked until it targets an explicitly disposable/seeded environment.
 
 ## Risks and handoff instructions
 
 - **Risks/limitations:** AgentEnv is capture-bounded; do not treat its unobserved operations as supported. A UI/browser outcome is not payment, network, legal, security, or production evidence.
-- **Next action:** Monitor PR #14's current-head checks, request/inspect Greptile's explicit score and findings, and update this handoff/status after each head change.
+- **Next action:** Reactivate the configured Greptile service, then review PR #14's latest head and finish the required score/findings gate.
 - **User approval required:** Product implementation, production use, or any real state-changing provider/router scenario still needs its applicable explicit approval.
 
 ## Delivery state
 
-- **Commit/branch:** `04b9e260748d66a3c793891d2c17996a4578ec59` on `codex/mn-rea-usage-plan`
-- **PR/review:** [PR #14](https://github.com/mylescorp/mylesnet/pull/14); Greptile not yet reported; Gitleaks in progress; Vercel preview reported success
+- **Commit/branch:** Branch `codex/mn-rea-usage-plan`; status-only follow-up commit pending
+- **PR/review:** [PR #14](https://github.com/mylescorp/mylesnet/pull/14); Vercel preview passed; Gitleaks passed; Greptile returned a trial-ended notice without a score
 - **Merge:** not merged
 - **Deployment:** not deployed
