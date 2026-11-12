@@ -59,7 +59,7 @@ Record official public SMS API, safe-test, delivery-report, and country/sender-r
 
 ## Delivery state
 
-- **Commit/branch:** Rebased task commits `7c80f71`–`7ff265c` on `codex/mn-plan-014-sms-provider-evidence`, with `main` at `3842391` as the base; the final handoff refresh commit is being added now.
-- **PR/review:** [PR #20](https://github.com/mylescorp/mylesnet/pull/20), ready/open; Greptile identified an outdated pending-work list and a missing review-restoration note. Both are corrected on this same branch. Fresh review and checks are pending.
+- **Commit/branch:** Rebased task commits on `codex/mn-plan-014-sms-provider-evidence`, with `main` at `3842391` as the base; this commit also reconciles `AGENTS.md` with the user's expanded review batch.
+- **PR/review:** [PR #20](https://github.com/mylescorp/mylesnet/pull/20), ready/open; Greptile scored head `f716c16` 4/5 because `AGENTS.md` still named the earlier #16–#25 batch. This same-PR update expands the repository instructions to #16–#26 and matches the status and handoff. Fresh review and checks are pending.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; no product service was implemented or enabled.
