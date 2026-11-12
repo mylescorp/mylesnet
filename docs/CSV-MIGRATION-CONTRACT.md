@@ -114,7 +114,7 @@ Exact rollback eligibility by entity, dependency detection, archive versus compe
 
 - Use restricted temporary storage for uploaded source files and generated preview artifacts. Enforce tenant and actor scope on staging reads and result access.
 - Store the approved source digest and necessary job metadata; keep raw row contents, credentials, payment secrets, and full extracts out of ordinary logs, telemetry, and audit payloads.
-- Define retention and deletion for source files, preview artifacts, row errors, and result exports under `RET-OPERATIONAL` and applicable legal holds. Exact periods are open; the contract does not invent a duration.
+- Keep job metadata under `RET-OPERATIONAL`. Apply `RET-EXPORT` to source files, preview artifacts, row-error files, and result exports, including expiring/revocable access and applicable legal holds. Exact periods are open; this contract does not invent a duration.
 - Bound upload, parsing, batch, concurrency, retry, and result sizes after workload review. Apply queue backpressure so bulk imports cannot starve interactive tenant operations, payment integrity, or network work.
 - Expose progress, timestamps, safe row-level outcomes, and a correlation ID. Redact personal values from diagnostics; show sensitive values only to actors currently authorized to see them.
 - Recheck the actor's permission when uploading, viewing the preview/result, committing, retrying, and rolling back. Client-supplied tenant/branch IDs never grant access.
