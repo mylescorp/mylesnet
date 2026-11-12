@@ -35,4 +35,4 @@ See `IC-DATA-01`, `IC-IAM-02`, `IC-APP-02`, and `SEQ-IAM-01` in [`INTERFACE-AND-
 
 ## Open items and revisit trigger
 
-MN-DEC-016 remains open for resource-to-branch assignment, shared resources, unassigned semantics, indexes, and migration. Define query/index budgets, authorization wrapper contracts, live-query revocation mechanics, and a measurable future isolation threshold. Revisit the shared model only with workload, legal, security, and migration evidence.
+MN-DEC-016 remains open for resource-to-branch assignment, shared resources, unassigned semantics, indexes, and migration. The [branch resource scope decision packet](../BRANCH-RESOURCE-SCOPE-DECISION-PACKET.md) organizes current options and required acceptance cases but does not select a policy. Define query/index budgets, authorization wrapper contracts, live-query revocation mechanics, and a measurable future isolation threshold. Revisit the shared model only with workload, legal, security, and migration evidence.

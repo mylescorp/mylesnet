@@ -84,6 +84,7 @@ Use the technical specification's representative envelope as the starting contra
 | ID | Required contract artifact | Primary requirement/flow | Current state / owner |
 |---|---|---|---|
 | `API-001` | Shared operation envelope: identity, tenant/branch scope, permissions, entitlement, validation, bounds, error, audit and correlation | All `REQ-*`; ADR-0003 | Requirements captured; schema and application owner open. |
+| `SCOPE-001` | Resource-family ownership, branch assignment/cardinality, shared-resource visibility, unassigned workflow, and scope inheritance | `MN-DEC-016`; `TECHNICAL-SPECIFICATION.md` §14.2; [`BRANCH-RESOURCE-SCOPE-DECISION-PACKET.md`](BRANCH-RESOURCE-SCOPE-DECISION-PACKET.md) | Decision dimensions and acceptance questions captured; resource-by-resource choices, query/index contracts, migration, and accountable owner remain open. |
 | `API-002` | Stable error catalog and adapter mapping | All authenticated/public boundaries | Families listed above; exact envelope/HTTP mapping and owner open. |
 | `EVT-001` | Provider callback inbox, signature/replay, tenant mapping, versioning, durable acknowledgement and quarantine | `J-CAP-01`, `J-SUB-02`, `REQ-PLAT-03`; ADR-0006 | Rules captured; per-provider contract, secret rotation and payment owner open. |
 | `EVT-002` | RADIUS accounting/outbox, NAS mapping, dedupe, retry, recovery drain and projection | `J-NET-01`; ADR-0005 | Rules captured; PostgreSQL/queue limits and network owner open. |

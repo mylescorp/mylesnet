@@ -526,7 +526,7 @@ SaaS platform
     ├── Staff memberships (tenant-wide or scoped to one or more branches)
     ├── Branch/site (required v1 hierarchy; cross-country operation supported)
     │   ├── NAS / router / access point
-    │   ├── subscribers and service resources (tenant-owned; optional branch assignment)
+    │   ├── subscribers and service resources (tenant-owned; assignment policy remains open under MN-DEC-016)
     │   └── branch-scoped jobs, sessions, tickets and reports
     └── Tenant-wide plans, billing configuration, branding and audit records
 ```
@@ -545,7 +545,7 @@ Rules:
 - Hostname/domain identifies a tenant-facing surface, not an authenticated person. A custom domain must resolve to a verified tenant mapping; authorization still uses authenticated identity and membership.
 - Platform support access is a scoped, expiring grant and must be labeled on every page/action. It never converts a platform identity into a tenant owner identity.
 
-V1 supports multiple branches and legal entities per tenant, including branches in different countries with branch-local currency and timezone settings. Subscribers, staff, routers, jobs and reports must carry explicit branch scope where relevant. Exactly one Owner is always tenant-wide; every other built-in/custom staff role may be tenant-wide or selected-branch. Encode these scope rules before entity/API contracts are frozen. Never retrofit branch isolation after shipping tenant-wide access.
+V1 supports multiple branches and legal entities per tenant, including branches in different countries with branch-local currency and timezone settings. Subscribers, staff, routers, jobs and reports must carry explicit branch scope where relevant. Exactly one Owner is always tenant-wide; every other built-in/custom staff role may be tenant-wide or selected-branch. Encode these scope rules before entity/API contracts are frozen. Never retrofit branch isolation after shipping tenant-wide access. The [`branch resource scope decision packet`](BRANCH-RESOURCE-SCOPE-DECISION-PACKET.md) records review dimensions and alternatives; it does not close MN-DEC-016 or define a schema.
 
 ### 14.3 Query, mutation and API contract standard
 
@@ -754,7 +754,7 @@ Before development begins, approve the documents listed in §11 plus the followi
 
 The following are explicit blockers to a final production-ready specification, not reasons to invent a choice:
 
-- Branch/site hierarchy and cross-country operation are in v1. Still open: resource-by-resource branch assignment, shared/multi-branch resources, null semantics, indexes, and acceptance cases.
+- Branch/site hierarchy and cross-country operation are in v1. Still open: resource-by-resource branch assignment, shared/multi-branch resources, null semantics, indexes, and acceptance cases. The non-decisional [MN-DEC-016 packet](BRANCH-RESOURCE-SCOPE-DECISION-PACKET.md) organizes these owner decisions.
 - V1 shared Convex, strict tenant/branch isolation, WorkOS organization-to-tenant mapping, and SSO/SCIM deferral are approved. Still open: detailed access contracts, future isolation triggers, final region/legal-transfer approval, and operating cost.
 - Standard Hotspot/PPPoE modes share core features, tenant branding/custom domains are available across offers, and standard usage has no hard subscriber/router caps. Still open: exact local rates/minimums, tax/Hotspot base treatment, FX fallback/finality, Enterprise commercial terms, and usage-event effective-time/correction rules.
 - Payment, messaging, DNS/TLS, accounting and portal vendors; provider contracts/sandboxes, settlement and reconciliation ownership, and country-specific activation evidence. FreeRADIUS 3.2.x is the approved v1 RADIUS implementation.

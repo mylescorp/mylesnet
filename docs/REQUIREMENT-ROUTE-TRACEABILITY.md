@@ -555,7 +555,7 @@ These 73 entries are sanitized observations from the local-only tenant reference
 
 ## Open decisions and implementation boundary
 
-- **MN-DEC-016:** exact resource-to-branch assignments, shared-resource behavior, tenant-wide/unassigned semantics, indexes, and migration remain open. This catalog states the enforcement boundary, not a schema shortcut.
+- **MN-DEC-016:** exact resource-to-branch assignments, shared-resource behavior, tenant-wide/unassigned semantics, indexes, and migration remain open. The [branch resource scope decision packet](BRANCH-RESOURCE-SCOPE-DECISION-PACKET.md) organizes alternatives and future acceptance evidence; this catalog states the enforcement boundary, not a schema shortcut.
 - **MN-DEC-020:** CMS/editorial workflow and content owners remain open; public URL coverage stays static/structured absent an approved editing need. Subscriber portal host and exact navigation also remain open.
 - Platform route names/grouping and exact page-level permission bundles are proposals until the architecture/route ADRs and detailed role matrix are accepted. Charter role boundaries, MFA, support grants, tenant isolation, and high-risk controls are applied as approved constraints.
 - Exact plan names/prices/quotas/taxes; country legal/provider approvals; retention periods; DNS registrar; external integration contracts; detailed branch mapping; and RADIUS lab coverage remain open in the decision register. This catalog does not choose them.
