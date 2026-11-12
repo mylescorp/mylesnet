@@ -41,7 +41,7 @@ Prepare a reviewable Phase 0 decision packet for resource-to-branch assignment, 
 
 ## Verification and evidence
 
-- **Checks run:** `git diff --check` passed; all added local Markdown link targets exist; conflict-marker scan passed.
+- **Checks run:** `git diff --check` passed; all added local Markdown link targets exist; conflict-marker scan passed. Gitleaks, Vercel, and Vercel Preview Comments passed on commit `2839e730eec025c6a1ed75712278da918c41080f`. A later handoff/status-only commit triggers a fresh CI run; its result is not yet recorded here.
 - **Checks not run:** Tests/builds were not run or requested for this documentation-only task. REA was not used; existing planning requirements are the evidence source.
 - **Evidence:** `AGENTS.md`; `TECHNICAL-SPECIFICATION.md` §§6, 14.2–14.3; ADR-0003; `DATA-OWNERSHIP-AND-CLASSIFICATION.md`; `REQUIREMENT-ROUTE-TRACEABILITY.md`; `DECISION-REGISTER.md` MN-DEC-016.
 - **REA evidence:** Not used.
@@ -55,7 +55,7 @@ Prepare a reviewable Phase 0 decision packet for resource-to-branch assignment, 
 
 ### Pending
 
-- Commit, push, open this task's own PR, and record current-head non-review checks.
+- Verify refreshed non-review CI checks after the handoff/status-only commit; report the exact latest-head result.
 - Keep the PR open/unmerged during the user's review deferral.
 - The appointed owners must select or explicitly gate resource-specific semantics and propagate the approved decision to the ADR, requirements, APIs, and migration contracts.
 
@@ -71,7 +71,7 @@ Prepare a reviewable Phase 0 decision packet for resource-to-branch assignment, 
 
 ## Delivery state
 
-- **Commit/branch:** `codex/mn-plan-017-branch-resource-scope` / not committed yet.
-- **PR/review:** Not created yet; code review deferred at the user's direction.
+- **Commit/branch:** `2839e730eec025c6a1ed75712278da918c41080f` / `codex/mn-plan-017-branch-resource-scope`; handoff/status follow-up is being prepared.
+- **PR/review:** [PR #23](https://github.com/mylescorp/mylesnet/pull/23) is open and draft against `main`; code review is deferred at the user's direction and was not requested.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; no deployment was authorized.
