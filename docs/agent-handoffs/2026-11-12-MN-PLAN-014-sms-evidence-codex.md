@@ -44,7 +44,7 @@ Record official public SMS API, safe-test, delivery-report, and country/sender-r
 
 ### Pending
 
-- Run documentation integrity checks, commit and push this focused branch, create this task's own draft PR, and verify current-head secret-scan/preview checks.
+- Re-run documentation integrity checks and current-head secret-scan/preview checks after this handoff correction; obtain a fresh Greptile review and merge only if the current head meets the required 5/5 and zero-unresolved-issues gate.
 - Obtain comparable country/MNO quotes, sender approvals, privacy/security terms, and authorized handset evidence before any selection. Appoint the accountable communications/privacy and country-counsel owners.
 
 ### Blocked
@@ -54,12 +54,12 @@ Record official public SMS API, safe-test, delivery-report, and country/sender-r
 ## Risks and handoff instructions
 
 - **Risks/limitations:** Provider pages may change; published availability and sender rules do not prove account eligibility, legal compliance, route quality, delivery latency, handset delivery, or an SLA. Infobip trial sender names differ across public guides. Africa's Talking API docs were inaccessible to this review tool. No SMS was sent.
-- **Next action:** Keep own draft PR #20 open/unmerged while the code-review deferral is active. Do not request review until the user says it is restored; if the PR head changes, verify the re-run checks before reporting their result.
-- **User approval required:** Explicit user approval and privacy/legal/provider safeguards before any handset delivery pilot; explicit user instruction when code review is restored.
+- **Next action:** Keep PR #20 ready/open and unmerged until the corrected current head receives the required Greptile review and all required checks pass; then update the status ledger and clean only its dedicated merged worktree/branch.
+- **User approval required:** Privacy/legal/provider safeguards and separate explicit authorization before any handset delivery pilot.
 
 ## Delivery state
 
 - **Commit/branch:** Initial documentation commit `a91252d` on `codex/mn-plan-014-sms-provider-evidence`; PR/status handoff update is on the same focused task branch.
-- **PR/review:** [PR #20](https://github.com/mylescorp/mylesnet/pull/20), draft/open; checks are tracked on its latest head. Code review deferred at the user's direction.
+- **PR/review:** [PR #20](https://github.com/mylescorp/mylesnet/pull/20), ready/open; Greptile identified an outdated pending-work list on the reviewed head, and the correction is being made on this same branch. Fresh review and checks are pending.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; no product service was implemented or enabled.
