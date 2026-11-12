@@ -45,9 +45,8 @@ Record public, provider-controlled developer documentation for the existing paym
 
 ### Pending
 
-- Commit and push the task branch, then open this task's own draft PR against `main`.
 - Have appointed payments/finance, security, and country-counsel owners request and assess written eligibility, sandbox, commercial, callback-security, data-transfer, settlement, refund, and support evidence.
-- Keep this PR open and unmerged during the user's Greptile deferral. Request review only after the user says Greptile is restored.
+- Keep PR #18 open and unmerged during the user's Greptile deferral. Request review only after the user says Greptile is restored.
 
 ### Blocked
 
@@ -56,12 +55,12 @@ Record public, provider-controlled developer documentation for the existing paym
 ## Risks and handoff instructions
 
 - **Risks/limitations:** Public docs can change and may omit account-specific terms. Provider claims are not independently verified. ClickPesa documentation explicitly warns that API requests are production requests; do not call its API or API Explorer as a test. Do not treat preview endpoints as a sandbox without written provider confirmation.
-- **Next action:** Commit/push and open the separate task PR. Continue to keep all payment rails disabled pending owner evidence and approvals.
+- **Next action:** Continue to keep all payment rails disabled pending owner evidence and approvals. When Greptile is restored, request review on PR #18's then-current head.
 - **User approval required:** No product/provider integration or real payment action is authorized. Phase 1 remains behind the Phase 0 exit and explicit user authorization. Code review remains deferred until the user says it is restored.
 
 ## Delivery state
 
-- **Commit/branch:** Not committed; `codex/mn-plan-012-payment-provider-evidence`.
-- **PR/review:** Not created; code review deferred by user.
+- **Commit/branch:** Initial evidence commit `12b08df` and PR/status handoff update on `codex/mn-plan-012-payment-provider-evidence`.
+- **PR/review:** [PR #18](https://github.com/mylescorp/mylesnet/pull/18), draft/open; review deferred by user, not requested.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; no deployment authorized.
