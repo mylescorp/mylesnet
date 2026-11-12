@@ -28,7 +28,7 @@ Record public technical evidence for the approved separation between WorkOS iden
 
 ## Verification and evidence
 
-- **Checks run:** `git diff --cached --check` passed. Local Markdown-link and conflict-marker validation passed for all 10 staged files, excluding one pre-existing private image target that is absent in this checkout.
+- **Checks run:** `git diff --cached --check` passed. Local Markdown-link and conflict-marker validation passed for all 10 documentation files, excluding one pre-existing private image target that is absent in this checkout. On PR #19's initial head `4e782ff`, Vercel and Preview Comments passed; Gitleaks was still running when this handoff update began. Hosted checks will rerun for the latest PR commit.
 - **Checks not run:** No tests or builds were run for this documentation-only task. No provider account, endpoint, configuration, or message send was used.
 - **Evidence:** Official direct sources and access date are in `docs/EMAIL-PROVIDER-PUBLIC-EVIDENCE.md`.
 - **REA evidence:** Not used. This task used public provider documentation and did not need runtime evidence.
@@ -58,7 +58,7 @@ Record public technical evidence for the approved separation between WorkOS iden
 
 ## Delivery state
 
-- **Commit/branch:** Initial commit pending on `codex/mn-plan-013-email-provider-evidence`, based on PR #18's current head so the evidence task has an independent stacked PR.
-- **PR/review:** Not created yet; create immediately after the first commit. Greptile review remains deferred by the user and is not requested.
+- **Commit/branch:** Evidence commit `4e782ff` on `codex/mn-plan-013-email-provider-evidence`, based on PR #18's then-current head. The PR/status follow-up is being committed on the same branch.
+- **PR/review:** [PR #19](https://github.com/mylescorp/mylesnet/pull/19), open as a draft and stacked on PR #18. Greptile review remains deferred by the user and is not requested.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; no deployment authorized.
