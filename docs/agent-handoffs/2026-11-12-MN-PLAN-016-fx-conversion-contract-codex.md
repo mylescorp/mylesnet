@@ -40,7 +40,7 @@ Document the minimum immutable provenance needed to explain the official FX obse
 
 ## Verification and evidence
 
-- **Checks run:** `git diff --check` passed; focused validation found every added local Markdown link target; conflict-marker scan passed.
+- **Checks run:** `git diff --check` passed; focused validation found every added local Markdown link target; conflict-marker scan passed. On commit `a58b719c19ba1463fac253a0fd160f9f039c10fa`, Gitleaks, Vercel, and Vercel Preview Comments passed. A later handoff/status-only commit triggers a fresh CI run; its result is not yet recorded here.
 - **Checks not run:** Tests/builds were not run or requested for this documentation-only task. No REA capture was needed; this is ordinary planning-source analysis.
 - **Evidence:** Canonical invoice and report requirements in `TECHNICAL-SPECIFICATION.md` §14.5 and `IMPLEMENTATION-PLAN.md` Phase 8/10; open policy items in `DECISION-REGISTER.md` MN-DEC-015 and MN-DEC-022.
 - **REA evidence:** Not used.
@@ -54,7 +54,7 @@ Document the minimum immutable provenance needed to explain the official FX obse
 
 ### Pending
 
-- Commit, push, open this task's own PR, and record current-head non-review checks.
+- Verify the refreshed non-review CI checks after the handoff/status-only commit; report the exact latest-head result.
 - Keep the PR open/unmerged during the user's code-review deferral.
 - Resolve source and calculation policy only with the accountable Finance, engineering, data/privacy, and country owners and their evidence.
 
@@ -70,7 +70,7 @@ Document the minimum immutable provenance needed to explain the official FX obse
 
 ## Delivery state
 
-- **Commit/branch:** `codex/mn-plan-016-fx-conversion-contract` / documentation changes not committed yet.
-- **PR/review:** Not created yet; code review deferred at the user's direction.
+- **Commit/branch:** `a58b719c19ba1463fac253a0fd160f9f039c10fa` / `codex/mn-plan-016-fx-conversion-contract`; handoff/status follow-up is being prepared.
+- **PR/review:** [PR #22](https://github.com/mylescorp/mylesnet/pull/22) is open and draft against `main`; code review is deferred at the user's direction and was not requested.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; no deployment was authorized.
