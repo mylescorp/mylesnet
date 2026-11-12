@@ -40,7 +40,7 @@ Document the minimum immutable provenance needed to explain the official FX obse
 
 ## Verification and evidence
 
-- **Checks run:** `git diff --check` passed; focused validation found every added local Markdown link target; conflict-marker scan passed. On commit `a58b719c19ba1463fac253a0fd160f9f039c10fa`, Gitleaks, Vercel, and Vercel Preview Comments passed. A later handoff/status-only commit triggers a fresh CI run; its result is not yet recorded here.
+- **Checks run:** `git diff --check` passed; focused validation found every added local Markdown link target; conflict-marker scan passed. Gitleaks, Vercel, and Vercel Preview Comments passed on both implementation head `a58b719c19ba1463fac253a0fd160f9f039c10fa` and status-update head `567bda1be15190ffc7cbcc0e5ed6cb20b6f4b60f`. This final handoff update triggers a fresh CI run; its result will be reported separately against the resulting head.
 - **Checks not run:** Tests/builds were not run or requested for this documentation-only task. No REA capture was needed; this is ordinary planning-source analysis.
 - **Evidence:** Canonical invoice and report requirements in `TECHNICAL-SPECIFICATION.md` §14.5 and `IMPLEMENTATION-PLAN.md` Phase 8/10; open policy items in `DECISION-REGISTER.md` MN-DEC-015 and MN-DEC-022.
 - **REA evidence:** Not used.
@@ -54,7 +54,7 @@ Document the minimum immutable provenance needed to explain the official FX obse
 
 ### Pending
 
-- Verify the refreshed non-review CI checks after the handoff/status-only commit; report the exact latest-head result.
+- Verify the refreshed non-review CI checks after this handoff-only commit; report the exact latest-head result.
 - Keep the PR open/unmerged during the user's code-review deferral.
 - Resolve source and calculation policy only with the accountable Finance, engineering, data/privacy, and country owners and their evidence.
 
@@ -70,7 +70,7 @@ Document the minimum immutable provenance needed to explain the official FX obse
 
 ## Delivery state
 
-- **Commit/branch:** `a58b719c19ba1463fac253a0fd160f9f039c10fa` / `codex/mn-plan-016-fx-conversion-contract`; handoff/status follow-up is being prepared.
+- **Commit/branch:** `567bda1be15190ffc7cbcc0e5ed6cb20b6f4b60f` / `codex/mn-plan-016-fx-conversion-contract`; this final evidence update will produce the next head.
 - **PR/review:** [PR #22](https://github.com/mylescorp/mylesnet/pull/22) is open and draft against `main`; code review is deferred at the user's direction and was not requested.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; no deployment was authorized.
