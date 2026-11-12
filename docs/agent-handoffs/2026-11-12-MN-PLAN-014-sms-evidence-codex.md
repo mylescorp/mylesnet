@@ -29,11 +29,11 @@ Record official public SMS API, safe-test, delivery-report, and country/sender-r
 
 ## Verification and evidence
 
-- **Checks run:** `git diff --check` passed. Local Markdown link scan passed for all changed-document targets except one missing private reference image already present in base `HEAD` (`docs/READINESS-DECISIONS.md` → `reference-images/reference-domain-settings.png`); this is not introduced by this task. Conflict-marker scan passed. Official-source review on 12 November 2026: Africa's Talking sandbox guide states sandbox interactions occur in its simulator rather than on a handset; its country list claims SMS availability in Kenya, Uganda, and Tanzania. Infobip docs distinguish `PENDING_ACCEPTED` from final handset delivery, define `DELIVERED_TO_HANDSET`, and document up to 20 retries after the initial webhook attempt, with the final retry 41 hours 30 minutes later. Country sender-registration statements are attributed to Infobip documentation and marked for current provider/counsel confirmation.
-- **Checks not run:** No automated tests, build, application integration, account setup, endpoint setup, or SMS transmission; outside this documentation task and not authorized. GitHub CI results are tracked on the current head of [PR #20](https://github.com/mylescorp/mylesnet/pull/20).
+- **Checks run:** `git diff --check` passed. Local Markdown link scan passed for all changed-document targets except one missing private reference image already present in base `HEAD` (`docs/READINESS-DECISIONS.md` → `reference-images/reference-domain-settings.png`); this is not introduced by this task. Conflict-marker scan passed. Gitleaks, Vercel deployment, and Vercel Preview Comments passed on PR #20 head `fc7600326a33c84ad2653b7b7d407cb93660b0f3`. Official-source review on 12 November 2026: Africa's Talking sandbox guide states sandbox interactions occur in its simulator rather than on a handset; its country list claims SMS availability in Kenya, Uganda, and Tanzania. Infobip docs distinguish `PENDING_ACCEPTED` from final handset delivery, define `DELIVERED_TO_HANDSET`, and document up to 20 retries after the initial webhook attempt, with the final retry 41 hours 30 minutes later. Country sender-registration statements are attributed to Infobip documentation and marked for current provider/counsel confirmation.
+- **Checks not run:** No automated tests, build, application integration, account setup, endpoint setup, or SMS transmission; outside this documentation task and not authorized.
 - **Evidence:** Official links and dates/limitations are recorded in `docs/SMS-PROVIDER-PUBLIC-EVIDENCE.md`. Africa's Talking developer SMS pages returned HTTP 403 to the review tool; this is recorded as an inspection limitation only.
 - **REA evidence:** Not used; normal documentation review was sufficient.
-- **Failures:** The HTTP 403 from the official Africa's Talking developer-doc site limited inspection; provider behavior is not inferred from that access failure. The pre-existing private reference-image link remains unresolved and unchanged.
+- **Failures:** No failing project checks. The HTTP 403 from the official Africa's Talking developer-doc site limited inspection; provider behavior is not inferred from that access failure. The pre-existing private reference-image link remains unresolved and unchanged.
 
 ## Remaining work
 
@@ -54,7 +54,7 @@ Record official public SMS API, safe-test, delivery-report, and country/sender-r
 ## Risks and handoff instructions
 
 - **Risks/limitations:** Provider pages may change; published availability and sender rules do not prove account eligibility, legal compliance, route quality, delivery latency, handset delivery, or an SLA. Infobip trial sender names differ across public guides. Africa's Talking API docs were inaccessible to this review tool. No SMS was sent.
-- **Next action:** Verify checks on the latest head of own draft PR #20 and keep it open/unmerged while the code-review deferral is active. Do not request review until the user says it is restored.
+- **Next action:** Keep own draft PR #20 open/unmerged while the code-review deferral is active. Do not request review until the user says it is restored; if the PR head changes, verify the re-run checks before reporting their result.
 - **User approval required:** Explicit user approval and privacy/legal/provider safeguards before any handset delivery pilot; explicit user instruction when code review is restored.
 
 ## Delivery state
