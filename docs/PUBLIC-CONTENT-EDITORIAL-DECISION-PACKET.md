@@ -3,7 +3,7 @@
 **Task:** MN-PLAN-018
 **Plan phase:** Phase 0 — close planning and turn decisions into build contracts
 **Status:** Decision support prepared; no CMS, route-level editing scope, or content owner is approved.
-**Related decision:** [MN-DEC-020](DECISION-REGISTER.md#open-decisions)
+**Related decision:** [MN-DEC-020](DECISION-REGISTER.md)
 
 ## Purpose and boundary
 
