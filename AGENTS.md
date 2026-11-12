@@ -124,12 +124,12 @@ Treat package versions in the scaffold as setup-time pins. Recheck supported ver
 
 ### Batch-scoped user-directed Greptile review resumption
 
-The earlier temporary review deferral is superseded for PRs #16–#25 by the user's 2026-11-12 instruction to convert and merge all then-open draft PRs. This resumption applies only to that batch; new PRs outside it remain deferred until separately authorized. Every PR in this batch must satisfy the same current-head review, remediation, and CI gates below before merge. This does not authorize product implementation, provider actions, or deployment.
+The earlier temporary review deferral is superseded for PRs #16–#26 by the user's 2026-11-12 instruction to convert and merge all open draft PRs, including PR #26 found after the initial inventory. This resumption applies only to that batch; PRs created later remain under the current user-directed policy unless separately authorized. Every PR in this batch must satisfy the same current-head review, remediation, and CI gates below before merge. This does not authorize product implementation, provider actions, or deployment.
 
 - Continue eligible planning tasks when their documented dependencies and acceptance criteria are satisfied. Do not stop independent Phase 0 work solely because Greptile is unavailable.
 - Keep using focused branches, commits, pull requests, applicable checks, and durable handoffs. Do not claim a Greptile review, score, or approval that did not occur.
-- For PRs #16–#25, request a fresh review of the latest head, fix actionable findings in the same PR, and merge only after an explicit 5/5, zero comments, zero unresolved issues, and passing required checks. If those conditions are unavailable, leave that PR open and report the pending gate.
-- The deferred status of PRs outside #16–#25 does not waive required CI, task dependencies, Phase 0 acceptance criteria, the planning-only boundary, explicit authorization to begin product implementation, or production-deployment approval.
+- For PRs #16–#26, request a fresh review of the latest head, fix actionable findings in the same PR, and merge only after an explicit 5/5 confidence score, zero unresolved issues, and passing required checks. If those conditions are unavailable, leave that PR open and report the pending gate.
+- PRs outside #16–#26 remain subject to the current user-directed review policy. This does not waive required CI, task dependencies, Phase 0 acceptance criteria, the planning-only boundary, explicit authorization to begin product implementation, or production-deployment approval.
 
 1. Confirm the current phase and read the applicable canonical requirements, repository guidance, and Git status before editing. Preserve unrelated work and never stage unrelated files.
 2. Work on a focused phase branch. Keep each commit scoped to that phase. Immediately after the first commit, push the branch and open its pull request; push each later phase commit to that same PR. At phase completion, ensure all intended phase changes are committed and the PR description/checklist is current.
