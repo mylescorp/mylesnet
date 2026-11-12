@@ -10,7 +10,7 @@ Give internet service providers one tenant workspace to manage subscribers, inte
 
 | Surface | Intended users | Scope |
 |---|---|---|
-| Public website | ISP prospects and customers | Marketing pages, feature/pricing information, docs, signup and recovery. Reference coverage includes the 308 public sitemap URLs in the saved route manifest. |
+| Public website | ISP prospects and customers | Marketing pages, feature/pricing information, docs, signup and recovery. Reference coverage includes the 308 public sitemap URLs in the saved route manifest; all remain static/structured unless an editing need is approved. The [editorial decision packet](PUBLIC-CONTENT-EDITORIAL-DECISION-PACKET.md) records candidate route-family signals without selecting a CMS or assigning owners. |
 | Platform control plane | SaaS owner and platform operators | Tenant lifecycle, SaaS plans/subscriptions, platform health, provider status, support access, platform audit. This panel was not observed in reference platform; it is a new requirement. |
 | Tenant console | ISP owner and staff | Subscriber, network, finance, voucher, support, outreach, analytics, tenant settings, and guided CSV data migration. The route inventory is derived from the signed-in reference review. |
 | Subscriber portal | ISP customers | Tenant-branded account status, plan purchase/renewal, invoices or receipts, payment status, support entry points, and service instructions. |
