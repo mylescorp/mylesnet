@@ -44,7 +44,7 @@ Record official public SMS API, safe-test, delivery-report, and country/sender-r
 
 ### Pending
 
-- Re-run documentation integrity checks and current-head secret-scan/preview checks after this handoff correction; obtain a fresh Greptile review and merge only if the current head has an explicit 5/5 score, zero unresolved issues, and passing required checks. The user resumed review for then-open PRs #16–#25 on 2026-11-12; later PRs remain deferred until separately restored.
+- Run documentation integrity checks and current-head secret-scan/preview checks after this rebase; obtain a fresh Greptile review and merge only if the current head has an explicit 5/5 score, zero unresolved issues, and passing required checks. The user resumed review and merge authorization for the open draft PR batch #16–#26 on 2026-11-12.
 - Obtain comparable country/MNO quotes, sender approvals, privacy/security terms, and authorized handset evidence before any selection. Appoint the accountable communications/privacy and country-counsel owners.
 
 ### Blocked
@@ -54,12 +54,12 @@ Record official public SMS API, safe-test, delivery-report, and country/sender-r
 ## Risks and handoff instructions
 
 - **Risks/limitations:** Provider pages may change; published availability and sender rules do not prove account eligibility, legal compliance, route quality, delivery latency, handset delivery, or an SLA. Infobip trial sender names differ across public guides. Africa's Talking API docs were inaccessible to this review tool. No SMS was sent.
-- **Next action:** PR #20 is in the user-authorized resumed review batch #16–#25. Keep it open until the corrected current head receives the explicit 5/5 review and all required checks pass; then update the status ledger and clean only its dedicated merged worktree/branch.
+- **Next action:** PR #20 is in the user-authorized resumed review batch #16–#26. Keep it open until the rebased current head receives explicit Greptile 5/5, zero unresolved findings, and all required checks pass; then merge, update the status ledger, and clean only its dedicated merged worktree/branch.
 - **User approval required:** Privacy/legal/provider safeguards and separate explicit authorization before any handset delivery pilot.
 
 ## Delivery state
 
-- **Commit/branch:** Initial documentation commit `a91252d` on `codex/mn-plan-014-sms-provider-evidence`; PR/status handoff update is on the same focused task branch.
+- **Commit/branch:** Rebased task commits `7c80f71`–`7ff265c` on `codex/mn-plan-014-sms-provider-evidence`, with `main` at `3842391` as the base; the final handoff refresh commit is being added now.
 - **PR/review:** [PR #20](https://github.com/mylescorp/mylesnet/pull/20), ready/open; Greptile identified an outdated pending-work list and a missing review-restoration note. Both are corrected on this same branch. Fresh review and checks are pending.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; no product service was implemented or enabled.
