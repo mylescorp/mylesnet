@@ -6,7 +6,7 @@
 - **Plan phase:** `Phase 0 — Close planning and turn decisions into build contracts`
 - **Status:** `In progress`
 - **Related requirements:** `IMPLEMENTATION-PLAN.md` Phase 0 item 5, Phase 8 finance item 4, Phase 10 analytics; `MN-DEC-015`, `MN-DEC-022`; `TECHNICAL-SPECIFICATION.md` §14.5
-- **Dependencies:** Existing approved billing/reporting requirements. The independent public-source evidence task PR #21 is still open during review deferral; source selection remains open and is not assumed by this contract.
+- **Dependencies:** Existing approved billing/reporting requirements. The independent central-bank source evidence task PR #21 is merged; it documents public source descriptions but does not select a rate series or conversion policy.
 
 ## Objective
 
@@ -40,7 +40,7 @@ Document the minimum immutable provenance needed to explain the official FX obse
 
 ## Verification and evidence
 
-- **Checks run:** `git diff --check` passed; focused validation found every added local Markdown link target; conflict-marker scan passed. Gitleaks, Vercel, and Vercel Preview Comments passed on both implementation head `a58b719c19ba1463fac253a0fd160f9f039c10fa` and status-update head `567bda1be15190ffc7cbcc0e5ed6cb20b6f4b60f`. This final handoff update triggers a fresh CI run; its result will be reported separately against the resulting head.
+- **Checks run:** Rebased onto `main` at `cf117ea` with conflicts resolved; `git diff --check origin/main...HEAD` passed and the conflict-marker scan passed. A local Markdown link scan checked 215 links; no new broken destinations were introduced, and three missing private reference-image paths were already referenced by tracked documents. Earlier Gitleaks/Vercel checks passed before rebase but are stale for the new head. Current-head CI/review are pending.
 - **Checks not run:** Tests/builds were not run or requested for this documentation-only task. No REA capture was needed; this is ordinary planning-source analysis.
 - **Evidence:** Canonical invoice and report requirements in `TECHNICAL-SPECIFICATION.md` §14.5 and `IMPLEMENTATION-PLAN.md` Phase 8/10; open policy items in `DECISION-REGISTER.md` MN-DEC-015 and MN-DEC-022.
 - **REA evidence:** Not used.
@@ -55,7 +55,7 @@ Document the minimum immutable provenance needed to explain the official FX obse
 ### Pending
 
 - Verify the refreshed non-review CI checks after this handoff-only commit; report the exact latest-head result.
-- Keep the PR open/unmerged during the user's code-review deferral.
+- Verify a fresh current-head Greptile 5/5 review with zero unresolved issues and passing required checks before merge.
 - Resolve source and calculation policy only with the accountable Finance, engineering, data/privacy, and country owners and their evidence.
 
 ### Blocked
@@ -65,12 +65,12 @@ Document the minimum immutable provenance needed to explain the official FX obse
 ## Risks and handoff instructions
 
 - **Risks/limitations:** A logical contract does not validate the live fields or access terms of any central-bank series and does not approve accounting treatment. No source value or external rate data was fetched or integrated in this task.
-- **Next action:** Finish document validation, create and push the focused PR, then monitor ordinary required CI. Request code review only after the user says review is restored.
+- **Next action:** Push the rebased branch, verify required checks, obtain fresh Greptile review on the current head, and fix any actionable findings in PR #22 before merging. Product implementation remains unauthorized.
 - **User approval required:** Finance/accounting owners must approve conversion policy before implementation; the user must explicitly authorize moving beyond Phase 0 before product code begins.
 
 ## Delivery state
 
-- **Commit/branch:** `567bda1be15190ffc7cbcc0e5ed6cb20b6f4b60f` / `codex/mn-plan-016-fx-conversion-contract`; this final evidence update will produce the next head.
-- **PR/review:** [PR #22](https://github.com/mylescorp/mylesnet/pull/22) is open and draft against `main`; code review is deferred at the user's direction and was not requested.
+- **Commit/branch:** Rebased contract commits are on `codex/mn-plan-016-fx-conversion-contract`; task-handoff correction is still to be committed.
+- **PR/review:** [PR #22](https://github.com/mylescorp/mylesnet/pull/22) is open and ready for review against `main`. Its previous 5/5 review is tied to pre-rebase head `569bd56`; fresh review and required checks are pending.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; no deployment was authorized.
