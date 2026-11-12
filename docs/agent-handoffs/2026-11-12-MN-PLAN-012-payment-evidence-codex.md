@@ -48,7 +48,7 @@ Record public provider documentation and regulator-published listing evidence fo
 ### Pending
 
 - Have appointed payments/finance, security, and country-counsel owners verify current license scope and request/assess written eligibility, sandbox, commercial, callback-security, data-transfer, settlement, refund, and support evidence.
-- Keep PR #18 open and unmerged during the user's Greptile deferral. Request review only after the user says Greptile is restored.
+- Complete the fresh current-head review and required checks after rebasing PR #18 onto current `main`; remediate findings in this PR before merging. Provider selection, merchant eligibility, safe sandbox/testing, legal/commercial approval, and country launch gates remain open.
 
 ### Blocked
 
@@ -57,12 +57,12 @@ Record public provider documentation and regulator-published listing evidence fo
 ## Risks and handoff instructions
 
 - **Risks/limitations:** Public docs and regulator listings can change and may omit account-specific terms or conditions. The BoU ioTec record is dated June 2023. Entity listings do not establish current product/API permission scope or MylesNet merchant eligibility. ClickPesa documentation explicitly warns that API requests are production requests; do not call its API or API Explorer as a test. Do not treat preview endpoints as a sandbox without written provider confirmation.
-- **Next action:** Continue to keep all payment rails disabled pending owner evidence and approvals. When Greptile is restored, request review on PR #18's then-current head.
-- **User approval required:** No product/provider integration or real payment action is authorized. Phase 1 remains behind the Phase 0 exit and explicit user authorization. Code review remains deferred until the user says it is restored.
+- **Next action:** Continue to keep all payment rails disabled pending owner evidence and approvals. Merge PR #18 only after an explicit current-head Greptile 5/5, zero unresolved findings, and passing required checks.
+- **User approval required:** No product/provider integration or real payment action is authorized. Phase 1 remains behind the Phase 0 exit and explicit user authorization. The user's 2026-11-12 instruction resumes review for then-open PRs #16–#25.
 
 ## Delivery state
 
 - **Commit/branch:** Initial evidence commit `12b08df`; PR/status commit `0539dce`; regulator-evidence update `dcf6564`; subsequent handoff metadata remains on `codex/mn-plan-012-payment-provider-evidence` and the same PR.
-- **PR/review:** [PR #18](https://github.com/mylescorp/mylesnet/pull/18), draft/open; user-directed code review deferral remains active; no review requested.
+- **PR/review:** [PR #18](https://github.com/mylescorp/mylesnet/pull/18) is ready/open and rebased onto current `main`; Greptile previously scored the original head 5/5, but a fresh review and required checks are pending after this base synchronization.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; no deployment authorized.
