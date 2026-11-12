@@ -6,7 +6,7 @@
 - **Plan phase:** `Phase 0 — close planning and turn decisions into build contracts`
 - **Status:** `In progress`
 - **Related requirements:** `IMPLEMENTATION-PLAN.md` Phase 0 work items 5–6; `DECISION-REGISTER.md` MN-DEC-014; `COUNTRY-AND-OPERATIONS-PACKS.md` CP-COMMS-01; `TECHNICAL-SPECIFICATION.md` §§3, 9, 12
-- **Dependencies:** MN-PLAN-007 country and operations packs; MN-PLAN-014 records public documentation, but does not satisfy legal, contractual, country, delivery, or production approval.
+- **Dependencies:** MN-PLAN-007 country and operations packs. This task records public documentation, but does not satisfy legal, contractual, country, delivery, or production approval.
 
 ## Objective
 
