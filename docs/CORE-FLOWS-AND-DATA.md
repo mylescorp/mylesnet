@@ -27,6 +27,8 @@ Block a repeated verified Owner identity from owning another tenant and block du
 
 **Open before build:** supported entity coverage, template schemas, duplicate matching/resolution rules, file/batch limits and retention, partial-commit semantics, retry behavior, and safe rollback cutoffs. Existing subscriber/lead import requirements use this shared guided CSV contract. No named system connector ships in v1.
 
+See the [guided CSV tenant migration contract](CSV-MIGRATION-CONTRACT.md) for the proposed job lifecycle, acceptance cases, and owner decisions that remain open.
+
 ### Tenant domain configuration and migration
 
 1. Tenant settings show the active domain and provide three choices: MylesNet subdomain, a domain the tenant owns, and **Buy a domain**.

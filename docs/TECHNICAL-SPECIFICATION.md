@@ -225,6 +225,8 @@ The paths above follow the observed tenant routes. The references do not confirm
 
 Provide a permission-gated, tenant/branch-scoped wizard for supported entity types. It offers templates/instructions, validates file structure and field mapping, checks duplicates within the file and against existing records in the selected tenant scope, and presents a dry-run preview before any mutation. Duplicate rows are flagged; the importer never silently merges or overwrites existing data. Require explicit commit, show per-row outcomes/progress, and write an audit trail for upload, mapping, validation, commit and rollback. Tag imported records with their `ImportJob` so rollback can safely target only the originating batch. Roll back only records that remain unchanged and have no downstream dependency; preserve immutable audit/financial history and route unsafe rows to an explicit reconciliation path. Named system-specific connectors are deferred beyond v1. Entity coverage, exact templates/matching keys, partial-failure behavior, file/batch limits and retention remain build-contract decisions.
 
+The [guided CSV migration contract](CSV-MIGRATION-CONTRACT.md) records the Phase 0 sequence, acceptance cases, and owner decisions required before implementation.
+
 ### 5.5 Subscriber account portal (proposed)
 
 - Sign-in/recovery using a subscriber-safe method; do not expose staff AuthKit or staff roles.
@@ -725,7 +727,7 @@ sequenceDiagram
 
 Acceptance includes Convex/WAN outage, repeated interim updates, stop-before-start, duplicate packet, NAS tenant mismatch, full local queue, recovery drain and the approved fail-closed login policy while existing sessions continue.
 
-Provisioning, support grant, monthly usage invoicing/rating, guided CSV import/commit/rollback, domain verification, tenant offboarding and router command require equivalent sequence diagrams before those flows are implemented.
+Provisioning, support grant, monthly usage invoicing/rating, guided CSV import/commit/rollback, domain verification, tenant offboarding and router command require equivalent sequence diagrams before those flows are implemented. The CSV planning sequence and its open contracts are in the [guided CSV migration contract](CSV-MIGRATION-CONTRACT.md).
 
 ### 14.10 ADRs, glossary, definition of done and readiness gate
 
