@@ -28,7 +28,7 @@ Record public technical evidence for the approved separation between WorkOS iden
 
 ## Verification and evidence
 
-- **Checks run:** `git diff --cached --check` passed. Local Markdown-link and conflict-marker validation passed for all 10 documentation files, excluding one pre-existing private image target that is absent in this checkout. On PR #19 head `198a7c9`, Gitleaks, Vercel, and Vercel Preview Comments all passed. This handoff-only follow-up changes documentation on the same PR, so hosted checks will rerun on its new head.
+- **Checks run:** `git diff --cached --check` passed. Local Markdown-link and conflict-marker validation passed for all 10 documentation files, excluding one pre-existing private image target that is absent in this checkout. The earlier PR head `198a7c9` passed Gitleaks, Vercel, and Vercel Preview Comments. The current branch has since been rebased onto `main`; those results do not apply to the new head. `git diff --check` and conflict-marker scan pass after the rebase; hosted checks must rerun after push.
 - **Checks not run:** No tests or builds were run for this documentation-only task. No provider account, endpoint, configuration, or message send was used.
 - **Evidence:** Official direct sources and access date are in `docs/EMAIL-PROVIDER-PUBLIC-EVIDENCE.md`.
 - **REA evidence:** Not used. This task used public provider documentation and did not need runtime evidence.
@@ -42,9 +42,8 @@ Record public technical evidence for the approved separation between WorkOS iden
 
 ### Pending
 
-- Commit and push the dedicated task branch; open draft PR #19 stacked on PR #18. This is complete; verify the hosted checks again after this handoff update.
-- Complete CP-COMMS-01 through appointed owners: obtain country-specific legal/contract review and written quotes; test representative identity/application messages in a controlled delivery pilot; validate security, suppression, webhook, retention, and sender controls.
-- Keep the PR open and unmerged while the user's Greptile review deferral is active. Request review only after the user says Greptile is restored.
+- Push this rebased branch with lease protection, then verify current-head required checks and Greptile review. Remediate any findings on PR #19 and merge only after the explicit 5/5, zero-unresolved, passing-check gate is satisfied.
+- Complete CP-COMMS-01 through appointed owners: obtain country-specific legal/contract review and written quotes; test representative identity/application messages in a controlled delivery pilot; validate security, suppression, webhook, retention, and sender controls. These external launch gates remain open.
 
 ### Blocked
 
@@ -53,12 +52,12 @@ Record public technical evidence for the approved separation between WorkOS iden
 ## Risks and handoff instructions
 
 - **Risks/limitations:** Public docs and list prices can change and do not establish local inbox delivery, legal compliance, provider eligibility, account state, or contractual controls. Resend documents US storage even when an Ireland send region is chosen. SES Ireland is only a regional endpoint/resource option, not proof that every related data path is region-contained.
-- **Next action:** Verify the CI rerun after this handoff update, keep PR #19 open and unmerged during the Greptile deferral, and continue to independent planning tasks only after this task's required PR state is clear.
+- **Next action:** Push the rebased branch with lease protection, then resolve fresh review/check results; merge only when all current-head gates pass.
 - **User approval required:** Product implementation, live provider configuration, production email, and production deployment remain unauthorized. Phase 1 remains behind Phase 0 exit and explicit authorization.
 
 ## Delivery state
 
-- **Commit/branch:** Evidence commit `4e782ff` and PR/status follow-up `198a7c9` on `codex/mn-plan-013-email-provider-evidence`, based on PR #18's then-current head.
-- **PR/review:** [PR #19](https://github.com/mylescorp/mylesnet/pull/19), open as a draft and stacked on PR #18. The last verified CI run passed on head `198a7c9`; current-head checks must be verified after this handoff update. Greptile review remains deferred by the user and is not requested.
+- **Commit/branch:** Rebased email-evidence commits on `codex/mn-plan-013-email-provider-evidence`, based on `main` at `8119f22`; the follow-up handoff commit is being added now.
+- **PR/review:** [PR #19](https://github.com/mylescorp/mylesnet/pull/19) is open and ready for review. Earlier checks and review belong to the pre-rebase head; current-head Greptile review and required checks are pending after the force-with-lease push.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; no deployment authorized.
