@@ -32,7 +32,7 @@ Record public provider documentation and regulator-published listing evidence fo
 
 ## Verification and evidence
 
-- **Checks run:** Prior pushed PR head `0539dce` passed Gitleaks, Vercel deployment, and Vercel Preview Comments. On the current documentation update, `git diff --check`, local Markdown links (6 changed files), and conflict-marker scan passed. The PR checks will rerun after push; this handoff does not claim results for the new head.
+- **Checks run:** Prior pushed PR head `0539dce` passed Gitleaks, Vercel deployment, and Vercel Preview Comments. Regulator-evidence commit `dcf6564` also passed Gitleaks, Vercel deployment, and Vercel Preview Comments. On this documentation update, `git diff --check`, local Markdown links (6 changed files), and conflict-marker scan passed. Follow the live PR check rollup for any later handoff-only commit.
 - **Checks not run:** No tests or builds were run for this documentation-only task. No provider endpoint, API Explorer, account, or sandbox was used. No REA runtime inspection was needed.
 - **Evidence:** Provider and regulator source URLs, publication/access dates, and limits are recorded in `docs/PAYMENT-PROVIDER-PUBLIC-EVIDENCE.md`, including the CBK directory (15 May 2026 snapshot), BoU September 2023 newsletter (June 2023 listing snapshot), and BoT National Payment Systems Annual Report 2025.
 - **REA evidence:** Not used; this task reviewed public documentation, not a product runtime.
@@ -62,7 +62,7 @@ Record public provider documentation and regulator-published listing evidence fo
 
 ## Delivery state
 
-- **Commit/branch:** Initial evidence commit `12b08df`; additional regulator-evidence changes are on `codex/mn-plan-012-payment-provider-evidence` and will be recorded in the updated PR #18 head.
+- **Commit/branch:** Initial evidence commit `12b08df`; PR/status commit `0539dce`; regulator-evidence update `dcf6564`; subsequent handoff metadata remains on `codex/mn-plan-012-payment-provider-evidence` and the same PR.
 - **PR/review:** [PR #18](https://github.com/mylescorp/mylesnet/pull/18), draft/open; user-directed code review deferral remains active; no review requested.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; no deployment authorized.
