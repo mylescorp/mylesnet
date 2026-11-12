@@ -30,8 +30,8 @@ Inventory official CBK, BoU, and BoT public evidence for currency rates relevant
 ## Verification and evidence
 
 - **Checks run:** `git diff --check` passed. Local Markdown link scan checked 157 links; every target exists except three private reference-image paths already present in base `HEAD` (`CORE-FLOWS-AND-DATA.md` → `reference-domain-settings.png` and `reference-subscription-wallet-auto-pay.png`; `READINESS-DECISIONS.md` → `reference-domain-settings.png`). Conflict-marker scan passed. Official public-source review on 12 November 2026: CBK's page states that daily indicative rates reflect average participant buy/sell rates at the open of trade and advertises historical exports; its separate Forex page describes a weighted-average registered spot-trades series. BoU's current page describes daily indicative rates and interactive history, but no live schema was visible to the review tool. BoT's daily table includes buying, selling, mean, and transaction date; its weekly report explicitly labels its weekly series TZS per foreign-currency unit.
-- **Checks not run:** No tests, build, rate harvesting, API integration, or numerical calculation was run. GitHub PR CI is pending creation of the task's own draft PR.
-- **Evidence:** Direct official links, observations, dates, and limitations are in `docs/FX-RATE-SOURCE-PUBLIC-EVIDENCE.md`.
+- **Checks not run:** No tests, build, rate harvesting, API integration, or numerical calculation was run. GitHub CI is tracked on this task's [own draft PR #21](https://github.com/mylescorp/mylesnet/pull/21); verify the current head before reporting its result.
+- **Evidence:** Direct official links, observations, dates, and limitations are in `docs/FX-RATE-SOURCE-PUBLIC-EVIDENCE.md`. The PR has no code review request under the current user-directed deferral.
 - **REA evidence:** Not used; public source documentation and page metadata answered this question. No rendered MylesNet or shipped-runtime evidence was required.
 - **Failures:** No newly introduced local documentation-check failure. Some official pages time out or expose only application chrome in the review tool; this limits field-level verification and is not evidence that their rates or APIs are unavailable. The three missing private image links are pre-existing and unchanged.
 
@@ -54,12 +54,12 @@ Inventory official CBK, BoU, and BoT public evidence for currency rates relevant
 ## Risks and handoff instructions
 
 - **Risks/limitations:** CBK exposes two separately described rate calculation contexts. BoU live fields/schema were not visible in this review. BoT's weekly quote orientation is explicit but does not by itself prove the same daily-series contract. Public pages do not establish reuse rights, freshness guarantees, API support, or accounting/tax approval.
-- **Next action:** Finish documentation checks, push the task branch, create this task's own draft PR, and keep it open/unmerged while the code-review deferral is active. Do not modify another task's PR.
+- **Next action:** Verify checks on the current head of own draft PR #21 and keep it open/unmerged while the code-review deferral is active. Do not modify another task's PR or request review until the user says it is restored.
 - **User approval required:** Explicit user authorization before product implementation or external rate use; user notice before re-enabling code review.
 
 ## Delivery state
 
-- **Commit/branch:** Pending; branch `codex/mn-plan-015-central-bank-fx-evidence`.
-- **PR/review:** Pending own draft PR; code review deferred at the user's direction.
+- **Commit/branch:** Evidence commit `86b1b8a` on `codex/mn-plan-015-central-bank-fx-evidence`; PR/status handoff updates remain on that focused branch.
+- **PR/review:** [PR #21](https://github.com/mylescorp/mylesnet/pull/21), draft/open; automated checks are tracked on its latest head. Code review deferred at the user's direction.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; no product service was implemented or enabled.
