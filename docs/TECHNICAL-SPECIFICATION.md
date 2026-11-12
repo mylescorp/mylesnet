@@ -416,7 +416,7 @@ Every tenant-owned record has tenant ID, creation/update actor, timestamps, stat
 - Encrypt transport; encrypt secrets at rest; use secret manager and rotation workflow; redact logs and traces.
 - Apply field masking for PII, payment references, subscriber credentials, and private message content.
 - Keep append-only platform/tenant audit events with actor, tenant, action, resource, reason, timestamp, correlation ID and safe before/after summary.
-- Define privacy notices, consent, data retention, legal hold, export/deletion, access requests, breach response and data residency before launch.
+- Define privacy notices, consent, data retention, legal hold, export/deletion, access requests, breach response and data residency before launch. Record country-specific counsel evidence through the [country legal and data-protection evidence plan](COUNTRY-LEGAL-AND-DATA-PROTECTION-EVIDENCE-PLAN.md); it does not set a legal conclusion or retention period.
 - Use provider-hosted checkout/tokenization where possible; do not store raw card data.
 
 ## 10. Non-functional requirements (targets to approve)
