@@ -29,9 +29,9 @@ Inventory official CBK, BoU, and BoT public evidence for currency rates relevant
 
 ## Verification and evidence
 
-- **Checks run:** `git diff --check` passed. Local Markdown link scan checked 157 links; every target exists except three private reference-image paths already present in base `HEAD` (`CORE-FLOWS-AND-DATA.md` → `reference-domain-settings.png` and `reference-subscription-wallet-auto-pay.png`; `READINESS-DECISIONS.md` → `reference-domain-settings.png`). Conflict-marker scan passed. Gitleaks, Vercel deployment, and Vercel Preview Comments passed on PR #21 head `dc955de8c876567b08b3ca242244e05ebdfd6d47`; this handoff-only follow-up will trigger another check run, so confirm the current PR head before reporting its final CI state. Official public-source review on 12 November 2026: CBK's page states that daily indicative rates reflect average participant buy/sell rates at the open of trade and advertises historical exports; its separate Forex page describes a weighted-average registered spot-trades series. BoU's current page describes daily indicative rates and interactive history, but no live schema was visible to the review tool. BoT's daily table includes buying, selling, mean, and transaction date; its weekly report explicitly labels its weekly series TZS per foreign-currency unit.
-- **Checks not run:** No tests, build, rate harvesting, API integration, or numerical calculation was run. GitHub CI is tracked on this task's [own draft PR #21](https://github.com/mylescorp/mylesnet/pull/21); verify the current head before reporting its result.
-- **Evidence:** Direct official links, observations, dates, and limitations are in `docs/FX-RATE-SOURCE-PUBLIC-EVIDENCE.md`. The PR has no code review request under the current user-directed deferral.
+- **Checks run:** Rebase onto `main` at `40b8cc7` completed with conflicts resolved; `git diff --check origin/main...HEAD` passed and the conflict-marker scan found no markers. A local Markdown link scan checked 201 links and found no new broken destinations; three missing private reference-image paths were pre-existing in tracked docs. Earlier Gitleaks/Vercel checks passed before rebase, but are stale for the rebased head. Current-head CI/review are pending. Official public-source review on 12 November 2026: CBK's page states that daily indicative rates reflect average participant buy/sell rates at the open of trade and advertises historical exports; its separate Forex page describes a weighted-average registered spot-trades series. BoU's current page describes daily indicative rates and interactive history, but no live schema was visible to the review tool. BoT's daily table includes buying, selling, mean, and transaction date; its weekly report explicitly labels its weekly series TZS per foreign-currency unit.
+- **Checks not run:** No tests, build, rate harvesting, API integration, or numerical calculation was run. GitHub CI and review must be verified against the rebased current head of [PR #21](https://github.com/mylescorp/mylesnet/pull/21); the pre-rebase review is stale.
+- **Evidence:** Direct official links, observations, dates, and limitations are in `docs/FX-RATE-SOURCE-PUBLIC-EVIDENCE.md`. The prior Greptile 5/5 review covered pre-rebase head `5cbaeb5` and is stale; request a fresh review after pushing the rebased branch.
 - **REA evidence:** Not used; public source documentation and page metadata answered this question. No rendered MylesNet or shipped-runtime evidence was required.
 - **Failures:** No newly introduced local documentation-check failure. Some official pages time out or expose only application chrome in the review tool; this limits field-level verification and is not evidence that their rates or APIs are unavailable. The three missing private image links are pre-existing and unchanged.
 
@@ -44,7 +44,7 @@ Inventory official CBK, BoU, and BoT public evidence for currency rates relevant
 
 ### Pending
 
-- Run documentation checks, commit/push the focused branch, open this task's own draft PR, and verify current-head Gitleaks/Vercel checks.
+- Verify documentation checks and current-head Gitleaks/Vercel checks, obtain a fresh Greptile 5/5 review with zero unresolved issues, then merge PR #21 if all required checks pass.
 - Finance/tax owner and country counsel to select permitted series and approve pair, timing, stale/missing-rate, pricing, tax, retention, and access terms before implementation.
 
 ### Blocked
@@ -54,12 +54,12 @@ Inventory official CBK, BoU, and BoT public evidence for currency rates relevant
 ## Risks and handoff instructions
 
 - **Risks/limitations:** CBK exposes two separately described rate calculation contexts. BoU live fields/schema were not visible in this review. BoT's weekly quote orientation is explicit but does not by itself prove the same daily-series contract. Public pages do not establish reuse rights, freshness guarantees, API support, or accounting/tax approval.
-- **Next action:** Verify checks on the current head of own draft PR #21 and keep it open/unmerged while the code-review deferral is active. Do not modify another task's PR or request review until the user says it is restored.
-- **User approval required:** Explicit user authorization before product implementation or external rate use; user notice before re-enabling code review.
+- **Next action:** Push the rebased PR #21 head, verify all required checks, and obtain a fresh Greptile review on that exact head. Fix actionable review findings in this PR before merging. Do not begin product implementation or use live FX rates.
+- **User approval required:** Explicit user authorization remains required before product implementation or external FX-rate use. The user has resumed Greptile review and PR merges for batch #16–#26.
 
 ## Delivery state
 
-- **Commit/branch:** Evidence commit `86b1b8a` on `codex/mn-plan-015-central-bank-fx-evidence`; PR/status handoff updates remain on that focused branch.
-- **PR/review:** [PR #21](https://github.com/mylescorp/mylesnet/pull/21), draft/open; automated checks are tracked on its latest head. Code review deferred at the user's direction.
+- **Commit/branch:** Rebased evidence commits are on `codex/mn-plan-015-central-bank-fx-evidence`; branch includes the rebase plus task-handoff and batch-range corrections.
+- **PR/review:** [PR #21](https://github.com/mylescorp/mylesnet/pull/21), ready/open. The previous 5/5 review is tied to pre-rebase head `5cbaeb5`; fresh review and required checks on the rebased head are pending.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; no product service was implemented or enabled.
