@@ -95,6 +95,7 @@ Use the technical specification's representative envelope as the starting contra
 | `RECON-001` | Payment provider ↔ payment intent ↔ immutable ledger reconciliation | `REC-009`–`REC-011` | Required; provider-specific interval, exception queue and finance owner open. |
 | `RECON-002` | RADIUS source/outbox ↔ Convex session projection reconciliation | `REC-007`–`REC-008` | Required; event freshness, queue drain and network owner open. |
 | `RECON-003` | WorkOS identity/org ↔ internal membership/tenant status reconciliation | `REC-001`–`REC-003` | Required; provider event strategy and identity owner open. |
+| `FX-001` | Immutable rate observation and invoice/report conversion provenance | `REC-020`; `MN-DEC-015/022`; [`FX-CONVERSION-PROVENANCE-CONTRACT.md`](FX-CONVERSION-PROVENANCE-CONTRACT.md) | Logical provenance is captured; source/quote semantics, freshness/fallback, precision/rounding, snapshot persistence, retention and Finance owner remain open. |
 | `EXPORT-001` | Scoped async export and reauthorized expiring download | `AC-X-01/02/03`, `IC-EXPORT-01` | Owner approval/MFA/audit boundary captured; storage, manifest and retention details open. |
 
 For the tenant CSV import lifecycle under `JOB-001`, see the [guided CSV migration contract](CSV-MIGRATION-CONTRACT.md). It details authority rechecks, preview/commit sequencing, idempotent row processing, rollback boundaries, and unresolved job policy choices.
