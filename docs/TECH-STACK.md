@@ -53,7 +53,7 @@ If RADIUS connectivity fails, keep current sessions active and reject new logins
 
 - Tenant staff use the approved built-in/custom RBAC model with branch scope; there is exactly one Owner per tenant. Platform administrators use separate platform roles and mandatory MFA.
 - Subscriber login is email/phone plus password; sensitive actions require MFA step-up. Recovery, sole-owner transfer, high-risk access, and emergency support follow audited workflows in the technical specification.
-- Use WorkOS's default identity sender. Resend is the conditional application-email candidate after country-specific transfer review and delivery pilot; use SES Ireland if approval fails.
+- Use WorkOS's default identity sender. Resend is the conditional application-email candidate after country-specific transfer review and delivery pilot; use SES Ireland if approval fails. Public provider facts and open validation are tracked in [`EMAIL-PROVIDER-PUBLIC-EVIDENCE.md`](EMAIL-PROVIDER-PUBLIC-EVIDENCE.md); these are not provider approvals.
 - Compare Africa's Talking and Infobip for SMS delivery/pricing/security; retain Twilio as a price benchmark. Use a registered tenant sender ID where approved, otherwise a configured fallback.
 - Separate promotional opt-in and STOP suppression from required service messages. Never put credentials or message bodies into logs or analytics.
 - Provider credentials belong in environment-specific secret storage. Local development uses development credentials and synthetic data only.
