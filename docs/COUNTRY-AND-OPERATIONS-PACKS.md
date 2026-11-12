@@ -63,6 +63,8 @@ Each row applies separately to KE, UG, and TZ. Record the country-specific resul
 
 ## Related artifacts
 
+- The [service objectives and operational evidence plan](SERVICE-OBJECTIVES-AND-OPERATIONAL-EVIDENCE-PLAN.md) provides shared measurement, recovery, and support-evidence criteria. Complete country-specific approval, ownership, and evidence in this register; the shared plan does not mark any country ready.
+
 - [Decision register](DECISION-REGISTER.md)
 - [Public payment-provider documentation evidence](PAYMENT-PROVIDER-PUBLIC-EVIDENCE.md)
 - [Data ownership and classification](DATA-OWNERSHIP-AND-CLASSIFICATION.md)
