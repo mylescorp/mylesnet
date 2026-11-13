@@ -153,7 +153,7 @@ The approved v1 direction is one shared Convex deployment with strict logical te
 - Blog listing and articles; changelog listing and entries; competitor comparison pages; affiliate information; terms/privacy/legal content.
 - Sitemap and canonical metadata, search/discovery, SEO-friendly server rendering, responsive layouts, cookie/consent behavior where required.
 
-**Public content CRUD:** Proposed editorial management belongs to platform roles or an approved CMS, not tenant staff. Define draft, review, publish, unpublish, schedule, version history, author, slug redirect and audit behavior before building. Marketing content publication does not modify operational tenant data.
+**Public content CRUD:** Editorial management remains a candidate, not an approved feature. All 308 inventoried public URLs stay static/structured unless an approved editing need names exact routes and an accountable owner. Tenant staff cannot manage MylesNet public content. Before building any editing capability, decide author/reviewer/publisher permissions, draft/review/publish/unpublish/schedule states, version history, preview isolation, slug redirects, audit, localization, cache/index updates, and correction/rollback behavior. See the [public-content editorial decision packet](PUBLIC-CONTENT-EDITORIAL-DECISION-PACKET.md). Marketing publication cannot modify operational tenant data.
 
 ### 5.2 ISP registration and account recovery
 
@@ -188,7 +188,7 @@ The approved v1 direction is one shared Convex deployment with strict logical te
 | Integrations | Provider configuration status, callback health, RADIUS/RouterOS service status, secret rotation workflow and failure history. Reveal secrets only once or not at all. |
 | Operations | Provisioning jobs, queue/worker status, scheduled jobs, backup state, incidents, maintenance notices and service flags. |
 | Audit and policy | Search immutable platform audit events, access reviews, retention rules and controlled exports. |
-| Marketing content | Optional CMS for pages/blog/changelog; draft/review/publish/unpublish and version history. Confirm CMS scope separately. |
+| Marketing content | CMS remains unapproved. If an editing need is approved, platform editorial roles or an approved CMS may manage only the selected public routes under the [editorial decision packet](PUBLIC-CONTENT-EDITORIAL-DECISION-PACKET.md); tenant staff cannot publish MylesNet marketing content. |
 
 ### 5.4 ISP tenant operator console
 
@@ -438,7 +438,7 @@ Every tenant-owned record has tenant ID, creation/update actor, timestamps, stat
 
 The following must be reviewed and approved before implementation begins:
 
-1. Product scope and prioritized MVP, including which of the 308 public URLs need dynamic CMS behavior.
+1. Product scope and prioritized MVP, including an owner-approved route list for any public URLs needing editing; all 308 remain in scope as static/structured pages unless this need is approved. Use the [editorial decision packet](PUBLIC-CONTENT-EDITORIAL-DECISION-PACKET.md) to record route, ownership, workflow, locale, and vendor evidence.
 2. Route/menu catalog for public site, platform admin, tenant console, subscriber portal and captive portal.
 3. CRUD/RBAC matrix above refined to field-level permissions and all special actions; every route has an explicit allow/deny owner.
 4. Tenant isolation design and proof strategy for WorkOS organization mapping, Convex queries, background jobs, storage and live subscriptions.
@@ -463,7 +463,7 @@ The following must be reviewed and approved before implementation begins:
 ## 12. Decisions still open
 
 - Exact product-brand expression and reference-derived visual treatment; the product name and four-surface scope are approved.
-- Which public routes need editable CMS behavior, content ownership, and editorial/release workflow. All 308 captured public URLs are in v1 scope as static or structured content unless a justified editing need is approved.
+- Which public routes need editable behavior, content ownership, and editorial/release workflow. The [editorial decision packet](PUBLIC-CONTENT-EDITORIAL-DECISION-PACKET.md) provides a route-family inventory and decision criteria; it does not approve a CMS. All 308 captured public URLs remain in v1 scope as static/structured content unless a justified editing need is approved.
 - Exact platform-admin navigation and detailed support/audit workflow contracts. The platform surface and the charter's scoped support-grant policy are approved; route/action acceptance remains to be cataloged.
 - Fine-grained role/action permissions, subscriber authentication/recovery contracts, and negative acceptance cases. The v1 built-in roles, branch-scope model, and SSO/SCIM deferral are approved.
 - Workload, rate/query/queue limits, indexes, capacity and cost budgets; future dedicated-tenant thresholds. V1 uses one shared Convex deployment with strict tenant/branch isolation.

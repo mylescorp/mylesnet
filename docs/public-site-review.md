@@ -9,6 +9,7 @@ Reviewed in the browser on 10 November 2026. This covers the public marketing si
 - Also captured the cookie banner, Features/Solutions/Resources navigation menu states, and registration/recovery screens.
 - Full-page captures and a searchable gallery remain in the local-only `docs/reference-images/public-site-screenshots/` directory. Its `route-manifest.csv` maps each captured route or state to an image; the gallery contains 325 screenshots.
 - The route collection covers product and feature pages, pricing, solutions, country pages, integrations, calculators/tools, comparisons, blog and changelog pages, and legal/content pages.
+- Route-family counts were reconciled with `REQUIREMENT-ROUTE-TRACEABILITY.md`; the [public-content editorial decision packet](PUBLIC-CONTENT-EDITORIAL-DECISION-PACKET.md) records the 308-route editorial signals and open decisions. It does not infer that captured pages have a CMS or named editor.
 
 ## Visual and flow observations
 
