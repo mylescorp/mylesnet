@@ -14,7 +14,7 @@
 5. Owner completes onboarding: brand, service plans, payment-provider setup, NAS/router registration, and initial data import. Tenant MFA enrollment is optional; high-risk actions require MFA step-up.
 6. Tenant becomes active only after provisioning and required owner actions succeed. Retry transient provisioning failures idempotently within a bounded policy; preserve progress, display status, and provide a support path after the threshold is reached. Exact retry/backoff bounds belong in the implementation runbook.
 
-Block a repeated verified Owner identity from owning another tenant and block duplicate subdomains; allow duplicate business names when those identifiers are distinct. Do not collect government-issued business registration IDs during v1 signup. Define failed verification/provisioning recovery before implementation. Tenant signup is self-service after email verification, with the selected 14-day trial and lifecycle rules documented in `READINESS-DECISIONS.md`.
+Block a repeated verified Owner identity from owning another tenant and block duplicate subdomains; allow duplicate business names when those identifiers are distinct. Do not collect government-issued business registration IDs during v1 signup. Define failed verification/provisioning recovery before implementation; the [MN-PLAN-026 decision packet](ISP-SIGNUP-PROVISIONING-RECOVERY-DECISION-PACKET.md) organizes the open cases without selecting a policy. Tenant signup is self-service after email verification, with the selected 14-day trial and lifecycle rules documented in `READINESS-DECISIONS.md`.
 
 ### Guided tenant CSV import (v1)
 
