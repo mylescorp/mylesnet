@@ -71,6 +71,8 @@ This is an evidence review, not a phase acceptance. Status reflects the current 
 
 **Phase 0 decision:** keep the phase **In progress**. There is no material contradiction identified in this document review, but open owner appointments and external evidence, task/PR closure, independent sign-off, and explicit user authorization mean the exit gate is not met. This refresh records status only; it does not accept Phase 0 or authorize Phase 1.
 
+Status addendum (13 November 2026): our MN-PLAN-032 support coverage and incident operations worksheet is in [draft PR #39](https://github.com/mylescorp/mylesnet/pull/39), stacked on our PR #38. Gitleaks, Vercel, and Preview Comments passed on initial head `f1d4bf3`; no review is requested while the user-directed pause remains in effect.
+
 ## Inputs and related records
 
 - [`IMPLEMENTATION-PLAN.md`](IMPLEMENTATION-PLAN.md#phase-0--close-planning-and-turn-decisions-into-build-contracts)
