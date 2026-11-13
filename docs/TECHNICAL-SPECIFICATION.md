@@ -321,6 +321,8 @@ Apply field-level masking to phone, payment provider references, router secrets,
 
 ### Sensitive actions and approvals
 
+The controls below remain proposed build contracts where they require owner-specific thresholds or role assignments. Use the [MN-PLAN-031 high-risk permission and approval worksheet](HIGH-RISK-PERMISSION-AND-APPROVAL-WORKSHEET.md) to complete and sign off the action-level policy before implementation; it does not approve a permission or threshold.
+
 | Action | Minimum proposed control |
 |---|---|
 | Export subscriber/payment data | Owner-approved sensitive `export` grant; scope/date filter, audit event, MFA step-up and rate limit. |
