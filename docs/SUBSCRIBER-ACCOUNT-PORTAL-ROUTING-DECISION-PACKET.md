@@ -1,7 +1,7 @@
 # Subscriber Account Portal Routing Decision Packet
 
-**Task:** MN-PLAN-022 · **Plan phase:** Phase 0 — close planning and turn decisions into build contracts  
-**Status:** Decision support prepared; host topology, route names, and navigation remain open  
+**Task:** MN-PLAN-022 · **Plan phase:** Phase 0 — close planning and turn decisions into build contracts
+**Status:** Decision support prepared; host topology, route names, and navigation remain open
 **Related decisions:** MN-DEC-003, MN-DEC-007, MN-DEC-020, MN-DEC-023
 
 ## Purpose and boundary
