@@ -26,7 +26,7 @@ Classification applies to copies, derived records, exports, caches, traces, back
 ## Scope invariants
 
 - Every tenant-owned record, event, file/object, export, search document, cache key, and job payload carries a server-derived `tenantId`. Tenant ownership does not change except through a separately audited migration.
-- A branch-scoped resource has a verified `branchId`; a tenant-wide resource is explicitly declared tenant-wide. `null` must not mean both unassigned and tenant-wide. Exact resource/branch semantics remain open under MN-DEC-016.
+- A branch-scoped resource has a verified branch assignment; a tenant-wide resource is explicitly declared tenant-wide. `null` must not mean both unassigned and tenant-wide. Exact resource/branch semantics remain open under MN-DEC-016; see the [decision packet](BRANCH-RESOURCE-SCOPE-DECISION-PACKET.md).
 - Identity, role, tenant lifecycle, permission, resource assignment, and branch scope are rechecked at every operation and live delivery. Client-supplied tenant/branch IDs are never authorization.
 - Keep WorkOS staff identity, subscriber identity, and RADIUS credentials separate by default. Application membership and permission records remain distinct from WorkOS organization membership.
 - Keep MylesNet platform subscription ledgers and each ISP's subscriber-collection ledger separate. Settled financial facts and audit events are append-only; corrections use linked reversals/adjustments.
