@@ -25,7 +25,7 @@ The current foundation pins Next.js `16.4.6`, React `19.3.1`, Convex `1.49.0`, W
 - Keep public pages and captive portal assets lightweight and independently cacheable. Resolve tenant domains safely; unknown or suspended tenants fail closed.
 - Keep payment ledgers, audit events, membership history, and security records append-only; use explicit reversals/corrections.
 - Use country/category retention defaults and guardrails. Legal holds override deletion; tenant-selected shorter periods are allowed where lawful.
-- Leading managed-region candidates are Convex Europe (Ireland) and Vercel Dublin (`dub1`). Validate measured regional latency, plan limits, data transfers, contracts, recovery, capacity, and country law before production.
+- Leading managed-region candidates are Convex Europe (Ireland) and Vercel Dublin (`dub1`). The [hosting cost and capacity evidence plan](HOSTING-COST-AND-CAPACITY-EVIDENCE.md) records current public prices/limits and the open workload/quote inputs. Validate measured regional latency, plan limits, data transfers, contracts, recovery, capacity, and country law before production; no hosting plan or production region is approved by the evidence packet.
 
 ## Network and subscriber access
 
