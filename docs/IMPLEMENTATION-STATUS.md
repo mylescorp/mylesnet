@@ -1,16 +1,16 @@
 # MylesNet Implementation Status
 
 **Purpose:** Repository-wide index of completed work, active work, pending work, blockers, and agent handoffs. Detailed scope and gates live in [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md).
-**Updated:** 13 November 2026
+**Updated:** 15 November 2026
 **Current project stage:** Planning and repository foundation. Product implementation has not been authorized.
 
 ## Current summary
 
 - **Active phase:** Phase 0 — close planning and turn decisions into build contracts. Phase 0 remains open; document completion does not authorize product implementation.
-- **Current task:** MN-PLAN-025 — prepare public-source hosting cost and capacity evidence for MN-DEC-019. See the [hosting cost and capacity evidence plan](HOSTING-COST-AND-CAPACITY-EVIDENCE.md) and [task handoff](agent-handoffs/2026-11-13-MN-PLAN-025-codex.md). [PR #31](https://github.com/mylescorp/mylesnet/pull/31) is stacked on merged PR #30; review remains paused and automated checks are tracked against the live PR head. MN-PLAN-024's [owner appointment register](PHASE-0-OWNER-APPOINTMENT-REGISTER.md) merged in PR #30 and remains blank; no person is appointed and no approval is recorded.
+- **Current task:** Phase 0 closeout, with MN-PLAN-025 and MN-PLAN-026 carried by [PR #31](https://github.com/mylescorp/mylesnet/pull/31). The hosting cost and capacity artifact is present on `main` at `627ea6d`; PR #31 remains open and contains the signup/provisioning recovery packet. Its base is now `main`; its task branch is being reconciled before fresh review. See the [hosting evidence](HOSTING-COST-AND-CAPACITY-EVIDENCE.md), [signup packet](ISP-SIGNUP-PROVISIONING-RECOVERY-DECISION-PACKET.md), and [MN-PLAN-026 handoff](agent-handoffs/2026-11-13-MN-PLAN-026-codex.md).
 - **Completed:** PRs #1–#30 are merged into `main`. PR #36 merged at `d79a222` from reviewed head `35c7d16` after Greptile 5/5, zero unresolved findings, and passing Gitleaks, Vercel, and Preview Comments; PR #28 merged at `8741ae6` from reviewed head `e5adf60` with the same review/check gate; original PR #29 auto-closed after its merged base branch was deleted and its rebased task content merged through #36. Architecture ADRs, data/threat contracts, country operations packs, the v1 story map/Phase 0 exit review, REA workflow, pricing/portal/CSV and provider-evidence reconciliations, and governance closeouts are in the repository.
-- **Pending:** Phase 0 exit conditions and explicit user authorization to start implementation. PRs #31–#35, #37–#39 remain open drafts in the sequence #31 → #32 → #33 → #34 → #35 → #37 → #38 → #39. Country-specific rates, tax/FX treatment, provider approvals, data-transfer review, and other open decisions remain in [IMPLEMENTATION-PLAN.md](IMPLEMENTATION-PLAN.md#8-open-gates-and-explicit-non-decisions).
-- **Review direction:** Convert each remaining draft after its contents, task handoff, and status are current. For every PR, require an explicit current-head Greptile 5/5, zero unresolved findings, and passing required checks; fix actionable findings in that same PR and request a fresh review. Process the dependency chain in order and update the base of each child after its parent merges.
+- **Pending:** Phase 0 exit conditions and explicit user authorization to start implementation. PR #31 must pass fresh review and checks and merge. PRs #33, #35, and #38 are closed without merge; their child PRs #34, #37, and #39 merged into the corresponding task branches. Reopen and merge the existing parent PRs in dependency order; do not create replacement PRs. Named workstream owners, independent product/security review, and documented user authorization remain open.
+- **Review direction:** The user resumed closeout and authorized opening and merging existing PRs, with no new draft PRs. Require an explicit current-head Greptile 5/5, zero unresolved findings, and passing required checks for each existing PR being merged; fix actionable findings in that same PR and request a fresh review. Process the existing dependency chain in order.
 - **Production:** No product service deployment is authorized or reported as active. This documentation-only batch did not implement product features, configure providers, operate routers, or change production.
 
 ## Phase tracker
@@ -69,9 +69,9 @@ Statuses: **Not started**, **In progress**, **Blocked**, or **Accepted**. “Acc
 
 | MN-PLAN-024 | 0 | Prepare Phase 0 owner appointment and independent sign-off register | In progress | Coordinator | [Owner appointment register](PHASE-0-OWNER-APPOINTMENT-REGISTER.md); [task handoff](agent-handoffs/2026-11-13-MN-PLAN-024-codex.md); [draft PR #30](https://github.com/mylescorp/mylesnet/pull/30) is rebased onto current `main`; no individuals are appointed or approvals recorded |
 
-| MN-PLAN-025 | 0 | Prepare hosting cost and capacity evidence | In progress | Coordinator | [Hosting cost and capacity evidence](HOSTING-COST-AND-CAPACITY-EVIDENCE.md); [task handoff](agent-handoffs/2026-11-13-MN-PLAN-025-codex.md); [draft PR #31](https://github.com/mylescorp/mylesnet/pull/31) follows #30; workload, quotes, costs, and capacity evidence remain open |
+| MN-PLAN-025 | 0 | Prepare hosting cost and capacity evidence | In progress | Coordinator | [Hosting cost and capacity evidence](HOSTING-COST-AND-CAPACITY-EVIDENCE.md) is present on `main` at `627ea6d`; [task handoff](agent-handoffs/2026-11-13-MN-PLAN-025-codex.md); PR #31 remains open while its stacked MN-PLAN-026 content is reconciled and reviewed; workload, quotes, costs, and capacity evidence remain open |
 
-| MN-PLAN-026 | 0 | Document signup provisioning and recovery decisions | In progress | Coordinator | [Draft PR #32](https://github.com/mylescorp/mylesnet/pull/32); signup decisions and recovery scenarios are documented; owner inputs remain open |
+| MN-PLAN-026 | 0 | Document signup provisioning and recovery decisions | In progress | Coordinator | [Signup/provisioning recovery packet](ISP-SIGNUP-PROVISIONING-RECOVERY-DECISION-PACKET.md); [task handoff](agent-handoffs/2026-11-13-MN-PLAN-026-codex.md); PR #32 is merged into PR #31's task branch; the packet awaits review and merge to `main` through PR #31; owner inputs remain open |
 
 | MN-PLAN-027 | 0 | Prepare standard pricing and tax approval worksheet | In progress | Coordinator | [Draft PR #33](https://github.com/mylescorp/mylesnet/pull/33); local prices, tax treatment, invoice requirements, and owner approvals remain open |
 

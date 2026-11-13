@@ -35,4 +35,4 @@ See `IC-IAM-01`, `IC-IAM-02`, `SEQ-IAM-01`, `SEQ-SIGNUP-01`, and `SEQ-IAM-02` in
 
 ## Open items and revisit trigger
 
-Run the WorkOS MFA compatibility spike for tenant/platform separation, optional staff enrollment, independently verified step-up, recovery, and failure behavior. Define provider event/reconciliation handling and session topology. Revisit only if WorkOS cannot meet an approved identity/security requirement or the v1 SSO/SCIM scope changes.
+Run the WorkOS MFA compatibility spike for tenant/platform separation, optional staff enrollment, independently verified step-up, recovery, and failure behavior. Define provider event/reconciliation handling and session topology. Signup verification and cross-system provisioning recovery decisions are organized in the [MN-PLAN-026 decision packet](../ISP-SIGNUP-PROVISIONING-RECOVERY-DECISION-PACKET.md); no retry, retention, or duplicate-identity policy is selected there. Revisit only if WorkOS cannot meet an approved identity/security requirement or the v1 SSO/SCIM scope changes.
