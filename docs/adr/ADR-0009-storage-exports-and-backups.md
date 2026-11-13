@@ -34,4 +34,4 @@ See `IC-STORAGE-01`, `IC-EXPORT-01`, `IC-RECOVERY-01`, `SEQ-EXPORT-01`, `SEQ-OFF
 
 ## Open items and revisit trigger
 
-Choose storage after workload/region/cost and recovery review. Set category retention with counsel; define backup/restore ownership, frequency, RPO/RTO, isolated drill cadence, deletion from backups, and selective restore safeguards. Revisit when legal holds, storage provider capabilities, data scale, or recovery targets change.
+Choose storage after workload/region/cost and recovery review. The [hosting cost and capacity evidence plan](../HOSTING-COST-AND-CAPACITY-EVIDENCE.md) covers Vercel and Convex public pricing only; object-storage selection and backup costs remain out of scope there. Set category retention with counsel; define backup/restore ownership, frequency, RPO/RTO, isolated drill cadence, deletion from backups, and selective restore safeguards. Revisit when legal holds, storage provider capabilities, data scale, or recovery targets change.
