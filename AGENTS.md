@@ -124,7 +124,7 @@ Treat package versions in the scaffold as setup-time pins. Recheck supported ver
 
 ### Batch-scoped user-directed Greptile review resumption
 
-The earlier temporary review deferral was superseded for PRs #16–#26 by the user's 2026-11-12 instruction to convert and merge all open draft PRs. The user's 2026-11-13 instruction extends this closeout to every currently open PR; the closeout inventory is PRs #25–#29; PR #25 has merged, PRs #26–#29 remain open, and draft PR #29 is stacked on PR #28. Each must satisfy the same current-head review, remediation, and CI gates below before merge. This closeout does not authorize product implementation, provider actions, or deployment.
+The earlier temporary review deferral was superseded for PRs #16–#26 by the user's 2026-11-12 instruction to convert and merge all open draft PRs. The user's 2026-11-13 instruction extends this closeout to every currently open PR; the closeout inventory is PRs #25–#29; PRs #25 and #26 have merged, PRs #27–#29 remain open, and draft PR #29 is stacked on PR #28. Each must satisfy the same current-head review, remediation, and CI gates below before merge. This closeout does not authorize product implementation, provider actions, or deployment.
 
 - Continue eligible planning tasks when their documented dependencies and acceptance criteria are satisfied. Do not stop independent Phase 0 work solely because Greptile is unavailable.
 - Keep using focused branches, commits, pull requests, applicable checks, and durable handoffs. Do not claim a Greptile review, score, or approval that did not occur.
