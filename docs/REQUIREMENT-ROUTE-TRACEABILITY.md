@@ -18,7 +18,7 @@ The public sitemap inventory is 308 URLs: the homepage plus 307 non-homepage rou
 - `Tenant + assigned branch` means every operation derives tenant and branch access from verified server-side identity, membership, role, and resource scope. The exact resource-to-branch assignment and shared-resource rules remain open under MN-DEC-016; a client-supplied tenant or branch ID never authorizes access.
 - All three SaaS tiers expose the same features. Quotas may block new additions while preserving existing records and service. Tier names, prices, quota values, tax handling, and exact entitlement values remain open. Lifecycle restrictions follow the approved tenant lifecycle; a route being listed does not bypass suspension or other server-side state.
 - Audit events record actor, tenant/branch where applicable, resource, action, timestamp, reason where required, and request/job/correlation reference. Redact secrets and avoid copying sensitive field values into this planning catalog.
-- Proposed platform navigation names are catalog keys, not finalized URLs. No CMS is assumed. Exact subscriber portal host/navigation remains open.
+- Proposed platform navigation names are catalog keys, not finalized URLs. No CMS is assumed. Exact subscriber account portal host/navigation remains open; see the [MN-PLAN-022 routing decision packet](SUBSCRIBER-ACCOUNT-PORTAL-ROUTING-DECISION-PACKET.md).
 
 ## Cross-cutting architecture contracts
 
@@ -556,7 +556,7 @@ These 73 entries are sanitized observations from the local-only tenant reference
 ## Open decisions and implementation boundary
 
 - **MN-DEC-016:** exact resource-to-branch assignments, shared-resource behavior, tenant-wide/unassigned semantics, indexes, and migration remain open. The [branch resource scope decision packet](BRANCH-RESOURCE-SCOPE-DECISION-PACKET.md) organizes alternatives and future acceptance evidence; this catalog states the enforcement boundary, not a schema shortcut.
-- **MN-DEC-020:** CMS/editorial workflow and content owners remain open; public URL coverage stays static/structured absent an approved editing need. Subscriber portal host and exact navigation also remain open.
+- **MN-DEC-020:** CMS/editorial workflow and content owners remain open; public URL coverage stays static/structured absent an approved editing need. Subscriber account portal host, route hierarchy, custom-domain scope, and exact navigation also remain open; see the [routing decision packet](SUBSCRIBER-ACCOUNT-PORTAL-ROUTING-DECISION-PACKET.md).
 - Platform route names/grouping and exact page-level permission bundles are proposals until the architecture/route ADRs and detailed role matrix are accepted. Charter role boundaries, MFA, support grants, tenant isolation, and high-risk controls are applied as approved constraints.
 - Exact plan names/prices/quotas/taxes; country legal/provider approvals; retention periods; DNS registrar; external integration contracts; detailed branch mapping; and RADIUS lab coverage remain open in the decision register. This catalog does not choose them.
 - The catalog is a planning contract and does not authorize product code, live provider/router connections, tenant provisioning, or deployment.

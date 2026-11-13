@@ -38,7 +38,7 @@ These are candidate navigation groupings for the approved platform surface. V1 i
 
 - Subscriber web portal: sign in/OTP, service summary, renew or choose a plan, payment result, invoices/receipts, profile/contact preferences, and support.
 - Captive portal: landing/plan selection, phone or account identification, voucher entry, payment handoff, success/failure/pending states, terms, and retry/recovery.
-- Exact navigation and whether the subscriber portal is shared or tenant-branded remain open decisions.
+- Tenant branding is approved for subscriber account and captive portals. The account portal's host, route hierarchy, relationship to the captive host, and exact navigation remain open under MN-DEC-020; see the [routing decision packet](SUBSCRIBER-ACCOUNT-PORTAL-ROUTING-DECISION-PACKET.md).
 
 ## Role groups
 
