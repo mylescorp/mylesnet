@@ -13,7 +13,7 @@ Use the project charter in [`AGENTS.md`](../AGENTS.md) and approved decisions in
 
 **States:** `Approved` means approved v1 direction; it is not evidence of implementation. `Candidate` means a leading option that still requires the listed validation. `Open` means no value or approval has been supplied; do not infer one. `Rejected` is reserved for an option explicitly ruled out by an approved decision.
 
-No individual owners are named for the open commercial, legal, provider, design-system, and operations work. The owner column records that gap instead of assigning it by assumption. MN-PLAN-008 must name accountable roles before the Phase 0 exit review.
+No individual owners are named for the open commercial, legal, provider, design-system, and operations work. The owner column records that gap instead of assigning it by assumption. MN-PLAN-008 established the role-level baseline; the [Phase 0 owner appointment and sign-off register](PHASE-0-OWNER-APPOINTMENT-REGISTER.md) provides a worksheet for recording individual appointments and review evidence. The project owner must still fill and validate it before Phase 0 exit.
 
 | ID | State | Decision or open item | Authority and evidence | Owner | Dependency / revisit trigger |
 |---|---|---|---|---|---|
