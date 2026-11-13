@@ -46,7 +46,7 @@ These contracts connect the approved architecture boundaries to requirement IDs.
 | `SEQ-OFFBOARD-01` | Authorized cancellation/offboarding → impact/notice/export window → service state transition and credential/domain/job revocation → category retention/legal-hold evaluation → deletion/anonymization job and evidence; export and deletion remain separate. | `AC-D-03`, `REQ-PLAT-02`, `REQ-TEN-12/13` |
 | `SEQ-RESTORE-01` | Isolated restore request with role/incident approval → restore encrypted snapshot/assets under controlled credentials → validate tenant isolation, retention/legal holds and ledger/audit integrity → record RPO/RTO/data integrity → only separately authorized service recovery may promote restored service. | `IC-RECOVERY-01`; technical-specification §14.8 |
 
-These outlines are planning contracts. Detailed failure states, payload schemas, retry limits, provider-specific behavior, operational ownership, and acceptance automation remain Phase 0/implementation work. In particular, router lab proof, support-grant workflow, plan downgrade, tenant offboarding, and restore drill remain unperformed.
+These outlines are planning contracts. Detailed failure states, payload schemas, retry limits, provider-specific behavior, operational ownership, and acceptance automation remain Phase 0/implementation work. Signup/provisioning recovery decisions for `SEQ-SIGNUP-01` are organized in the [MN-PLAN-026 packet](../ISP-SIGNUP-PROVISIONING-RECOVERY-DECISION-PACKET.md); they remain open. In particular, router lab proof, support-grant workflow, plan downgrade, tenant offboarding, and restore drill remain unperformed.
 
 ## Sequence diagrams
 
