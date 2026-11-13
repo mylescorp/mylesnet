@@ -42,7 +42,7 @@ These are candidate navigation groupings for the approved platform surface. V1 i
 
 ## Role groups
 
-The v1 built-in tenant staff and platform role names are approved; detailed permission matrices remain proposed pending action-level review.
+The v1 built-in tenant staff and platform role names are approved; detailed permission matrices remain proposed pending action-level review. The [MN-PLAN-031 high-risk permission and approval worksheet](HIGH-RISK-PERMISSION-AND-APPROVAL-WORKSHEET.md) groups the open threshold, approver, scope, MFA, and audit decisions for sensitive action families.
 
 | Role | Intended scope |
 |---|---|
@@ -81,4 +81,4 @@ Each tenant has exactly one active Owner. Owner is always tenant-wide; Admin, fu
 - Owner approval is required to grant permissions for withdrawals/payout destinations, refunds/credits, sensitive exports, credential/secret reveal or rotation, role delegation, bulk messaging, and destructive/bulk network actions.
 - Require MFA at sign-in for platform administrators. Tenant staff may opt out at sign-in, but high-risk actions (payment changes, sensitive credential operations, role/permission changes, and destructive operations) require a server-verified TOTP challenge and are denied to staff without an enrolled factor. Use optional WorkOS MFA API enrollment for tenant staff; AuthKit `max_age` reauthentication alone does not prove MFA. Confirm the flow in a pre-build compatibility spike.
 - Record actor, tenant, resource, action, timestamp, request/job ID, reason, and before/after summary for privileged changes without logging secrets.
-- Define approval thresholds for refunds, manual credits, bulk messaging, tenant suspension, and network-wide router commands.
+- Define approval thresholds for refunds, manual credits, bulk messaging, tenant suspension, and network-wide router commands. The [MN-PLAN-031 worksheet](HIGH-RISK-PERMISSION-AND-APPROVAL-WORKSHEET.md) records the decisions and evidence owners still needed; no threshold is selected there.
