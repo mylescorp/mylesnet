@@ -62,7 +62,7 @@ The [guided CSV migration contract](CSV-MIGRATION-CONTRACT.md) expands `REC-016`
 
 ## Retention and legal-hold register
 
-No exact retention period is approved by this document. The project uses country- and category-specific schedules with legal holds overriding deletion. Local counsel must validate the periods and transfers before production processing in Kenya, Uganda, or Tanzania.
+No exact retention period is approved by this document. The project uses country- and category-specific schedules with legal holds overriding deletion. Local counsel must validate the periods and transfers before production processing in Kenya, Uganda, or Tanzania; use the [country legal and data-protection evidence plan](COUNTRY-LEGAL-AND-DATA-PROTECTION-EVIDENCE-PLAN.md) to record country-specific advice and approvals.
 
 | Category key | Applies to | Current decision | Accountable owner needed |
 |---|---|---|---|
@@ -97,4 +97,4 @@ For every deletion or anonymization job, record the data categories and sources 
 
 ## Related contracts
 
-See [`DATA-*` crosswalk entries](REQUIREMENT-ROUTE-TRACEABILITY.md#cross-cutting-data-event-and-threat-contracts), the [interface/sequence contracts](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md), [MN-PLAN-007 country packs](IMPLEMENTATION-PLAN.md#phase-0--close-planning-and-turn-decisions-into-build-contracts), and [open decisions](DECISION-REGISTER.md) MN-DEC-016/018/019.
+See [`DATA-*` crosswalk entries](REQUIREMENT-ROUTE-TRACEABILITY.md#cross-cutting-data-event-and-threat-contracts), the [interface/sequence contracts](adr/INTERFACE-AND-SEQUENCE-CONTRACTS.md), [MN-PLAN-007 country packs](COUNTRY-AND-OPERATIONS-PACKS.md), the [country legal and data-protection evidence plan](COUNTRY-LEGAL-AND-DATA-PROTECTION-EVIDENCE-PLAN.md), and [open decisions](DECISION-REGISTER.md) MN-DEC-016/018/019.
