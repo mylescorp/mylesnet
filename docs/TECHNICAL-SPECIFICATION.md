@@ -234,6 +234,7 @@ The [guided CSV migration contract](CSV-MIGRATION-CONTRACT.md) records the Phase
 - Renew/select eligible plans; create a payment intent; show pending/success/failure/expired states and retry guidance.
 - Update permitted contact details and communication choices; create/review own support tickets.
 - Tenant-selected branding, support contacts, terms, and locale; apply the approved theme to the account portal and captive portal. All reads/writes are scoped to the verified subscriber identity and tenant.
+- The account portal's host, route hierarchy, relationship to the captive portal host, and subscriber navigation remain open under MN-DEC-020. See the [routing decision packet](SUBSCRIBER-ACCOUNT-PORTAL-ROUTING-DECISION-PACKET.md); hostname and route context never replace subscriber authentication or tenant authorization.
 
 ### 5.6 Captive portal (proposed from partial reference)
 
