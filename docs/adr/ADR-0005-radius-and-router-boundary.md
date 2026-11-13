@@ -34,4 +34,4 @@ See `IC-RADIUS-01`, `IC-ROUTER-01`, `SEQ-RADIUS-01`, and `SEQ-ROUTER-01` in [`IN
 
 ## Open items and revisit trigger
 
-Define projection ownership, policy versioning/cache invalidation, NAS mapping, PostgreSQL HA, local outbox capacity, ordering/deduplication key, retry/drain behavior, backup/restore, credential rotation, supported RouterOS lab devices, CGNAT/firewall behavior, and RADIUS operational targets. Revisit only with lab, load, outage, and recovery evidence.
+Define projection ownership, policy versioning/cache invalidation, NAS mapping, PostgreSQL HA, local outbox capacity, ordering/deduplication key, retry/drain behavior, backup/restore, credential rotation, supported RouterOS lab devices, CGNAT/firewall behavior, and RADIUS operational targets. The [MN-PLAN-030 router lab and acceptance worksheet](../ROUTER-LAB-AND-ACCEPTANCE-WORKSHEET.md) records the lab choices and evidence gate without changing approved boundaries. Revisit only with lab, load, outage, and recovery evidence.

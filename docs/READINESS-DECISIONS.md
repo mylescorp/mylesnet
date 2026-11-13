@@ -138,7 +138,7 @@ These decisions are approved product direction and should be carried into the de
 - [ ] Detail the approved FreeRADIUS 3.2.x deployment, dedicated PostgreSQL AAA store, tenant/NAS mapping, HA, accounting retention, cache/recovery, and CoA behavior. Keep current sessions on RADIUS loss, reject new logins, and never fail open.
 - [ ] Decide whether routers initiate outbound connections or need inbound reachability; document CGNAT/firewall cases, source IP validation, secret rotation, and allowed network paths.
 - [ ] Detail hosted captive-portal certificate and payment-return flows, template/version rollout, rollback, and behavior when a router or provider cannot reach the portal. Tenant-branded hosted portals on MylesNet subdomains by default and post-confirmation activation are approved.
-- [ ] Identify lab routers, test SIM/mobile networks, representative real routers, and a safe non-production network for end-to-end validation.
+- [ ] Identify lab routers, test SIM/mobile networks, representative real routers, and a safe non-production network for end-to-end validation. The [MN-PLAN-030 router lab and acceptance worksheet](ROUTER-LAB-AND-ACCEPTANCE-WORKSHEET.md) organizes the device, connectivity, token, portal, outage, and acceptance evidence; it authorizes no real-router work.
 
 ## Money and communications
 
