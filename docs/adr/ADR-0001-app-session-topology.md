@@ -3,7 +3,7 @@
 - **Date:** 11 November 2026
 - **State:** Accepted application boundaries; session and host details remain open
 - **Owner:** Application architecture owner not named; assign in MN-PLAN-008
-- **Evidence:** `AGENTS.md`; `TECH-STACK.md`; `TECHNICAL-SPECIFICATION.md` §§3–4, 14.2; `DECISION-REGISTER.md` MN-DEC-003/005/020
+- **Evidence:** `AGENTS.md`; `TECH-STACK.md`; `TECHNICAL-SPECIFICATION.md` §§3–4, 14.2; `DECISION-REGISTER.md` MN-DEC-003/005/020; [MN-PLAN-022 subscriber account portal routing packet](../SUBSCRIBER-ACCOUNT-PORTAL-ROUTING-DECISION-PACKET.md)
 
 ## Context
 
@@ -36,4 +36,4 @@ See `IC-APP-01`, `IC-IAM-01`, `IC-IAM-02`, `SEQ-IAM-01`, and `SEQ-SIGNUP-01` in 
 
 ## Open items and revisit trigger
 
-The application owner must specify route ownership, allowed origins/callbacks, cookie/session topology, tenant switching behavior across app origins, and subscriber portal host before implementation. Revisit this ADR only if the approved product surface or app layout changes.
+The application owner must specify route ownership, allowed origins/callbacks, cookie/session topology, tenant switching behavior across app origins, and subscriber portal host before implementation. The [MN-PLAN-022 decision packet](../SUBSCRIBER-ACCOUNT-PORTAL-ROUTING-DECISION-PACKET.md) organizes the subscriber host and navigation questions without selecting them. Revisit this ADR only if the approved product surface or app layout changes.

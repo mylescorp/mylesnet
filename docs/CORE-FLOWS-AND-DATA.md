@@ -66,6 +66,8 @@ Reference: [saved domain settings](reference-images/reference-domain-settings.pn
 4. Show the subscriber a clear pending/active/suspended/expired state and send credentials only through approved channels.
 5. All edits, credential resets, expiry changes, and manual adjustments create tenant audit records.
 
+The subscriber account portal's host and route hierarchy, its relationship to the captive portal, and the links between the two remain open under MN-DEC-020. See the [routing decision packet](SUBSCRIBER-ACCOUNT-PORTAL-ROUTING-DECISION-PACKET.md). A host or route may identify tenant context only through the approved verified server-side mapping; authorization remains tied to the subscriber identity and tenant scope.
+
 ### RADIUS authentication and accounting
 
 1. A NAS sends Access-Request/Accounting messages to the RADIUS service over an approved network path.

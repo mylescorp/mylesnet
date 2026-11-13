@@ -9,7 +9,7 @@
 
 This packet narrows the public-content portion of MN-DEC-020 into a reviewable decision. It uses the route catalog as its inventory and identifies where recurring editorial work may exist. A route family that looks like editorial content is only a candidate signal: this packet does not decide that any route must use a CMS.
 
-All 308 public sitemap URLs remain in the first-release route scope as static or structured content. CMS behavior stays excluded unless an accountable owner demonstrates an editing need and the project approves the route set and workflow. Subscriber account-portal host and navigation remain separate open questions. This planning packet authorizes no product implementation, vendor selection, production service, or public content publication.
+All 308 public sitemap URLs remain in the first-release route scope as static or structured content. CMS behavior stays excluded unless an accountable owner demonstrates an editing need and the project approves the route set and workflow. Subscriber account-portal host and navigation remain separate open questions; see the [MN-PLAN-022 routing decision packet](SUBSCRIBER-ACCOUNT-PORTAL-ROUTING-DECISION-PACKET.md). This planning packet authorizes no product implementation, vendor selection, production service, or public content publication.
 
 ## Evidence baseline
 
@@ -71,5 +71,5 @@ These are proposed acceptance criteria for the later Phase 5 contract. They do n
 ## Open items retained
 
 - No route-level editing need, CMS decision, editorial-role grant, person/role assignment, publishing timezone, or vendor approval has been provided.
-- `MN-DEC-020` stays open until the worksheet decisions are approved. The subscriber account-portal host/navigation question also stays open and is not resolved by this packet.
+- `MN-DEC-020` stays open until the worksheet decisions are approved. The subscriber account-portal host/navigation question is separate and remains open in the [MN-PLAN-022 routing decision packet](SUBSCRIBER-ACCOUNT-PORTAL-ROUTING-DECISION-PACKET.md).
 - Phase 0 remains active; this document is evidence for the decision process, not the missing owner appointment, sign-off, implementation authorization, or Phase 0 exit.
