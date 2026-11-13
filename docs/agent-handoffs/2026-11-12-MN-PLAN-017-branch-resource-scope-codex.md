@@ -41,7 +41,7 @@ Prepare a reviewable Phase 0 decision packet for resource-to-branch assignment, 
 
 ## Verification and evidence
 
-- **Checks run:** `git diff --check` passed; all added local Markdown link targets exist; conflict-marker scan passed. Gitleaks, Vercel, and Vercel Preview Comments passed on commits `2839e730eec025c6a1ed75712278da918c41080f` and `17e2becdbfccae7d6e014465719acda5d7660ddf`. This final handoff update triggers a fresh CI run; its result will be reported against the resulting head.
+- **Checks run:** `git diff --check` passed; all added local Markdown link targets exist; conflict-marker scan passed. Rebased onto current `main` at `150f180` with conflicts resolved. `git diff --check origin/main...HEAD` passed, the conflict-marker scan found no markers, and a focused Markdown link scan checked 310 local links with zero missing targets. Earlier Gitleaks/Vercel checks and the previous 5/5 review are stale after rebase; new-head checks and review are pending.
 - **Checks not run:** Tests/builds were not run or requested for this documentation-only task. REA was not used; existing planning requirements are the evidence source.
 - **Evidence:** `AGENTS.md`; `TECHNICAL-SPECIFICATION.md` §§6, 14.2–14.3; ADR-0003; `DATA-OWNERSHIP-AND-CLASSIFICATION.md`; `REQUIREMENT-ROUTE-TRACEABILITY.md`; `DECISION-REGISTER.md` MN-DEC-016.
 - **REA evidence:** Not used.
@@ -56,7 +56,7 @@ Prepare a reviewable Phase 0 decision packet for resource-to-branch assignment, 
 ### Pending
 
 - Verify refreshed non-review CI checks after this handoff-only commit; report the exact latest-head result.
-- Keep the PR open/unmerged during the user's review deferral.
+- Obtain a fresh current-head Greptile 5/5 review with zero unresolved issues and passing required checks before merge.
 - The appointed owners must select or explicitly gate resource-specific semantics and propagate the approved decision to the ADR, requirements, APIs, and migration contracts.
 
 ### Blocked
@@ -66,12 +66,12 @@ Prepare a reviewable Phase 0 decision packet for resource-to-branch assignment, 
 ## Risks and handoff instructions
 
 - **Risks/limitations:** This packet does not supply a final authorization predicate, database schema, query/index plan, or migration. The proposal cannot be used as implementation approval.
-- **Next action:** Finish document validation, create and push the focused PR, then monitor ordinary required CI. Request code review only after the user says review is restored.
+- **Next action:** Push the rebased branch, verify required checks, obtain fresh Greptile review on the current head, and fix actionable findings in PR #23 before merging. Product implementation remains unauthorized.
 - **User approval required:** Appointed product/architecture/security owners must approve `MN-DEC-016` before entity/API contracts are frozen; the user must explicitly authorize moving beyond Phase 0 before product implementation begins.
 
 ## Delivery state
 
-- **Commit/branch:** `17e2becdbfccae7d6e014465719acda5d7660ddf` / `codex/mn-plan-017-branch-resource-scope`; this final evidence update will produce the next head.
-- **PR/review:** [PR #23](https://github.com/mylescorp/mylesnet/pull/23) is open and draft against `main`; code review is deferred at the user's direction and was not requested.
+- **Commit/branch:** Rebased decision-packet commits are on `codex/mn-plan-017-branch-resource-scope`; final handoff correction remains to be committed.
+- **PR/review:** [PR #23](https://github.com/mylescorp/mylesnet/pull/23) is open and ready against `main`. Its previous 5/5 review is tied to pre-rebase head `1200fd8`; fresh review and required checks are pending.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; no deployment was authorized.
