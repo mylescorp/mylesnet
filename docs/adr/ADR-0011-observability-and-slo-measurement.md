@@ -2,7 +2,7 @@
 
 - **Date:** 11 November 2026
 - **State:** Privacy and measurement requirements accepted; SLO evidence and ownership remain open
-- **Owner:** Service operations/security owners not named; assign in MN-PLAN-008
+- **Owner:** Service operations/security owners not named; the role baseline is in MN-PLAN-008 and individual appointments remain open under MN-DEC-019.
 - **Evidence:** `AGENTS.md`; `READINESS-DECISIONS.md`; `TECHNICAL-SPECIFICATION.md` §§10, 14.7; `DECISION-REGISTER.md` MN-DEC-010/019
 
 ## Context
@@ -18,6 +18,7 @@ Approved readiness targets cover RADIUS and captive portal availability, eligibl
 - Establish alert ownership for saturation, callback quarantine/drop, retry exhaustion, RADIUS timeouts/accounting lag, router command failures, cross-tenant authorization denials, and backup/restore failures. Incident procedures include severity, incident commander, customer impact, notification, update cadence, resolution and post-incident review.
 - Treat the following readiness targets as targets only: 99.95% monthly availability for managed RADIUS and hosted captive portal; at least 99.5% monthly eligible-login success; 99% of valid payment confirmations activated within 30 seconds; 99% of provider-confirmed payments recorded/reconciled within one minute; 1,000 paying tenants and 100,000 subscriber accounts 12 months after launch. Definitions and sources are in `READINESS-DECISIONS.md`.
 - Review measures monthly and reassess assumptions quarterly. Do not claim an SLO, production availability, compliance, or provider approval without operational evidence.
+- Use the [Service Objectives and Operational Evidence Plan](../SERVICE-OBJECTIVES-AND-OPERATIONAL-EVIDENCE-PLAN.md) to track numerator/denominator, authoritative event sources, recovery proof, support feasibility, owner appointments, and phase-appropriate evidence. It preserves target status as planning-only and does not supersede this ADR.
 
 ## Alternatives considered
 
@@ -35,4 +36,4 @@ See `IC-OBS-01`, `IC-EVENT-01`, and `IC-INCIDENT-01` in [`INTERFACE-AND-SEQUENCE
 
 ## Open items and revisit trigger
 
-Define numerator/denominator and exclusions per SLI; authoritative event sources; event freshness thresholds; metric retention; cardinality/tenant fairness budgets; alert thresholds; service/error budgets; dashboard access; P1 on-call feasibility; and named service owners. Revisit targets only with measured evidence and approved product/operations changes.
+Define numerator/denominator and exclusions per SLI; authoritative event sources; event freshness thresholds; metric retention; cardinality/tenant fairness budgets; alert thresholds; service/error budgets; dashboard access; P1 on-call feasibility; and named service owners. Numeric RPO/RTO, region/capacity/cost, and staffed support feasibility also remain open. The [Service Objectives and Operational Evidence Plan](../SERVICE-OBJECTIVES-AND-OPERATIONAL-EVIDENCE-PLAN.md) organizes the evidence but closes none of these decisions. Revisit targets only with measured evidence and approved product/operations changes.

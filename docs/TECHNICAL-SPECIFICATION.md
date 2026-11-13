@@ -644,7 +644,7 @@ Observability requirements:
 - Alert on error/latency saturation, dropped/quarantined callbacks, retry exhaustion, RADIUS timeout/accounting lag, router-command failures, cross-tenant authorization denials and backup/restore failures.
 - Establish severity, owner, on-call route, incident commander, customer impact assessment, tenant notification channel/status page, update cadence, resolution note and post-incident review. Avoid exposing another tenant or security investigation details.
 
-Availability, latency, event-to-screen freshness, error budget, support hours, severity targets and notification deadlines remain numeric approval items; each service class (web, Convex, payment callbacks, RADIUS, router worker, messaging) needs a separate SLO and dependency policy.
+Availability, latency, event-to-screen freshness, error budget, support hours, severity targets and notification deadlines remain numeric approval items; each service class (web, Convex, payment callbacks, RADIUS, router worker, messaging) needs a separate SLO and dependency policy. The [service objectives and operational evidence plan](SERVICE-OBJECTIVES-AND-OPERATIONAL-EVIDENCE-PLAN.md) maps existing planning targets to candidate sources, definitions still open, and later acceptance evidence; it is not measured evidence or approval.
 
 ### 14.8 Scale, migration, backup and recovery contract
 
@@ -652,7 +652,7 @@ Availability, latency, event-to-screen freshness, error budget, support hours, s
 - Use tenant-first indexes and bounded queries; measure worst-case tenant and mixed-tenant load. Design dashboards as bounded projections, not whole-table scans. Isolate expensive reports from interactive paths.
 - Document when shared logical isolation is no longer sufficient, what metric/plan threshold triggers dedicated deployment or shard, tenant move procedure, cross-region implications and cost owner. Sharding is not assumed until the trigger and migration tooling exist.
 - Every schema/data migration states forward/backward compatibility, batch size, tenant checkpoint, idempotency, lock/latency impact, rollback/compensation and observability. Use expand/migrate/contract for zero-downtime changes; old and new code may run concurrently during rollout.
-- Backup design states data/assets/secrets scope, encryption, frequency, retention, isolation, restore order, provider dependency, tenant-selective export/restore, RPO/RTO, test frequency and named owner. Restore drills use an isolated environment and prove data integrity and tenant boundaries.
+- Backup design states data/assets/secrets scope, encryption, frequency, retention, isolation, restore order, provider dependency, tenant-selective export/restore, RPO/RTO, test frequency and named owner. Restore drills use an isolated environment and prove data integrity and tenant boundaries. Numeric recovery objectives and required drill evidence remain open as organized in the [service objectives and operational evidence plan](SERVICE-OBJECTIVES-AND-OPERATIONAL-EVIDENCE-PLAN.md).
 - Tenant export/deletion applies consistently to primary data, files, search/indexes, caches, analytics, logs and backups according to approved retention/legal hold; describe the residual backup expiry behavior.
 - Recovery/DR procedures specify degraded-mode behavior for Convex, identity, payment, DNS, RADIUS policy store and router reachability. RADIUS follows the approved policy: keep current sessions, reject new logins, and never fail open.
 
@@ -759,8 +759,8 @@ The following are explicit blockers to a final production-ready specification, n
 - Standard Hotspot/PPPoE modes share core features, tenant branding/custom domains are available across offers, and standard usage has no hard subscriber/router caps. Still open: exact local rates/minimums, tax/Hotspot base treatment, FX fallback/finality, Enterprise commercial terms, and usage-event effective-time/correction rules.
 - Payment, messaging, DNS/TLS, accounting and portal vendors; provider contracts/sandboxes, settlement and reconciliation ownership, and country-specific activation evidence. FreeRADIUS 3.2.x is the approved v1 RADIUS implementation.
 - Per-tenant/per-user rate limits, query/page caps, queue fairness, largest tenant, initial/target volumes and cost guardrails.
-- Measurement sources for approved availability/login/payment targets; service-specific latency/event-freshness budgets, support/incident staffing, maintenance policy, and operational ownership.
-- Backup/restore approach, retention/legal hold, tenant export/delete semantics, RPO/RTO, regions and shard/dedicated-tenant trigger.
+- Measurement sources for approved availability/login/payment targets; service-specific latency/event-freshness budgets, support/incident staffing, maintenance policy, and operational ownership. See the [service objectives and operational evidence plan](SERVICE-OBJECTIVES-AND-OPERATIONAL-EVIDENCE-PLAN.md); its criteria do not establish measured service health.
+- Backup/restore approach, retention/legal hold, tenant export/delete semantics, numeric RPO/RTO, regions and shard/dedicated-tenant trigger. Required proof is listed in the [service objectives and operational evidence plan](SERVICE-OBJECTIVES-AND-OPERATIONAL-EVIDENCE-PLAN.md).
 - Compliance scope and evidence needs; privacy notice/consent, audit retention, breach notification and data-subject request ownership.
 - Named owners for platform, security, network operations, finance, customer support, accessibility, design system and incident response.
 
