@@ -50,7 +50,7 @@ Record the owner's direct Phase 0 roster clarification in the canonical register
 
 ### Pending
 
-- Rebase, reopen, and retarget the existing PRs #33, #35, and #38 in dependency order; obtain current-head review/checks and merge only through the same gate.
+- Obtain fresh current-head review/checks on reopened PR #33 and merge only through the same gate. Then advance existing PRs #35 and #38 in dependency order.
 - Keep Phase 0 open until all plan exit criteria are satisfied and the user explicitly authorizes transition to implementation.
 
 ### Blocked
