@@ -1,7 +1,7 @@
 # Guided CSV Tenant Migration Contract
 
 **Task:** MN-PLAN-011 · **Plan phase:** Phase 0 — close planning and turn decisions into build contracts<br>
-**Status:** Planning contract draft; open choices below require owner decisions before implementation.<br>
+**Status:** Planning contract draft; open choices below require owner decisions before implementation. The [MN-PLAN-028 owner decision worksheet](CSV-MIGRATION-OWNER-DECISION-WORKSHEET.md) provides fillable entity and sign-off records without changing this contract.<br>
 **Authority:** [Project charter](../AGENTS.md), [MN-DEC-024](DECISION-REGISTER.md), [guided CSV flow](CORE-FLOWS-AND-DATA.md#guided-tenant-csv-import-v1), [API/error/event backlog](API-ERROR-EVENT-CONTRACT-BACKLOG.md), and [Phase 0 plan](IMPLEMENTATION-PLAN.md#phase-0--close-planning-and-turn-decisions-into-build-contracts).
 
 This contract turns the approved v1 guided-CSV direction into a reviewable import lifecycle. It does not choose entity schemas, retention periods, numeric limits, or failure policy where the project records those as open. It authorizes no product implementation or import against live tenant data.
