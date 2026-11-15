@@ -32,4 +32,4 @@ Region, country, service, and tenant scope must be available as controlled deplo
 
 ## Open items and revisit trigger
 
-Obtain country counsel review, latency/capacity/cost evidence, plan/contract and failover details, backup/recovery evidence, and a named data/operations owner. Revisit when any country law, provider region capability, measured workload, or continuity requirement changes.
+Obtain country counsel review, latency/capacity/cost evidence, plan/contract and failover details, backup/recovery evidence, and a named data/operations owner. The [hosting cost and capacity evidence plan](../HOSTING-COST-AND-CAPACITY-EVIDENCE.md) captures public pricing checked 13 November 2026 and the remaining workload/quote gaps; it does not close this ADR. Revisit when any country law, provider region capability, measured workload, or continuity requirement changes.
