@@ -2,14 +2,14 @@
 
 **Plan phase:** Phase 0 — close planning and turn decisions into build contracts
 
-**Status:** Blank planning worksheet; no individual appointments or approvals are recorded here.
+**Status:** Partially populated on 15 November 2026: the project/product owner is confirmed; specialist appointments and independent review sign-offs remain open.
 **Authority:** [`IMPLEMENTATION-PLAN.md`](IMPLEMENTATION-PLAN.md), the project charter in [`AGENTS.md`](../AGENTS.md), and the role baseline in [`PRIORITIZED-V1-STORY-MAP.md`](PRIORITIZED-V1-STORY-MAP.md).
 
 ## Purpose and boundaries
 
 Use this register to record who the project owner appoints for the Phase 0 workstreams, the scope each person accepts, and the evidence for independent review and sign-off. It turns the existing role baseline into a recordable checklist; it does not appoint anyone, change decision authority, or approve any unresolved product, legal, financial, security, or operational value.
 
-The project owner must fill the named-person, scope, evidence, and date fields. A blank field or a `Not recorded` status means the appointment or approval is still open. Do not infer an appointment from a task assignment, PR authorship, document authorship, or meeting attendance. Where a role names several people or country-specific approvers, record each person separately.
+Jonathan Myles (CEO, Mylescorp Technologies) is confirmed as project and product owner. The user confirmed that no other person should be added. A blank field or a `Not recorded` status means the appointment or approval is still open. Do not infer a specialist appointment from a task assignment, PR authorship, document authorship, or meeting attendance. The project/product owner is not an independent reviewer of his own decisions. Where a role names several people or country-specific approvers, record each person separately; unfilled roles remain open.
 
 This worksheet does not satisfy the Phase 0 exit gate by itself. Product implementation remains unauthorized until all required Phase 0 evidence and owner approvals are complete and the user explicitly authorizes the transition.
 
@@ -29,7 +29,7 @@ Every row is currently unassigned, based on the reviewed Phase 0 documents. Add 
 
 | Workstream | Accountable role(s) | Named appointee(s) | Scope accepted (including country/service limits) | Acceptance evidence and date | Status |
 |---|---|---|---|---|---|
-| Project and product scope | Project owner; product owner | Not recorded | Not recorded | Not recorded | Not appointed |
+| Project and product scope | Project owner; product owner | Jonathan Myles (CEO, Mylescorp Technologies) | Project direction and product scope; not independent review of his own product or security decisions | User confirmation, 2026-11-15; recorded in [MN-PLAN-033 handoff](agent-handoffs/2026-11-15-MN-PLAN-033-phase0-owner-confirmation-codex.md) | Accepted |
 | Architecture and application engineering | Engineering/architecture lead | Not recorded | Not recorded | Not recorded | Not appointed |
 | Identity, application security, and threat review | Security lead | Not recorded | Not recorded | Not recorded | Not appointed |
 | Design system and accessibility | Design-system/accessibility lead | Not recorded | Not recorded | Not recorded | Not appointed |
@@ -47,9 +47,9 @@ Record the artifact version, reviewer's name and role, review result, conditions
 
 | Review area | Reviewer(s) and role | Artifact/version reviewed | Result and conditions | Independence or conflict note | Evidence and date | Status |
 |---|---|---|---|---|---|---|
-| Product scope, story priorities, and acceptance catalog | Not recorded | Not recorded | Not recorded | Not recorded | Not recorded | Not recorded |
+| Product scope, story priorities, and acceptance catalog | Not recorded | Not recorded | Not recorded | No separate reviewer appointed; the project/product owner is not independent of these decisions. User confirmed sole-person staffing on 2026-11-15. | [MN-PLAN-033 handoff](agent-handoffs/2026-11-15-MN-PLAN-033-phase0-owner-confirmation-codex.md), 2026-11-15 | Open — independent review not recorded |
 | Architecture, tenant/branch isolation, and application boundaries | Not recorded | Not recorded | Not recorded | Not recorded | Not recorded | Not recorded |
-| Security controls and threat acceptance | Not recorded | Not recorded | Not recorded | Not recorded | Not recorded | Not recorded |
+| Security controls and threat acceptance | Not recorded | Not recorded | Not recorded | No separate reviewer appointed; the project/product owner is not independent of security decisions. User confirmed sole-person staffing on 2026-11-15. | [MN-PLAN-033 handoff](agent-handoffs/2026-11-15-MN-PLAN-033-phase0-owner-confirmation-codex.md), 2026-11-15 | Open — independent review not recorded |
 | Data governance, privacy, and country transfer/retention evidence | Not recorded | Not recorded; record KE, UG, and TZ separately where applicable | Not recorded | Not recorded | Not recorded | Not recorded |
 | Finance, pricing, tax, payment, and FX evidence | Not recorded | Not recorded; record country-specific evidence separately | Not recorded | Not recorded | Not recorded | Not recorded |
 | Design-system and accessibility acceptance | Not recorded | Not recorded | Not recorded | Not recorded | Not recorded | Not recorded |
@@ -63,7 +63,7 @@ Complete this section only after the evidence above and all other plan exit crit
 |---|---|
 | Phase 0 exit assessment and supporting evidence | Not recorded; see the [story map exit review](PRIORITIZED-V1-STORY-MAP.md) |
 | Open decisions with accountable owners and evidence plans | Not recorded; reconcile with [`DECISION-REGISTER.md`](DECISION-REGISTER.md) |
-| Independent product and security sign-off | Not recorded |
+| Independent product and security sign-off | Open — no separate reviewer appointed; the user confirmed sole-person staffing on 2026-11-15. |
 | User authorization to begin implementation | Not granted; obtain explicit authorization after the exit conditions are accepted |
 | Phase 0 disposition, approver, and date | In progress; no acceptance recorded |
 

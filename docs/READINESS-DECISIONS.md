@@ -2,6 +2,10 @@
 
 **Status: Approved decision baseline recorded; implementation-readiness gate remains open.** This checklist separates approved direction from the legal, provider, cost, operational, and acceptance evidence still required before implementation or production. `TECH-STACK.md` consolidates the selected v1 technical direction. `SAAS-ARCHITECTURE.md` remains a planning-only overview; superseded alternatives are reconciled in [`DECISION-REGISTER.md`](DECISION-REGISTER.md).
 
+## Phase 0 accountability and independent review
+
+Jonathan Myles (CEO, Mylescorp Technologies) is confirmed as the sole named project/product owner. The user confirmed on 15 November 2026 that no other person should be added. Specialist workstream owners remain unassigned, and independent product and security review remain open; the project/product owner cannot serve as an independent reviewer of his own decisions. See the [Phase 0 owner appointment and sign-off register](PHASE-0-OWNER-APPOINTMENT-REGISTER.md). This accountability record does not accept Phase 0 or authorize implementation.
+
 ## Confirmed decisions from the questionnaire
 
 These decisions are approved product direction and should be carried into the detailed specification. They do not close the implementation gate or replace the remaining operational, legal, provider, and acceptance details below.
