@@ -50,7 +50,7 @@ Record the owner's direct Phase 0 roster clarification in the canonical register
 
 ### Pending
 
-- Obtain fresh current-head review/checks on reopened PR #33 and merge only through the same gate. Then advance existing PRs #35 and #38 in dependency order.
+- Obtain fresh current-head review/checks on reopened PR #35 and merge only through the same gate. Then advance existing PR #38.
 - Keep Phase 0 open until all plan exit criteria are satisfied and the user explicitly authorizes transition to implementation.
 
 ### Blocked
@@ -59,8 +59,8 @@ Record the owner's direct Phase 0 roster clarification in the canonical register
 
 ## Risks and handoff instructions
 
-- **Risks/limitations:** PR review approval does not substitute for independent human product/security sign-off. Merged child PRs #34, #37, and #39 are on task branches and are not on `main` until their existing parent PRs are reopened/retargeted and merged.
-- **Next action:** Continue closeout through existing PR #33 and its dependent chain; leave Phase 0 open while independent review, specialist appointments, external evidence, and implementation authorization remain unresolved.
+- **Risks/limitations:** PR review approval does not substitute for independent human product/security sign-off. PR #34 content is on `main` through #33; PRs #37 and #39 remain on task branches until existing parents #35 and #38 merge.
+- **Next action:** Continue closeout through existing PRs #35 and #38; leave Phase 0 open while independent review, specialist appointments, external evidence, and implementation authorization remain unresolved.
 - **User approval required:** Explicit authorization to start product implementation and deployment remains absent. Do not claim Phase 0 green while independent sign-off is open.
 
 ## Delivery state
