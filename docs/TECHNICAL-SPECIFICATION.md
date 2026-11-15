@@ -649,6 +649,8 @@ Observability requirements:
 
 Availability, latency, event-to-screen freshness, error budget, support hours, severity targets and notification deadlines remain numeric approval items; each service class (web, Convex, payment callbacks, RADIUS, router worker, messaging) needs a separate SLO and dependency policy.
 
+Country staffing, on-call roles, escalation responsibilities, tenant communication ownership, and maintenance handoffs are organized separately in the [MN-PLAN-032 support coverage and incident operations worksheet](SUPPORT-COVERAGE-AND-INCIDENT-OPERATIONS-WORKSHEET.md). It does not set the numeric SLO, severity, alert, or notification values above.
+
 ### 14.8 Scale, migration, backup and recovery contract
 
 - Define tenant size bands and 12/24-month forecasts for subscribers, branches, NAS devices, concurrent sessions, events, payments, messages, reports and storage. Establish expected largest tenant and burst patterns.
