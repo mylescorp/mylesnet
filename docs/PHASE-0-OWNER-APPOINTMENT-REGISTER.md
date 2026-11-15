@@ -25,7 +25,7 @@ Suggested status labels are `Not appointed`, `Proposed`, `Appointed — acceptan
 
 ## Appointment log
 
-Every row is currently unassigned, based on the reviewed Phase 0 documents. Add one entry per named person when the project owner confirms the appointment.
+The project/product owner appointment is confirmed in the first row below. All other workstream appointments remain unassigned. Add one entry per named person when the project owner confirms an appointment.
 
 | Workstream | Accountable role(s) | Named appointee(s) | Scope accepted (including country/service limits) | Acceptance evidence and date | Status |
 |---|---|---|---|---|---|

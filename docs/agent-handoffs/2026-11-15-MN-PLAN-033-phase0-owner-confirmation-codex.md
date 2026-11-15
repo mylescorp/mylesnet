@@ -34,11 +34,11 @@ Record the owner's direct Phase 0 roster clarification in the canonical register
 
 ## Verification and evidence
 
-- **Checks run:** `git diff --check` passed. A changed-line Markdown integrity scan found all 73 added Markdown lines' local links valid, confirmed task IDs are unique in `IMPLEMENTATION-STATUS.md`, and confirmed the supplied phone number and email are absent from changed records. No tests or builds were run.
+- **Checks run:** `git diff --check` passed. The latest changed-line Markdown scan validated local links on 15 added lines and confirmed task IDs are unique in `IMPLEMENTATION-STATUS.md`; the earlier owner/status commit also validated 73 added lines and confirmed supplied phone/email details are absent. No tests or builds were run.
 - **Checks not run:** No tests or builds; this is documentation-only and the repository instructions say not to run tests unless requested. No REA or external/provider actions were needed.
 - **Evidence:** User's 2026-11-15 roster clarification, recorded here and in the owner register; live GitHub PR/check state is recorded in `IMPLEMENTATION-STATUS.md`.
 - **REA evidence:** Not used; ordinary repository documentation work.
-- **Failures:** PR #31's review of head `e6a1ec7` found one P2 duplicate-row inconsistency in the status ledger; the same-PR correction is included in this follow-up. Fresh Greptile review and required checks remain pending.
+- **Failures:** PR #31's review of head `e6a1ec7` found one P2 duplicate-row inconsistency, corrected in `61319da`. A subsequent review found a P2 mismatch between the owner register and the story-map role table; that finding is corrected in this follow-up and awaits push. Fresh Greptile review on the final head and required checks remain pending.
 
 ## Remaining work
 
@@ -49,6 +49,7 @@ Record the owner's direct Phase 0 roster clarification in the canonical register
 
 ### Pending
 
+- Push the owner-record correction to the existing PR #31 branch before requesting that review.
 - Request a fresh current-head Greptile review and resolve every actionable finding in PR #31.
 - Merge PR #31 only after explicit current-head Greptile 5/5, zero unresolved findings, and passing required checks.
 - Reopen/retarget the existing PRs #33, #35, and #38 after their dependencies advance; obtain current-head review/checks and merge only through the same gate.
@@ -61,12 +62,12 @@ Record the owner's direct Phase 0 roster clarification in the canonical register
 ## Risks and handoff instructions
 
 - **Risks/limitations:** PR review approval does not substitute for independent human product/security sign-off. Merged child PRs #34, #37, and #39 are on task branches and are not on `main` until their existing parent PRs are reopened/retargeted and merged.
-- **Next action:** Finish documentation checks, commit/push to the existing PR #31 branch, request fresh Greptile review, and continue the existing dependency chain.
+- **Next action:** Commit/push the owner-record correction to the existing PR #31 branch, request fresh Greptile review, and continue the existing dependency chain.
 - **User approval required:** Explicit authorization to start product implementation and deployment remains absent. Do not claim Phase 0 green while independent sign-off is open.
 
 ## Delivery state
 
-- **Commit/branch:** Owner/status correction is committed as `61319da` and pushed to the existing branch `codex/mn-plan-025-hosting-cost-capacity-evidence`.
-- **PR/review:** [PR #31](https://github.com/mylescorp/mylesnet/pull/31) is open and ready against `main`; review of prior head `e6a1ec7` found one P2, corrected in `61319da`. Fresh review and checks on the pushed head are pending.
+- **Commit/branch:** Owner/status correction is committed as `61319da` on the existing branch `codex/mn-plan-025-hosting-cost-capacity-evidence`; the second review correction is prepared in this same branch and awaits commit/push.
+- **PR/review:** [PR #31](https://github.com/mylescorp/mylesnet/pull/31) is open and ready against `main`; the duplicate-row P2 was corrected in `61319da`, and a later owner-record P2 is corrected in this follow-up. Push, fresh review, and checks on the final head are pending.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; documentation-only changes.
