@@ -50,6 +50,8 @@ Reference: [saved domain settings](reference-images/reference-domain-settings.pn
 - Give the Owner at least 30 days' notice of a rate change and make it effective only from a future billing cycle. Do not apply changes retroactively.
 - Enterprise is custom-priced for 10,000+ active subscribers or a documented multi-region/regulatory requirement. Its quote form asks for ISP/company name, work email, countries served, estimated subscriber count, Hotspot/PPPoE usage, and a short needs summary. Do not request credentials or registration IDs. Enterprise may negotiate dedicated onboarding/account management, migration help, custom integrations/API/branding, and contract/support terms; dedicated infrastructure or stronger guarantees need separate validation.
 
+The [MN-PLAN-027 pricing and tax approval worksheet](STANDARD-PRICING-AND-TAX-APPROVAL-WORKSHEET.md) organizes country-specific prices, invoices, and required owner evidence; it selects no rate or tax policy.
+
 ### Tenant ownership transfer
 
 1. The sole current Owner starts the transfer and completes MFA step-up.
