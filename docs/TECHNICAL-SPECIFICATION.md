@@ -254,7 +254,7 @@ The [guided CSV migration contract](CSV-MIGRATION-CONTRACT.md) records the Phase
 - Disconnect/CoA and router changes are auditable jobs with approval policy, timeout, response, retry and rollback/compensation record.
 - Router secrets are encrypted in a secret manager, never returned in API/UI, logs, exports, screenshots or browser storage.
 - Use FreeRADIUS 3.2.x with the dedicated PostgreSQL AAA store. If RADIUS connectivity fails, retain current sessions and reject new logins; never fail open. RouterOS 7 provisioning uses a least-privilege WireGuard tunnel limited to RADIUS and CoA/Disconnect, with WinBox, SSH, and RouterOS API blocked.
-- Still specify HA topology, the exact allowed tunnel paths and source checks, policy synchronization/cache invalidation, accounting recovery, supported RouterOS patch/device matrix, provisioning-token lifetime, and isolated lab acceptance. Do not connect real routers during planning.
+- Still specify HA topology, the exact allowed tunnel paths and source checks, policy synchronization/cache invalidation, accounting recovery, supported RouterOS patch/device matrix, provisioning-token lifetime, and isolated lab acceptance. The [MN-PLAN-030 router lab and acceptance worksheet](ROUTER-LAB-AND-ACCEPTANCE-WORKSHEET.md) organizes these open questions without authorizing a real connection. Do not connect real routers during planning.
 
 ## 6. CRUD and RBAC specification
 
