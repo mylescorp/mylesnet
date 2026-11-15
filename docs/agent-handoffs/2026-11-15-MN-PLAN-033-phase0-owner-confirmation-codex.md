@@ -4,7 +4,7 @@
 - **Date:** `2026-11-15`
 - **Agent/owner:** `Coordinator`
 - **Plan phase:** `Phase 0 — close planning and turn decisions into build contracts`
-- **Status:** `In progress; project/product owner is recorded, but Phase 0 acceptance and existing PR closeout remain open.`
+- **Status:** `In progress; project/product owner is recorded and the status correction is pushed to PR #31, but Phase 0 acceptance and existing PR closeout remain open.`
 - **Related requirements:** `IMPLEMENTATION-PLAN.md` Phase 0 exit gate; `PHASE-0-OWNER-APPOINTMENT-REGISTER.md`; `PRIORITIZED-V1-STORY-MAP.md` Phase 0 exit review; repository status and handoff requirements in `AGENTS.md`.
 - **Dependencies:** Existing PR #31 on `main`; no implementation authorization. The user confirmed no additional people should be named.
 
@@ -34,7 +34,7 @@ Record the owner's direct Phase 0 roster clarification in the canonical register
 
 ## Verification and evidence
 
-- **Checks run:** `git diff --check` passed. A changed-line Markdown integrity scan found all 73 added Markdown lines' local links valid, confirmed task IDs are unique in `IMPLEMENTATION-STATUS.md`, and confirmed the supplied phone number and email are absent from changed records.
+- **Checks run:** `git diff --check` passed. A changed-line Markdown integrity scan found all 73 added Markdown lines' local links valid, confirmed task IDs are unique in `IMPLEMENTATION-STATUS.md`, and confirmed the supplied phone number and email are absent from changed records. No tests or builds were run.
 - **Checks not run:** No tests or builds; this is documentation-only and the repository instructions say not to run tests unless requested. No REA or external/provider actions were needed.
 - **Evidence:** User's 2026-11-15 roster clarification, recorded here and in the owner register; live GitHub PR/check state is recorded in `IMPLEMENTATION-STATUS.md`.
 - **REA evidence:** Not used; ordinary repository documentation work.
@@ -49,7 +49,6 @@ Record the owner's direct Phase 0 roster clarification in the canonical register
 
 ### Pending
 
-- Commit and push this correction to the existing PR #31 branch; do not create a new PR.
 - Request a fresh current-head Greptile review and resolve every actionable finding in PR #31.
 - Merge PR #31 only after explicit current-head Greptile 5/5, zero unresolved findings, and passing required checks.
 - Reopen/retarget the existing PRs #33, #35, and #38 after their dependencies advance; obtain current-head review/checks and merge only through the same gate.
@@ -67,7 +66,7 @@ Record the owner's direct Phase 0 roster clarification in the canonical register
 
 ## Delivery state
 
-- **Commit/branch:** Changes are prepared on the existing PR #31 branch `codex/mn-plan-025-hosting-cost-capacity-evidence`; commit/push pending final checks.
-- **PR/review:** [PR #31](https://github.com/mylescorp/mylesnet/pull/31) is open and ready against `main`; current-head review found one P2. Follow-up review and checks are pending.
+- **Commit/branch:** Owner/status correction is committed as `61319da` and pushed to the existing branch `codex/mn-plan-025-hosting-cost-capacity-evidence`.
+- **PR/review:** [PR #31](https://github.com/mylescorp/mylesnet/pull/31) is open and ready against `main`; review of prior head `e6a1ec7` found one P2, corrected in `61319da`. Fresh review and checks on the pushed head are pending.
 - **Merge:** Not merged.
 - **Deployment:** Not deployed; documentation-only changes.
